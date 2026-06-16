@@ -1,0 +1,38 @@
+# Kadro — karakterler tamamen kodla çizilir (renderer/src/cast.tsx).
+# Bu dosya yalnızca metadata taşır: isim, kişilik (LLM için), ses, renk (altyazı vurgusu).
+# Yeni karakter eklemek için: buraya bir giriş + cast.tsx'e bir bileşen ekle.
+
+characters:
+  kursun:
+    name: "Kurşun Kalem"
+    persona: "Mükemmeliyetçi, biraz kibirli, keskinliğiyle övünen sarı kalem."
+    voice: "tr-TR-AhmetNeural"
+    color: "#e0ad2c"
+    scale: 1.0
+
+  silgi:
+    name: "Silgi"
+    persona: "Sakin, alaycı, hatalardan beslenen pembe silgi."
+    voice: "tr-TR-EmelNeural"
+    color: "#d8728f"
+    scale: 0.95
+
+  tukenmez:
+    name: "Tükenmez"
+    persona: "Kendini silinmez/ölümsüz sanan, abartan mavi tükenmez kalem."
+    voice: "tr-TR-AhmetNeural"
+    color: "#3b7dd8"
+    scale: 1.0
+
+  kalemtras:
+    name: "Kalemtraş"
+    persona: "Tehditkâr ama komik, herkesi 'açmakla' korkutan teal kalemtraş."
+    voice: "tr-TR-EmelNeural"
+    color: "#1f8d80"
+    scale: 0.9
+
+# Sahne etiketleri (renderer arka planı kodla çizer; bunlar sadece LLM bağlamı).
+backgrounds:
+  - notebook
+  - desk
+  - pencilcase

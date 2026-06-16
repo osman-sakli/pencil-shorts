@@ -1,0 +1,8 @@
+services:
+  pencil:
+    build: .
+    env_file: .env
+    volumes:
+      - ./out:/app/out
+    # command: ["--topic", "Kurşun kalem silgiyi kıskanıyor"]
+    command: ["--auto"]
