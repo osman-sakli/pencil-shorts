@@ -82,7 +82,7 @@ def publish(platforms: list[str]) -> dict:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--platforms", nargs="+",
-                    default=["tiktok", "youtube", "instagram"])
+                    default=["tiktok", "youtube", "instagram", "facebook"])
     args = ap.parse_args()
     publish(args.platforms)
 
