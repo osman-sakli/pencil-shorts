@@ -27,8 +27,10 @@ HEADERS = {
 }
 
 
-def build_caption(manifest: dict) -> str:
-    parts = [manifest.get("title", "").strip()]
+def build_texts(manifest: dict) -> tuple[str, str]:
+    """Return (title, description). Title ≤100 chars for YouTube."""
+    title = manifest.get("title", "").strip()[:100]
+    parts = []
     desc = manifest.get("description", "").strip()
     if desc and desc != manifest.get("title", "").strip():
         parts.append(desc)
@@ -39,7 +41,8 @@ def build_caption(manifest: dict) -> str:
     tags = " ".join(manifest.get("hashtags", []))
     if tags:
         parts.append(tags)
-    return "\n\n".join(p for p in parts if p)
+    description = "\n\n".join(p for p in parts if p)
+    return title, description
 
 
 def publish(platforms: list[str]) -> dict:
@@ -53,11 +56,11 @@ def publish(platforms: list[str]) -> dict:
 
     manifest = json.loads((config.OUT / "manifest.json").read_text(encoding="utf-8"))
     video = config.OUT / "video.mp4"
-    caption = build_caption(manifest)
+    title, description = build_texts(manifest)
 
     headers = {**HEADERS, "Authorization": f"Apikey {key}"}
 
-    data = [("user", user), ("title", caption)]
+    data = [("user", user), ("title", title), ("description", description)]
     for p in platforms:
         data.append(("platform[]", p))
 
