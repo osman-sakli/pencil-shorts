@@ -21,55 +21,55 @@ import random
 import anthropic
 import config
 
-SYSTEM = """Sen kısa çizgi film senaristisin. Kalem karakterlerinin kendi aralarında
-yaşadığı, 60-90 SANIYELIK komik, hikayeli kısa videolar yazıyorsun.
+SYSTEM = """You are a short-form cartoon scriptwriter. You write funny, story-driven 60-90 SECOND videos
+featuring stationery characters — pencils, erasers, sharpeners — in everyday drama.
 
-Uzunluk ve ritim (ÇOK ÖNEMLİ — gelir için video 60 sn üstü olmalı):
-- Toplam metin 60-90 saniyede seslendirilebilecek uzunlukta: yaklaşık 150-220 kelime.
-- 10-14 replik (beat). Replikler kısa ve tempolu olsun.
-- İzleyiciyi sonuna kadar tutacak yapı:
-  1) İLK REPLİK = güçlü KANCA (ilk 2 saniyede merak/çatışma kur).
-  2) Ortada tırmanma: her 3-5 saniyede yeni bir mini-olay, çıkış, yanlış anlama.
-  3) Sonlara doğru bir TWIST.
-  4) Son replik = komik, tatmin edici kapanış (cliffhanger değil).
-- Tek bir konuda kal, dağılma; tempoyu düşürme.
+Length & pacing (CRITICAL — revenue requires videos ≥ 60 s):
+- Total spoken text fits 60-90 seconds: roughly 150-220 words.
+- 10-14 lines (beats). Keep each line short and punchy.
+- Retention structure:
+  1) FIRST LINE = strong HOOK (plant conflict/curiosity in first 2 seconds).
+  2) Middle escalation: a new mini-twist, misunderstanding, or reaction every 3-5 s.
+  3) A TWIST near the end.
+  4) Final line = funny, satisfying close (not a cliffhanger).
+- Stay on one topic; keep the energy up.
 
-Diğer kurallar:
-- SADECE verilen karakterleri kullan.
-- Mizah: günlük durum komedisi, kıskançlık, rekabet, absürt yorumlar.
-- Türkçe yaz, doğal konuşma dili.
-- Ayrıca videonun açıklaması için kısa, çekici bir 'description' (1-2 cümle + birkaç emoji)
-  ve 5-8 'hashtags' üret.
+Other rules:
+- Use ONLY the provided characters.
+- Humour: relatable situation comedy, jealousy, rivalry, absurd observations.
+- Write in NATIVE, colloquial ENGLISH — the way real people actually talk.
+- Also generate a short, punchy 'description' for the video caption (1-2 sentences + a few emojis)
+  and 5-8 relevant 'hashtags'.
 
-Yanıtı SADECE geçerli JSON olarak ver. Markdown, backtick veya açıklama EKLEME."""
+Return ONLY valid JSON. No markdown, no backticks, no explanations."""
 
-PROMPT_TMPL = """Konu: {topic}
+PROMPT_TMPL = """Topic: {topic}
 
-Kullanılabilir karakterler:
+Available characters:
 {roster}
 
-Açılış sahnesi için arka plan seç: {backgrounds}
+Pick a background for the opening scene from: {backgrounds}
 
-Bu şemada JSON üret:
+Generate JSON in this exact schema:
 {{
-  "title": "kısa, merak uyandıran başlık",
-  "background": "arka plan etiketi",
-  "description": "izleyiciye hitap eden kısa açıklama + emoji",
+  "title": "short, curiosity-driving title",
+  "background": "background label",
+  "description": "punchy caption for viewers + emojis",
   "hashtags": ["#...", "#..."],
   "beats": [
-    {{"character": "karakter_id", "text": "replik", "emotion": "neutral"}}
+    {{"character": "character_id", "text": "line of dialogue", "emotion": "neutral"}}
   ]
 }}
 
-Unutma: 10-14 beat, 150-220 kelime, güçlü kanca + tırmanma + twist + komik kapanış."""
+Remember: 10-14 beats, 150-220 words, strong hook + escalation + twist + funny close."""
 
 AUTO_TOPICS = [
-    "Kurşun kalem silgiyi kıskanıyor",
-    "Tükenmez kalem kendini ölümsüz sanıyor",
-    "Kalemtraş herkesi açmakla tehdit ediyor",
-    "Kalemler sınava kimin gireceğini tartışıyor",
-    "Silgi bütün hataları silince kimse onu sevmiyor",
-    "Yeni gelen renkli kalem kadroyu karıştırıyor",
+    "The pencil is jealous of the eraser",
+    "The pen thinks it's immortal",
+    "The sharpener threatens everyone with a sharpening",
+    "The pencils argue over who gets to take the exam",
+    "The eraser erases all mistakes and nobody likes it",
+    "A new colourful pencil disrupts the whole squad",
 ]
 
 

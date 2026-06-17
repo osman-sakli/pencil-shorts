@@ -1,37 +1,37 @@
-# Kadro — karakterler tamamen kodla çizilir (renderer/src/cast.tsx).
-# Bu dosya yalnızca metadata taşır: isim, kişilik (LLM için), ses, renk (altyazı vurgusu).
-# Yeni karakter eklemek için: buraya bir giriş + cast.tsx'e bir bileşen ekle.
+# Cast — characters are fully code-drawn (renderer/src/cast.tsx).
+# This file carries metadata only: name, persona (for the LLM), TTS voice, subtitle colour.
+# To add a character: add an entry here + a component in cast.tsx.
 
 characters:
   kursun:
-    name: "Kurşun Kalem"
-    persona: "Mükemmeliyetçi, biraz kibirli, keskinliğiyle övünen sarı kalem."
-    voice: "tr-TR-AhmetNeural"
+    name: "Pencil"
+    persona: "Perfectionist, slightly arrogant yellow pencil who brags about being sharp."
+    voice: "en-US-GuyNeural"
     color: "#e0ad2c"
     scale: 1.0
 
   silgi:
-    name: "Silgi"
-    persona: "Sakin, alaycı, hatalardan beslenen pembe silgi."
-    voice: "tr-TR-EmelNeural"
+    name: "Eraser"
+    persona: "Calm, sarcastic pink eraser who thrives on other people's mistakes."
+    voice: "en-US-JennyNeural"
     color: "#d8728f"
     scale: 0.95
 
   tukenmez:
-    name: "Tükenmez"
-    persona: "Kendini silinmez/ölümsüz sanan, abartan mavi tükenmez kalem."
-    voice: "tr-TR-AhmetNeural"
+    name: "Ballpoint"
+    persona: "Drama-queen blue pen who thinks it's immortal and never lets anyone forget it."
+    voice: "en-US-GuyNeural"
     color: "#3b7dd8"
     scale: 1.0
 
   kalemtras:
-    name: "Kalemtraş"
-    persona: "Tehditkâr ama komik, herkesi 'açmakla' korkutan teal kalemtraş."
-    voice: "tr-TR-EmelNeural"
+    name: "Sharpener"
+    persona: "Menacing but goofy teal sharpener who threatens to sharpen everyone."
+    voice: "en-US-AriaNeural"
     color: "#1f8d80"
     scale: 0.9
 
-# Sahne etiketleri (renderer arka planı kodla çizer; bunlar sadece LLM bağlamı).
+# Scene labels (renderer draws these in code; labels give the LLM context).
 backgrounds:
   - notebook
   - desk

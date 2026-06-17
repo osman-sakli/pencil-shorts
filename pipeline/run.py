@@ -22,9 +22,13 @@ import build_manifest
 def render(manifest_path: Path) -> Path:
     out_mp4 = config.OUT / "video.mp4"
     renderer = config.ROOT / "renderer"
+    # Remotion expects { "manifest": {...} } matching the component prop name
+    props_path = config.OUT / "props.json"
+    manifest_data = json.loads(manifest_path.read_text(encoding="utf-8"))
+    props_path.write_text(json.dumps({"manifest": manifest_data}), encoding="utf-8")
     subprocess.run(
         ["npx", "remotion", "render", "PencilShort", str(out_mp4),
-         f"--props={manifest_path}", "--public-dir=../"],
+         f"--props={props_path}", "--public-dir=../"],
         cwd=renderer, check=True,
     )
     return out_mp4
