@@ -1,15 +1,17 @@
-"""End-to-end orchestrator: script -> voice -> lipsync -> manifest -> render.
+"""End-to-end orchestrator: script -> voice -> lipsync -> manifest -> render -> publish.
 
 Usage:
-  python pipeline/run.py --topic "Kurşun kalem silgiyi kıskanıyor"
+  python pipeline/run.py --topic "The pencil is jealous of the eraser"
   python pipeline/run.py --auto
   python pipeline/run.py --topic "..." --no-render   # skip Remotion
+  python pipeline/run.py --auto --no-publish         # skip upload
 """
 from __future__ import annotations
 import argparse
 import json
 import random
 import subprocess
+import sys
 from pathlib import Path
 
 import config
@@ -17,6 +19,9 @@ import generate_script
 import synthesize_voice
 import lipsync
 import build_manifest
+
+sys.path.insert(0, str(config.ROOT / "publish"))
+import upload
 
 
 def render(manifest_path: Path) -> Path:
@@ -39,6 +44,7 @@ def main() -> None:
     ap.add_argument("--topic")
     ap.add_argument("--auto", action="store_true")
     ap.add_argument("--no-render", action="store_true")
+    ap.add_argument("--no-publish", action="store_true")
     args = ap.parse_args()
 
     topic = args.topic or (random.choice(generate_script.AUTO_TOPICS) if args.auto else None)
@@ -68,7 +74,15 @@ def main() -> None:
         return
 
     mp4 = render(manifest_path)
-    print(f"=== Bitti: {mp4} ===")
+    print(f"[5/5] render: {mp4}")
+
+    if args.no_publish:
+        print("=== Done (upload skipped) ===")
+        return
+
+    print("[5/5] uploading to all platforms...")
+    upload.publish(["tiktok", "youtube", "instagram", "facebook"])
+    print("=== Done: video live on all platforms ===")
 
 
 if __name__ == "__main__":
