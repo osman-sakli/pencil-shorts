@@ -2,10 +2,7 @@
 
 Uses upload-post.com API. Requires:
   - UPLOAD_POST_API_KEY  in .env / SSM
-  - UPLOAD_POST_USERNAME per platform in .env / SSM
-    e.g.  UPLOAD_POST_USERNAME_TIKTOK=@yourhandle
-          UPLOAD_POST_USERNAME_YOUTUBE=@yourhandle
-          UPLOAD_POST_USERNAME_INSTAGRAM=@yourhandle
+  - UPLOAD_POST_USER     in .env / SSM  (managed-user profile name, e.g. "familypencils")
 
 Usage:
   python publish/upload.py --platforms tiktok youtube instagram
@@ -20,14 +17,13 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "pipeline"))
 import config  # noqa: E402
-import httpx   # noqa: E402
+import requests  # noqa: E402
 
 API = "https://api.upload-post.com/api/upload"
-
-PLATFORM_USERNAME_ENVS = {
-    "tiktok":    "UPLOAD_POST_USERNAME_TIKTOK",
-    "youtube":   "UPLOAD_POST_USERNAME_YOUTUBE",
-    "instagram": "UPLOAD_POST_USERNAME_INSTAGRAM",
+HEADERS = {
+    "Authorization": "",          # set at runtime
+    "User-Agent": "upload-post-python-client/2.0.0",
+    "X-Upload-Post-Source": "pip",
 }
 
 
@@ -46,44 +42,41 @@ def build_caption(manifest: dict) -> str:
     return "\n\n".join(p for p in parts if p)
 
 
-def publish(platforms: list[str]) -> None:
+def publish(platforms: list[str]) -> dict:
     key = os.getenv("UPLOAD_POST_API_KEY", "")
     if not key:
         raise SystemExit("UPLOAD_POST_API_KEY not set (.env or SSM)")
+
+    user = os.getenv("UPLOAD_POST_USER", "")
+    if not user:
+        raise SystemExit("UPLOAD_POST_USER not set (.env or SSM) — set to your upload-post profile name, e.g. 'familypencils'")
 
     manifest = json.loads((config.OUT / "manifest.json").read_text(encoding="utf-8"))
     video = config.OUT / "video.mp4"
     caption = build_caption(manifest)
 
-    results = {}
-    for platform in platforms:
-        username_env = PLATFORM_USERNAME_ENVS.get(platform)
-        username = os.getenv(username_env, "") if username_env else ""
-        if not username:
-            print(f"[publish] SKIP {platform}: {username_env} not set")
-            continue
+    headers = {**HEADERS, "Authorization": f"Apikey {key}"}
 
-        with open(video, "rb") as f:
-            r = httpx.post(
-                API,
-                headers={"Authorization": f"Apikey {key}"},
-                data={
-                    "title": caption,
-                    "platform[]": platform,
-                    "username": username,
-                },
-                files={"video": (video.name, f, "video/mp4")},
-                timeout=300,
-            )
-        try:
-            body = r.json()
-        except Exception:
-            body = r.text
-        print(f"[publish] {platform} ({r.status_code}): {body}")
-        results[platform] = {"status": r.status_code, "body": body}
-        r.raise_for_status()
+    data = [("user", user), ("title", caption)]
+    for p in platforms:
+        data.append(("platform[]", p))
 
-    return results
+    with open(video, "rb") as f:
+        r = requests.post(
+            API,
+            headers=headers,
+            data=data,
+            files=[("video", (video.name, f, "video/mp4"))],
+            timeout=300,
+        )
+
+    try:
+        body = r.json()
+    except Exception:
+        body = r.text
+    print(f"[publish] {platforms} ({r.status_code}): {body}")
+    r.raise_for_status()
+    return body
 
 
 def main() -> None:
