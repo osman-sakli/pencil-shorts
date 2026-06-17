@@ -1,10 +1,14 @@
 # Tek container: Python pipeline + Node/Remotion + ffmpeg + rhubarb
 FROM node:20-bookworm
 
-# System deps
+# System deps (includes Chromium shared libs required by Remotion headless)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 python3-pip ffmpeg unzip wget ca-certificates \
-    libgl1 libglib2.0-0 && rm -rf /var/lib/apt/lists/*
+    libgl1 libglib2.0-0 \
+    libnspr4 libnss3 libatk1.0-0 libatk-bridge2.0-0 \
+    libcups2 libdrm2 libxkbcommon0 libxcomposite1 \
+    libxdamage1 libxfixes3 libxrandr2 libgbm1 libasound2 \
+    && rm -rf /var/lib/apt/lists/*
 
 # Rhubarb lip-sync
 ARG RHUBARB_VERSION=1.13.0
