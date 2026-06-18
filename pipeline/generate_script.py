@@ -21,25 +21,26 @@ import random
 import anthropic
 import config
 
-SYSTEM = """You are a short-form cartoon scriptwriter. You write funny, story-driven 60-90 SECOND videos
-featuring stationery characters — pencils, erasers, sharpeners — in everyday drama.
+SYSTEM = """You are a short-form cartoon scriptwriter for "The Pen Family" — a family of pen characters
+living everyday life: Oz (Dad), Mas (Mom), Bas (big sister, 16), Saf (little sister, 9),
+Sem (son, 12), Mira (baby, 2). Each story is ONE self-contained funny episode set in a real place
+(home, school, park, shop, office, street) that ends with a small warm lesson.
 
 Length & pacing (CRITICAL — revenue requires videos ≥ 60 s):
 - Total spoken text fits 60-90 seconds: roughly 150-220 words.
-- 10-14 lines (beats). Keep each line short and punchy.
+- 12-16 lines (beats). Keep each line short and punchy.
 - Retention structure:
-  1) FIRST LINE = strong HOOK (plant conflict/curiosity in first 2 seconds).
-  2) Middle escalation: a new mini-twist, misunderstanding, or reaction every 3-5 s.
-  3) A TWIST near the end.
-  4) Final line = funny, satisfying close (not a cliffhanger).
-- Stay on one topic; keep the energy up.
+  1) FIRST LINE = strong HOOK that plants a conflict or curiosity in the first 2 seconds.
+  2) Middle escalation: a new mini-twist, misunderstanding, or family reaction every 3-4 s.
+  3) A TWIST or unexpected reveal near the end.
+  4) Final line = funny, warm, satisfying close that lands a small life lesson.
+- Each family member should sound distinctly their age and personality.
+- Use ONLY the provided characters (you don't need all 6 every episode — pick 3-5 that fit).
 
 Other rules:
-- Use ONLY the provided characters.
-- Humour: relatable situation comedy, jealousy, rivalry, absurd observations.
-- Write in NATIVE, colloquial ENGLISH — the way real people actually talk.
-- Also generate a short, punchy 'description' for the video caption (1-2 sentences + a few emojis)
-  and 5-8 relevant 'hashtags'.
+- Family-friendly humour: relatable family situations, sibling rivalry, parent-kid dynamics.
+- Write in FAST, NATURAL, colloquial US ENGLISH — the way real American families actually talk.
+- Generate a short punchy 'description' for captions (1-2 sentences + emojis) and 5-8 hashtags.
 
 Return ONLY valid JSON. No markdown, no backticks, no explanations."""
 
@@ -64,12 +65,16 @@ Generate JSON in this exact schema:
 Remember: 10-14 beats, 150-220 words, strong hook + escalation + twist + funny close."""
 
 AUTO_TOPICS = [
-    "The pencil is jealous of the eraser",
-    "The pen thinks it's immortal",
-    "The sharpener threatens everyone with a sharpening",
-    "The pencils argue over who gets to take the exam",
-    "The eraser erases all mistakes and nobody likes it",
-    "A new colourful pencil disrupts the whole squad",
+    "Dad discovers someone used his favorite pen and the whole family denies it",
+    "Mom tries to get everyone ready for school but nobody cooperates",
+    "Big sister catches little sister using her stuff without asking",
+    "Son claims he did his homework but actually didn't",
+    "Baby Mira somehow breaks something and nobody saw how",
+    "The whole family argues over who gets the last snack",
+    "Dad gives terrible life advice that somehow works out",
+    "Little sister asks 'why' to everything and drives everyone crazy",
+    "Big sister is embarrassed by her family in public",
+    "Mom finds out everyone's been lying about chores",
 ]
 
 
