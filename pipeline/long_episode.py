@@ -100,8 +100,24 @@ def generate_episode_plan(topic: str) -> dict:
         messages=[{"role": "user", "content": EPISODE_PLANNER_PROMPT.format(topic=topic)}],
     )
     text = "".join(b.text for b in resp.content if b.type == "text").strip()
-    if text.startswith("```"):
+    # Strip markdown fences and any trailing text after the JSON object
+    if "```" in text:
         text = text[text.find("{"):]
+    start = text.find("{")
+    if start > 0:
+        text = text[start:]
+    # Trim to valid JSON — find the matching closing brace
+    depth = 0
+    end = 0
+    for i, ch in enumerate(text):
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                end = i + 1
+                break
+    text = text[:end]
     plan = json.loads(text)
     assert len(plan["scenes"]) == 10, f"Expected 10 scenes, got {len(plan['scenes'])}"
     return plan
