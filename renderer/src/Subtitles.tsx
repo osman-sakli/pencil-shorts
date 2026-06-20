@@ -1,5 +1,26 @@
 import React from "react";
+import { interpolate, spring, useVideoConfig } from "remotion";
 import { Word } from "./types";
+
+const ActiveWord: React.FC<{ word: string; color: string }> = ({ word, color }) => {
+  const { fps } = useVideoConfig();
+  const scale = spring({ fps, frame: 0, config: { damping: 10, stiffness: 280 } });
+  return (
+    <span style={{
+      color,
+      display: "inline-block",
+      transform: `scale(${interpolate(scale, [0, 1], [1.0, 1.18])})`,
+      transformOrigin: "center bottom",
+      textShadow: `0 0 20px ${color}, 0 0 40px ${color}88`,
+      WebkitTextStroke: "4px #000",
+      paintOrder: "stroke fill",
+      margin: "0 5px",
+      transition: "color 0.05s",
+    }}>
+      {word}
+    </span>
+  );
+};
 
 export const Subtitles: React.FC<{
   text: string;
@@ -12,46 +33,51 @@ export const Subtitles: React.FC<{
     words.length > 0 ? (
       words.map((w, i) => {
         const active = t >= w.start && t < w.end;
-        return (
-          <span key={i} style={{
-            color: active ? color : "#fff",
-            margin: "0 4px",
-            textShadow: active ? `0 0 14px ${color}88` : "none",
-          }}>
-            {w.word}
-          </span>
-        );
+        return active
+          ? <ActiveWord key={i} word={w.word} color={color} />
+          : (
+            <span key={i} style={{
+              color: "#FFFFFF",
+              WebkitTextStroke: "4px #000",
+              paintOrder: "stroke fill",
+              margin: "0 5px",
+            }}>
+              {w.word}
+            </span>
+          );
       })
     ) : (
-      text
+      <span style={{ WebkitTextStroke: "4px #000", paintOrder: "stroke fill" }}>{text}</span>
     );
 
   return (
-    // Fixed bar at the VERY BOTTOM — never overlaps characters
     <div style={{
       position: "absolute",
       bottom: 0,
       left: 0,
       right: 0,
-      paddingBottom: 36,
-      paddingTop: 20,
-      paddingLeft: 32,
-      paddingRight: 32,
-      background: "linear-gradient(transparent, rgba(0,0,0,0.72) 28%)",
+      paddingBottom: 44,
+      paddingTop: 28,
+      paddingLeft: 28,
+      paddingRight: 28,
+      background: "linear-gradient(transparent, rgba(0,0,0,0.80) 32%)",
     }}>
       {/* Speaker chip */}
       <div style={{
-        display: "inline-block",
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 8,
         backgroundColor: color,
         color: "#fff",
         fontFamily: "Arial Black, Impact, sans-serif",
         fontWeight: 900,
-        fontSize: 34,
-        borderRadius: 24,
-        padding: "4px 22px",
-        marginBottom: 10,
+        fontSize: 32,
+        borderRadius: 999,
+        padding: "6px 24px",
+        marginBottom: 12,
         letterSpacing: 1,
-        boxShadow: "0 2px 8px rgba(0,0,0,0.35)",
+        boxShadow: `0 4px 16px ${color}88, 0 2px 4px rgba(0,0,0,0.4)`,
+        WebkitTextStroke: "1px rgba(0,0,0,0.3)",
       }}>
         {speakerName}
       </div>
@@ -60,12 +86,15 @@ export const Subtitles: React.FC<{
       <div style={{
         fontFamily: "Arial Black, Impact, sans-serif",
         fontWeight: 900,
-        fontSize: 56,
-        lineHeight: 1.2,
+        fontSize: 58,
+        lineHeight: 1.25,
         color: "#fff",
-        WebkitTextStroke: "5px #000",
-        paintOrder: "stroke fill",
         textAlign: "center",
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        alignItems: "baseline",
+        gap: 0,
       }}>
         {content}
       </div>

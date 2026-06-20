@@ -1,5 +1,23 @@
 import React from "react";
-import { AbsoluteFill } from "remotion";
+import { AbsoluteFill, Img, staticFile } from "remotion";
+
+// ─── Photo backgrounds (real photos when available) ────────────────────────
+const PHOTO_SCENES = new Set([
+  "home", "kitchen", "bedroom", "park", "school", "shop", "street",
+  "office", "library",
+]);
+
+const PhotoBg: React.FC<{ label: string }> = ({ label }) => (
+  <AbsoluteFill>
+    <Img
+      src={staticFile(`backgrounds/photos/${label}.jpg`)}
+      style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%" }}
+    />
+    {/* darken so characters & text stay readable */}
+    <div style={{ position: "absolute", inset: 0,
+      background: "linear-gradient(180deg, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0.10) 50%, rgba(0,0,0,0.35) 100%)" }} />
+  </AbsoluteFill>
+);
 
 // ─── Home / Living Room ────────────────────────────────────────────────────
 const Home: React.FC = () => (
@@ -616,8 +634,8 @@ const Street: React.FC = () => (
   </AbsoluteFill>
 );
 
-// ─── Scene map ──────────────────────────────────────────────────────────────
-const SCENES: Record<string, React.FC> = {
+// ─── Scene map (CSS fallbacks for scenes without photos) ────────────────────
+const CSS_SCENES: Record<string, React.FC> = {
   home:     Home,
   kitchen:  Kitchen,
   bedroom:  Bedroom,
@@ -626,7 +644,6 @@ const SCENES: Record<string, React.FC> = {
   park:     Park,
   shop:     Shop,
   street:   Street,
-  // legacy fallbacks
   office:   Home,
   library:  School,
   notebook: Home,
@@ -635,6 +652,7 @@ const SCENES: Record<string, React.FC> = {
 };
 
 export const SceneBg: React.FC<{ label: string }> = ({ label }) => {
-  const Cmp = SCENES[label] ?? Home;
+  if (PHOTO_SCENES.has(label)) return <PhotoBg label={label} />;
+  const Cmp = CSS_SCENES[label] ?? Home;
   return <Cmp />;
 };

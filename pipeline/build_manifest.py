@@ -3,12 +3,15 @@
 - Concatenates per-beat wavs with silence gaps for pacing.
 - Offsets each beat's mouth cues and word timings to the global timeline.
 - Computes frame in/out points for each beat.
+- Optionally mixes in a background music track at low volume.
 - Emits a self-contained manifest consumed by the Remotion renderer.
 
 All asset paths are relative to the repo root (Remotion is run with --public-dir=../).
 """
 from __future__ import annotations
 import json
+import subprocess
+import shutil
 from pathlib import Path
 from pydub import AudioSegment
 import config
@@ -81,6 +84,27 @@ def build(script: dict) -> dict:
     total_s = cursor_s + config.TAIL_PAD_S
     audio_path = config.OUT / "audio_full.wav"
     full_audio.export(audio_path, format="wav")
+
+    # Mix in background music if available (Pixabay API key in env)
+    try:
+        import fetch_music
+        music_path = fetch_music.get_music_path()
+        if music_path:
+            mixed = config.OUT / "audio_full_mixed.wav"
+            subprocess.run([
+                config.FFMPEG, "-y",
+                "-i", str(audio_path),
+                "-stream_loop", "-1", "-i", str(music_path),
+                "-filter_complex",
+                "[1:a]volume=0.10,atrim=duration={dur}[bg];[0:a][bg]amix=inputs=2:duration=first:weights=1 0.10[out]".format(
+                    dur=total_s),
+                "-map", "[out]",
+                str(mixed),
+            ], check=True, capture_output=True)
+            shutil.move(mixed, audio_path)
+            print("[music] background track mixed in")
+    except Exception as e:
+        print(f"[music] skip: {e}")
 
     # only the characters actually used (metadata only; visuals are code-drawn)
     used = {b["character"] for b in script["beats"]}
