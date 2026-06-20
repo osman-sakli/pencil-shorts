@@ -120,6 +120,7 @@ resource "aws_iam_role_policy" "github_deploy_permissions" {
         Effect   = "Allow"
         Action   = [
           "ec2:DescribeVpcs",
+          "ec2:DescribeVpcAttribute",
           "ec2:DescribeSubnets",
           "ec2:DescribeSecurityGroups",
           "ec2:CreateSecurityGroup",
@@ -127,7 +128,20 @@ resource "aws_iam_role_policy" "github_deploy_permissions" {
           "ec2:AuthorizeSecurityGroupEgress",
           "ec2:RevokeSecurityGroupEgress",
           "ec2:CreateTags",
+          "ec2:DescribeNetworkInterfaces",
         ]
+        Resource = "*"
+      },
+      # IAM OIDC provider listing (for data source)
+      {
+        Effect   = "Allow"
+        Action   = ["iam:ListOpenIDConnectProviders"]
+        Resource = "*"
+      },
+      # ECR describe (for data source refresh)
+      {
+        Effect   = "Allow"
+        Action   = ["ecr:DescribeRepositories", "ecr:ListTagsForResource"]
         Resource = "*"
       },
     ]
