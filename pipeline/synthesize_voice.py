@@ -37,18 +37,30 @@ def _kokoro(text: str, voice: str, wav_path: Path) -> list[dict]:
 
 # ── EdgeTTS ───────────────────────────────────────────────────────────────────
 
-async def _edge_tts(text: str, voice: str, mp3_path: Path) -> list[dict]:
-    communicate = edge_tts.Communicate(text, voice)
-    words: list[dict] = []
-    with open(mp3_path, "wb") as f:
-        async for chunk in communicate.stream():
-            if chunk["type"] == "audio":
-                f.write(chunk["data"])
-            elif chunk["type"] == "WordBoundary":
-                start = chunk["offset"] / 1e7
-                dur = chunk["duration"] / 1e7
-                words.append({"word": chunk["text"], "start": start, "end": start + dur})
-    return words
+async def _edge_tts(text: str, voice: str, mp3_path: Path,
+                    rate: str = "+0%", pitch: str = "+0Hz") -> list[dict]:
+    import asyncio as _aio
+    for attempt in range(4):
+        try:
+            communicate = edge_tts.Communicate(text, voice, rate=rate, pitch=pitch)
+            words: list[dict] = []
+            with open(mp3_path, "wb") as f:
+                async for chunk in communicate.stream():
+                    if chunk["type"] == "audio":
+                        f.write(chunk["data"])
+                    elif chunk["type"] == "WordBoundary":
+                        start = chunk["offset"] / 1e7
+                        dur = chunk["duration"] / 1e7
+                        words.append({"word": chunk["text"], "start": start, "end": start + dur})
+            if mp3_path.stat().st_size > 0:
+                return words
+            raise RuntimeError("empty audio file")
+        except Exception as exc:
+            if attempt == 3:
+                raise
+            wait = 2 ** attempt  # 1, 2, 4 saniye
+            await _aio.sleep(wait)
+    return []
 
 
 # ── ElevenLabs ────────────────────────────────────────────────────────────────
@@ -84,24 +96,33 @@ def synthesize(script: dict) -> None:
 
     for i, beat in enumerate(script["beats"]):
         char = config.CHARACTERS[beat["character"]]
-        voice = char["voice"]
         wav_16k = config.OUT / f"beat_{i}.wav"
 
         if provider == "kokoro":
+            voice = char["voice"]
             wav_24k = config.OUT / f"beat_{i}_24k.wav"
             words = _kokoro(beat["text"], voice, wav_24k)
             _to_wav_16k(wav_24k, wav_16k)
             wav_24k.unlink(missing_ok=True)
 
         elif provider == "elevenlabs":
+            voice = char["voice"]
             mp3 = config.OUT / f"beat_{i}.mp3"
             words = _elevenlabs(beat["text"], voice, mp3)
             _to_wav_16k(mp3, wav_16k)
 
         else:  # edge (default fallback)
+            voice = char.get("voice_edge", char["voice"])
             mp3 = config.OUT / f"beat_{i}.mp3"
-            words = asyncio.run(_edge_tts(beat["text"], voice, mp3))
+            rate = char.get("voice_rate", "+0%")
+            pitch = char.get("voice_pitch", "+0Hz")
+            words = asyncio.run(_edge_tts(beat["text"], voice, mp3, rate=rate, pitch=pitch))
+            # Keep original mp3 for high-quality audio mix; convert a copy to 16kHz for Rhubarb
+            mp3_copy = config.OUT / f"beat_{i}_hq.mp3"
+            import shutil; shutil.copy2(mp3, mp3_copy)
             _to_wav_16k(mp3, wav_16k)
+            # Restore original mp3 so build_manifest can use it
+            mp3_copy.rename(mp3)
 
         (config.OUT / f"beat_{i}.words.json").write_text(
             json.dumps(words, ensure_ascii=False), encoding="utf-8"

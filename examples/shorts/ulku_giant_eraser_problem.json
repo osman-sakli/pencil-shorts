@@ -1,0 +1,30 @@
+{
+  "title": "Ulku's Giant Eraser PROBLEM!",
+  "background": "school",
+  "description": "Eli the eraser tries to 'help' Saf's science project... and erases the WHOLE thing 🤣 #ThePenFamily #Shorts",
+  "hashtags": ["#ThePenFamily", "#KidsCartoon", "#FamilyFun", "#Shorts", "#SchoolCartoon"],
+  "thumbnail_prompt": "Saf (purple pen, shocked face) standing in front of a blank paper that used to have her project. Eli (red eraser) looking guilty next to her. Bright school classroom background. No text.",
+  "lesson": "asking permission",
+  "beats": [
+    { "character": "saf", "text": "WHAT HAPPENED TO MY PROJECT?!", "emotion": "surprised", "background": "school" },
+    { "character": "eli", "text": "Don't worry! I fixed the smudges!", "emotion": "happy", "background": "school" },
+    { "character": "saf", "text": "You erased EVERYTHING. It's due TODAY.", "emotion": "angry", "background": "school" },
+    { "character": "eli", "text": "Oops. Let me help fix it!", "emotion": "surprised", "background": "school" },
+    { "character": "saf", "text": "You CANNOT help. You're an eraser!", "emotion": "angry", "background": "school" },
+    { "character": "sem", "text": "Whoa. That paper is very clean.", "emotion": "happy", "background": "school" },
+    { "character": "bas", "text": "Okay this is actually a great video though.", "emotion": "happy", "background": "school" },
+    { "character": "saf", "text": "Bas PLEASE not now!", "emotion": "angry", "background": "school" },
+    { "character": "eli", "text": "Mistakes happen! Can I write it back?", "emotion": "neutral", "background": "school" },
+    { "character": "saf", "text": "Erasers can't WRITE, Eli!", "emotion": "angry", "background": "school" },
+    { "character": "sem", "text": "I can draw a volcano!", "emotion": "happy", "background": "school" },
+    { "character": "saf", "text": "It's a project on gravity! Why a volcano?!", "emotion": "surprised", "background": "school" },
+    { "character": "sem", "text": "Volcanos have gravity. Maybe.", "emotion": "neutral", "background": "school" },
+    { "character": "mas", "text": "Tell the teacher the eraser did it.", "emotion": "neutral", "background": "school" },
+    { "character": "saf", "text": "Nobody will believe that!", "emotion": "angry", "background": "school" },
+    { "character": "eli", "text": "I'll go talk to the teacher myself!", "emotion": "happy", "background": "school" },
+    { "character": "bas", "text": "An eraser confessing to a teacher — content.", "emotion": "happy", "background": "school" },
+    { "character": "mas", "text": "Eli. You need to ask before you help.", "emotion": "neutral", "background": "school" },
+    { "character": "eli", "text": "...I should've asked first. Didn't think.", "emotion": "sad", "background": "school" },
+    { "character": "mira", "text": "Yay!", "emotion": "happy", "background": "school" }
+  ]
+}

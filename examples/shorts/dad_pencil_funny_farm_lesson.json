@@ -1,0 +1,30 @@
+{
+  "title": "Dad Pencil's Funny Farm Lesson!",
+  "background": "park",
+  "description": "Oz takes the family to a farm to teach Sem a lesson about patience... and immediately loses a chicken 🐔 #ThePenFamily #Shorts",
+  "hashtags": ["#ThePenFamily", "#KidsCartoon", "#FamilyFun", "#Shorts", "#DadJokes"],
+  "thumbnail_prompt": "Oz (blue pen, panicking) chasing a cartoon chicken while Sem watches laughing. Bright farm/park background. The whole family in background looking shocked. No text.",
+  "lesson": "patience",
+  "beats": [
+    { "character": "oz", "text": "Son, today you learn patience. At a FARM.", "emotion": "happy", "background": "park" },
+    { "character": "sem", "text": "What's a farm?", "emotion": "neutral", "background": "park" },
+    { "character": "saf", "text": "Wait — why is this a lesson about patience?", "emotion": "neutral", "background": "park" },
+    { "character": "oz", "text": "Farming takes TIME, son. Years!", "emotion": "happy", "background": "park" },
+    { "character": "sem", "text": "I'm gonna go pet dat chicken!", "emotion": "happy", "background": "park" },
+    { "character": "oz", "text": "Wait — Sem! Don't chase the — ", "emotion": "surprised", "background": "park" },
+    { "character": "bas", "text": "And the chicken is loose. Recording.", "emotion": "happy", "background": "park" },
+    { "character": "oz", "text": "This is FINE. I am very calm.", "emotion": "angry", "background": "park" },
+    { "character": "mas", "text": "You are literally running in circles.", "emotion": "neutral", "background": "park" },
+    { "character": "saf", "text": "Dad — doesn't chasing a chicken require patience?", "emotion": "neutral", "background": "park" },
+    { "character": "oz", "text": "That's... actually a good point.", "emotion": "surprised", "background": "park" },
+    { "character": "sem", "text": "Chicken go fast! Like me!", "emotion": "happy", "background": "park" },
+    { "character": "mira", "text": "Bawk!", "emotion": "happy", "background": "park" },
+    { "character": "bas", "text": "Mira just did a chicken sound. That's a first.", "emotion": "surprised", "background": "park" },
+    { "character": "oz", "text": "Sem. Just... stand still. Let it come to you.", "emotion": "neutral", "background": "park" },
+    { "character": "sem", "text": "Okay. I'm waiting. I'm bein patient.", "emotion": "neutral", "background": "park" },
+    { "character": "oz", "text": "Good. That's... that's patience right there.", "emotion": "happy", "background": "park" },
+    { "character": "sem", "text": "It came! I did it!", "emotion": "happy", "background": "park" },
+    { "character": "mas", "text": "The chicken taught you patience. Not your dad.", "emotion": "neutral", "background": "park" },
+    { "character": "oz", "text": "That was my plan the whole time.", "emotion": "neutral", "background": "park" }
+  ]
+}

@@ -19,13 +19,13 @@ def _round_f(seconds: float) -> int:
 
 
 def _assign_positions(beats: list[dict]) -> dict[str, str]:
-    """Stable side per character based on order of first appearance."""
-    slots = ["left", "right", "center"]
+    """Alternate left/right per character so they never share a side."""
     mapping: dict[str, str] = {}
     for b in beats:
         cid = b["character"]
         if cid not in mapping:
-            mapping[cid] = slots[len(mapping) % len(slots)]
+            # Strict alternation: odd-indexed chars go right, even go left
+            mapping[cid] = "right" if len(mapping) % 2 == 1 else "left"
     return mapping
 
 
@@ -35,16 +35,17 @@ def build(script: dict) -> dict:
     cursor_s = 0.0
     positions = _assign_positions(script["beats"])
 
-    # Scene variety: cycle background labels every few beats (helps 60s+ retention).
-    labels = list(config.BACKGROUNDS)
-    try:
-        start_bg = labels.index(script.get("background", labels[0]))
-    except ValueError:
-        start_bg = 0
-    BEATS_PER_SCENE = 4
+    opening_bg = script.get("background", config.BACKGROUNDS[0])
 
     for i, beat in enumerate(script["beats"]):
-        seg = AudioSegment.from_wav(config.OUT / f"beat_{i}.wav")
+        # Use original high-quality mp3 for final audio if available.
+        # The 16kHz wav is only for Rhubarb lip-sync — never for the mix.
+        mp3_path = config.OUT / f"beat_{i}.mp3"
+        wav_path = config.OUT / f"beat_{i}.wav"
+        if mp3_path.exists():
+            seg = AudioSegment.from_mp3(mp3_path)
+        else:
+            seg = AudioSegment.from_wav(wav_path)
         dur_s = len(seg) / 1000.0
         audio_start = cursor_s
 
@@ -56,7 +57,7 @@ def build(script: dict) -> dict:
             "text": beat["text"],
             "emotion": beat.get("emotion", "neutral"),
             "position": positions[beat["character"]],
-            "background": labels[(start_bg + i // BEATS_PER_SCENE) % len(labels)],
+            "background": beat.get("background", opening_bg),
             "startFrame": _round_f(audio_start),
             "endFrame": _round_f(audio_start + dur_s),
             # times shifted to global timeline (seconds)

@@ -13,7 +13,7 @@ export const RemotionRoot: React.FC = () => {
       calculateMetadata={({ props }) => {
         const m = props.manifest as Manifest;
         return {
-          durationInFrames: Math.max(1, m.totalDurationFrames),
+          durationInFrames: Math.max(1, m.totalDurationFrames) + 90, // +3s end card
           fps: m.fps,
           width: m.width,
           height: m.height,

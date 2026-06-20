@@ -1,0 +1,244 @@
+{
+  "title": "The Pencil Family and the Giant Crayon Castle! 🏰 | The Pen Family",
+  "seo_title": "The Pen Family Builds a GIANT Crayon Castle! | Funny Kids Cartoon 2026",
+  "episode_premise": "Aunt Nib arrives unannounced with 1000 crayons and announces she's building a castle in the living room. The whole family tries to help while trying to stop her at the same time. Sem accidentally becomes the castle's architect.",
+  "total_duration_seconds": 560,
+  "thumbnail_concept": "Sem (green pen) standing proudly in front of a giant colorful castle made of crayons. Nib (marker) looking thrilled. Oz in foreground with head in hands. Bright colors. No text.",
+  "hashtags": ["#ThePenFamily", "#KidsCartoon", "#FamilyAnimation", "#KidsYouTube", "#AnimatedSeries", "#ArtKids", "#CrayonCastle"],
+  "lesson": "creativity and teamwork",
+
+  "scenes": [
+    {
+      "act": 1,
+      "act_name": "Hook",
+      "topic": "Aunt Nib has already filled the living room with crayons before the family wakes up.",
+      "background": "home",
+      "target_seconds": 45,
+      "carry_forward": null,
+      "image_prompt": "Cartoon living room completely covered in colorful crayons. Nib (yellow-green marker) standing proudly in the middle. Family in doorway with shocked faces.",
+      "voice_direction": "Nib theatrical and delighted, everyone else stunned",
+      "beats": [
+        { "character": "nib", "text": "DARLINGS! You're awake! Perfect timing!", "emotion": "happy" },
+        { "character": "oz", "text": "What happened to our living room.", "emotion": "surprised" },
+        { "character": "nib", "text": "I'm building a CASTLE! Isn't it brilliant?!", "emotion": "happy" },
+        { "character": "sem", "text": "A CASTLE?! I'm in! I'm the king!", "emotion": "happy" },
+        { "character": "bas", "text": "There are crayons in my coffee mug.", "emotion": "angry" },
+        { "character": "saf", "text": "When did she get here?! Why didn't we hear her?", "emotion": "surprised" },
+        { "character": "mas", "text": "Nib. It's 6am.", "emotion": "neutral" },
+        { "character": "nib", "text": "Creativity doesn't sleep, Mas!", "emotion": "happy" }
+      ]
+    },
+    {
+      "act": 2,
+      "act_name": "Family Intro",
+      "topic": "Nib explains her vision — an 8-foot crayon castle, floor to ceiling. Everyone reacts differently.",
+      "background": "home",
+      "target_seconds": 50,
+      "carry_forward": "Sem is already on board; Oz deeply opposed",
+      "image_prompt": "Nib showing hand-drawn plans for a massive crayon tower. Family gathered around looking at them.",
+      "voice_direction": "Nib fully committed, Oz trying to be reasonable, Sem enthusiastic ally",
+      "beats": [
+        { "character": "nib", "text": "Floor to ceiling! A MASTERPIECE of color!", "emotion": "happy" },
+        { "character": "oz", "text": "In the living room. Of my house.", "emotion": "neutral" },
+        { "character": "nib", "text": "YOUR house needs some drama, Oz!", "emotion": "happy" },
+        { "character": "sem", "text": "I'll do the tower! I'm the architect!", "emotion": "happy" },
+        { "character": "saf", "text": "Wait — can crayons actually hold each other up?", "emotion": "neutral" },
+        { "character": "kit", "text": "Actually, if stacked correctly — yes, briefly.", "emotion": "neutral" },
+        { "character": "bas", "text": "Kit is here too? When did everyone arrive?", "emotion": "surprised" },
+        { "character": "mas", "text": "They came with Nib. I'm making more coffee.", "emotion": "neutral" }
+      ]
+    },
+    {
+      "act": 3,
+      "act_name": "Funny Problem",
+      "topic": "Sem starts 'helping' by stacking crayons randomly, completely ignoring Nib's plans.",
+      "background": "home",
+      "target_seconds": 60,
+      "carry_forward": "Kit brought his notebook with engineering notes",
+      "image_prompt": "Sem stacking crayons wildly. Nib watching in horror. Kit with notebook trying to calculate.",
+      "voice_direction": "Sem chaotically confident, Nib having an artistic crisis",
+      "beats": [
+        { "character": "sem", "text": "I'm putting all the wed ones HERE!", "emotion": "happy" },
+        { "character": "nib", "text": "No no no that's NOT the plan darling!", "emotion": "angry" },
+        { "character": "sem", "text": "MY plan is better! It's swoopier!", "emotion": "happy" },
+        { "character": "kit", "text": "Actually the structural integrity requires — ", "emotion": "neutral" },
+        { "character": "sem", "text": "What's integ-widdy?", "emotion": "neutral" },
+        { "character": "saf", "text": "Why does the swoopier tower look... more interesting?", "emotion": "neutral" },
+        { "character": "nib", "text": "It doesn't WORK that way! This is ART!", "emotion": "angry" },
+        { "character": "oz", "text": "I'm just going to sit here and watch.", "emotion": "neutral" },
+        { "character": "bas", "text": "This is basically a design competition now.", "emotion": "happy" },
+        { "character": "mira", "text": "Ooh!", "emotion": "happy" }
+      ]
+    },
+    {
+      "act": 4,
+      "act_name": "First Failed Attempt",
+      "topic": "Nib's original plan collapses. Her perfectly arranged tower crashes down spectacularly.",
+      "background": "home",
+      "target_seconds": 60,
+      "carry_forward": "Sem's tower is still standing; Nib's is destroyed",
+      "image_prompt": "Crayons everywhere on the floor. Nib looking at the ruins of her tower. Sem's smaller wonky tower still standing in the background.",
+      "voice_direction": "Nib devastated then quickly pivoting, Sem obliviously triumphant",
+      "beats": [
+        { "character": "nib", "text": "I'll build the base first — very CAREFULLY — ", "emotion": "neutral" },
+        { "character": "kit", "text": "The angle is approximately 4 degrees too far — ", "emotion": "neutral" },
+        { "character": "nib", "text": "I KNOW what I'm doing Kit!", "emotion": "angry" },
+        { "character": "oz", "text": "Should I be worried about — oh there it goes.", "emotion": "surprised" },
+        { "character": "nib", "text": "...", "emotion": "sad" },
+        { "character": "sem", "text": "Mine is still standing! Look look look!", "emotion": "happy" },
+        { "character": "saf", "text": "His is crooked and backwards and... not fallen.", "emotion": "surprised" },
+        { "character": "bas", "text": "That is simultaneously the worst and best tower.", "emotion": "neutral" },
+        { "character": "nib", "text": "The child has... a structural gift.", "emotion": "surprised" },
+        { "character": "mas", "text": "He also had no idea what he was doing.", "emotion": "neutral" },
+        { "character": "sem", "text": "I had a VISION!", "emotion": "happy" }
+      ]
+    },
+    {
+      "act": 5,
+      "act_name": "New Clue",
+      "topic": "Kit analyzes Sem's tower and discovers it works because of random weight distribution.",
+      "background": "home",
+      "target_seconds": 50,
+      "carry_forward": "Nib now wants to learn from Sem",
+      "image_prompt": "Kit with notebook measuring Sem's tower. Sem watching confused. Everyone gathered.",
+      "voice_direction": "Kit in scientific mode, Sem confused but proud",
+      "beats": [
+        { "character": "kit", "text": "I have notes. The tower works because of chaos.", "emotion": "neutral" },
+        { "character": "saf", "text": "Chaos is a building technique?", "emotion": "neutral" },
+        { "character": "kit", "text": "When random, weight distributes unexpectedly well.", "emotion": "neutral" },
+        { "character": "sem", "text": "I didn't do any of those words.", "emotion": "neutral" },
+        { "character": "nib", "text": "He built INTUITIVELY. That's genius!", "emotion": "happy" },
+        { "character": "sem", "text": "I'm a jenius?", "emotion": "surprised" },
+        { "character": "oz", "text": "Let's not give him that information yet.", "emotion": "neutral" },
+        { "character": "mas", "text": "Too late. He heard it.", "emotion": "neutral" }
+      ]
+    },
+    {
+      "act": 6,
+      "act_name": "Adventure",
+      "topic": "Nib gets inspired, runs to her car, and returns with MORE craft supplies. The whole house is now involved.",
+      "background": "home",
+      "target_seconds": 65,
+      "carry_forward": "Sem is now official castle architect; family reluctantly helping",
+      "image_prompt": "Living room transformed into a full art studio. Crayons, paper, glue, glitter everywhere. Everyone working together.",
+      "voice_direction": "Fun creative chaos, everyone finding their role",
+      "beats": [
+        { "character": "nib", "text": "I have GLITTER. I have paper. LET'S GO!", "emotion": "happy" },
+        { "character": "oz", "text": "Not glitter. Anywhere but glitter.", "emotion": "sad" },
+        { "character": "sem", "text": "GLITTER! The castle needs GLITTER!", "emotion": "happy" },
+        { "character": "saf", "text": "I'm on flags! Every castle needs flags!", "emotion": "happy" },
+        { "character": "bas", "text": "Okay fine I'll make the throne. For content.", "emotion": "happy" },
+        { "character": "kit", "text": "I'll document every measurement. For science.", "emotion": "neutral" },
+        { "character": "oz", "text": "What do I do?", "emotion": "neutral" },
+        { "character": "sem", "text": "You're the drawbridge, Dad!", "emotion": "happy" },
+        { "character": "oz", "text": "I'm... the drawbridge.", "emotion": "neutral" },
+        { "character": "mas", "text": "You asked. That's on you.", "emotion": "neutral" },
+        { "character": "mira", "text": "Ooh! Ooh! Ooh!", "emotion": "happy" }
+      ]
+    },
+    {
+      "act": 7,
+      "act_name": "Bigger Challenge",
+      "topic": "The castle reaches the ceiling and starts to lean. A section falls and traps Mira inside.",
+      "background": "home",
+      "target_seconds": 70,
+      "carry_forward": "Castle nearly complete; everyone exhausted but proud",
+      "image_prompt": "Enormous colorful crayon castle structure. One side leaning precariously. Mira visible between two crayon towers looking happy.",
+      "voice_direction": "Rising tension, Sem focused and serious for once",
+      "beats": [
+        { "character": "sem", "text": "It's so tall! It touches the seeeeiling!", "emotion": "happy" },
+        { "character": "nib", "text": "IT'S MAGNIFICENT! Almost done — ", "emotion": "happy" },
+        { "character": "kit", "text": "The eastern wall is at fourteen degrees lean.", "emotion": "neutral" },
+        { "character": "oz", "text": "Is that bad?", "emotion": "neutral" },
+        { "character": "kit", "text": "Eleven was when we should have stopped.", "emotion": "neutral" },
+        { "character": "saf", "text": "Wait — where did Mira go?!", "emotion": "surprised" },
+        { "character": "mira", "text": "Hehe!", "emotion": "happy" },
+        { "character": "bas", "text": "She went inside the castle. Through a hole.", "emotion": "surprised" },
+        { "character": "sem", "text": "Mira's the princess! She lives in there now!", "emotion": "happy" },
+        { "character": "mas", "text": "Mira is NOT living in a crayon castle.", "emotion": "neutral" },
+        { "character": "oz", "text": "The wall is moving. Everyone freeze.", "emotion": "angry" },
+        { "character": "sem", "text": "I'll fix it! I got a pwan!", "emotion": "happy" }
+      ]
+    },
+    {
+      "act": 8,
+      "act_name": "Solution",
+      "topic": "Sem engineers a support system using Dad as a literal support beam. Castle is saved. Mira emerges.",
+      "background": "home",
+      "target_seconds": 60,
+      "carry_forward": "Oz is now literally holding up part of the castle",
+      "image_prompt": "Oz (blue pen) pressed against the castle wall holding it up. Sem directing traffic. Castle stable. Mira crawling out and waving.",
+      "voice_direction": "Triumphant but absurd, everyone relieved and laughing",
+      "beats": [
+        { "character": "sem", "text": "Dad stand HERE and don't move!", "emotion": "neutral" },
+        { "character": "oz", "text": "I'm a drawbridge AND a wall now?", "emotion": "neutral" },
+        { "character": "sem", "text": "You're the most important part!", "emotion": "happy" },
+        { "character": "oz", "text": "...okay.", "emotion": "neutral" },
+        { "character": "kit", "text": "Structural analysis says that... actually works.", "emotion": "surprised" },
+        { "character": "nib", "text": "The family IS the castle! This is ART!", "emotion": "happy" },
+        { "character": "mira", "text": "Ba-ba! Yay!", "emotion": "happy" },
+        { "character": "sem", "text": "Mira is out! Mission complete!", "emotion": "happy" },
+        { "character": "bas", "text": "I'm posting this. All of it. Sorry not sorry.", "emotion": "happy" },
+        { "character": "saf", "text": "Dad — are you... okay with being a wall?", "emotion": "neutral" }
+      ]
+    },
+    {
+      "act": 9,
+      "act_name": "Lesson Learned",
+      "topic": "After cleanup, family looks at the photo Bas took. The castle was chaotic but they made it together.",
+      "background": "home",
+      "target_seconds": 45,
+      "carry_forward": "Castle is now being carefully dismantled",
+      "image_prompt": "Family gathered around looking at a phone photo of the finished castle. Everyone smiling.",
+      "voice_direction": "Warm, genuine — even Oz is smiling",
+      "beats": [
+        { "character": "bas", "text": "Thirty thousand views already. We went viral.", "emotion": "surprised" },
+        { "character": "oz", "text": "From me holding up a crayon wall.", "emotion": "neutral" },
+        { "character": "nib", "text": "Collaboration! That's what art is, darlings!", "emotion": "happy" },
+        { "character": "sem", "text": "I was the architect. And a jenius.", "emotion": "happy" },
+        { "character": "saf", "text": "Do you think we could do a castle bigger next time?", "emotion": "neutral" },
+        { "character": "mas", "text": "No. But this one was perfect.", "emotion": "happy" },
+        { "character": "mira", "text": "Castle!", "emotion": "happy" },
+        { "character": "oz", "text": "She said her first real word. 'Castle'.", "emotion": "surprised" }
+      ]
+    },
+    {
+      "act": 10,
+      "act_name": "Funny Ending",
+      "topic": "Next day. Nib has returned. With MORE crayons. And a blueprint for a moat.",
+      "background": "home",
+      "target_seconds": 50,
+      "carry_forward": "Family now knows this will keep happening with Nib",
+      "image_prompt": "Front door open. Nib standing there with enormous boxes of crayons. Family visible in background with tired eyes. Sem behind her jumping up and down.",
+      "voice_direction": "Everyone exhausted except Sem and Nib who are energized",
+      "beats": [
+        { "character": "nib", "text": "DARLINGS! I came back! For the MOAT!", "emotion": "happy" },
+        { "character": "oz", "text": "The moat.", "emotion": "neutral" },
+        { "character": "nib", "text": "Every castle NEEDS a moat! With a drawbridge!", "emotion": "happy" },
+        { "character": "oz", "text": "I'm the drawbridge. I know what's coming.", "emotion": "sad" },
+        { "character": "sem", "text": "I already have a pwan! Come IN!", "emotion": "happy" },
+        { "character": "mas", "text": "This is our life now.", "emotion": "neutral" },
+        { "character": "bas", "text": "Fine. If it goes viral again — fine.", "emotion": "neutral" },
+        { "character": "saf", "text": "Wait — can a crayon moat hold actual water?", "emotion": "neutral" },
+        { "character": "kit", "text": "I have notes on that. Actually — no.", "emotion": "neutral" },
+        { "character": "mira", "text": "Castle! Castle!", "emotion": "happy" }
+      ]
+    }
+  ],
+
+  "openmontage_editing_plan": {
+    "transitions": [
+      { "after_act": 1, "type": "quick_cut" },
+      { "after_act": 2, "type": "quick_cut" },
+      { "after_act": 3, "type": "wipe_right" },
+      { "after_act": 4, "type": "zoom_in_cut" },
+      { "after_act": 5, "type": "soft_fade" },
+      { "after_act": 6, "type": "quick_cut" },
+      { "after_act": 7, "type": "quick_cut" },
+      { "after_act": 8, "type": "dissolve" },
+      { "after_act": 9, "type": "soft_fade" }
+    ],
+    "pacing": "chaotic_start_build_middle_warm_resolution_callback_ending",
+    "subscribe_prompt_at_seconds": 510
+  }
+}

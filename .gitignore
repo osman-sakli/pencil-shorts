@@ -4,6 +4,21 @@ node_modules/
 .env
 __pycache__/
 *.pyc
+
+# Terraform
 .terraform/
+infra/.terraform/
 *.tfstate
 *.tfstate.backup
+*.tfplan
+tfplan
+infra/tfplan
+.terraform.lock.hcl
+
+# Output videos (too large for git)
+outputs/shorts/*/
+outputs/long_episodes/*/
+!outputs/shorts/.gitkeep
+!outputs/long_episodes/.gitkeep
+
+.DS_Store

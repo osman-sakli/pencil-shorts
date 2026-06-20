@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { AbsoluteFill, Audio, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
-import { Manifest, MouthShape, Beat } from "./types";
-import { Character } from "./Character";
+import { Manifest, MouthShape, Beat, Position } from "./types";
+import { CharacterSprite } from "./CharacterSprite";
 import { Subtitles } from "./Subtitles";
 import { SceneBg } from "./backgrounds";
+import { EndCard } from "./EndCard";
+
+const END_CARD_FRAMES = 90; // 3 seconds
 
 function mouthAt(beat: Beat, t: number): MouthShape {
   for (const c of beat.mouthCues) if (t >= c.start && t < c.end) return c.value;
@@ -20,13 +23,11 @@ function findLastEnded(beats: Beat[], frame: number): number {
   return idx;
 }
 
-// Find the most recent OTHER-character beat (listener)
 function findListener(beats: Beat[], activeIdx: number): Beat | undefined {
   const speakerId = beats[activeIdx]?.character;
   for (let i = activeIdx - 1; i >= 0; i--) {
     if (beats[i].character !== speakerId) return beats[i];
   }
-  // fallback: look ahead
   for (let i = activeIdx + 1; i < beats.length; i++) {
     if (beats[i].character !== speakerId) return beats[i];
   }
@@ -38,6 +39,22 @@ export const PencilShort: React.FC<{ manifest: Manifest }> = ({ manifest }) => {
   const { fps } = useVideoConfig();
   const t = frame / fps;
 
+  const contentFrames = manifest.totalDurationFrames;
+  const showEndCard = frame >= contentFrames;
+
+  // Precompute first-appearance frame per character for spring entrance
+  const entryFrames = useMemo(() => {
+    const map: Record<string, number> = {};
+    for (const beat of manifest.beats) {
+      if (!(beat.character in map)) map[beat.character] = beat.startFrame;
+    }
+    return map;
+  }, [manifest.beats]);
+
+  if (showEndCard) {
+    return <EndCard />;
+  }
+
   const beats = manifest.beats;
   let activeIdx = findActive(beats, frame);
   const speaking = activeIdx !== -1;
@@ -48,39 +65,44 @@ export const PencilShort: React.FC<{ manifest: Manifest }> = ({ manifest }) => {
   const speakerDef = active ? manifest.characters[active.character] : undefined;
   const mouth: MouthShape = active && speaking ? mouthAt(active, t) : "X";
   const sceneLabel = active?.background ?? "home";
-
   const listenerBeat = findListener(beats, activeIdx);
 
+  const speakerPos = active?.position ?? "left";
+  const listenerPos: Position = listenerBeat
+    ? listenerBeat.position === speakerPos
+      ? speakerPos === "left" ? "right" : "left"
+      : listenerBeat.position
+    : "right";
+
   return (
-    <AbsoluteFill style={{ backgroundColor: "#fcfaf2" }}>
+    <AbsoluteFill style={{ backgroundColor: "#111" }}>
       <Audio src={staticFile(manifest.audio)} />
       <SceneBg label={sceneLabel} />
 
-      {/* Listener — dimmed, opposite side */}
       {listenerBeat && (
-        <Character
+        <CharacterSprite
           characterId={listenerBeat.character}
-          mouth="X"
-          position={listenerBeat.position}
+          position={listenerPos}
           speaking={false}
+          mouth="X"
           scale={manifest.characters[listenerBeat.character]?.scale ?? 1}
           emotion="neutral"
+          entryFrame={entryFrames[listenerBeat.character] ?? 0}
         />
       )}
 
-      {/* Active speaker */}
       {active && (
-        <Character
+        <CharacterSprite
           characterId={active.character}
-          mouth={mouth}
           position={active.position}
           speaking={speaking}
+          mouth={mouth}
           scale={speakerDef?.scale ?? 1}
-          emotion={active.emotion ?? "neutral"}
+          emotion={(active as any).emotion ?? "neutral"}
+          entryFrame={entryFrames[active.character] ?? 0}
         />
       )}
 
-      {/* Subtitles — anchored to bottom, never overlaps characters */}
       {speaking && active && speakerDef && (
         <Subtitles
           text={active.text}

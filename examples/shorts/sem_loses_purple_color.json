@@ -1,0 +1,30 @@
+{
+  "title": "Sem Loses His Purple Color!",
+  "background": "bathroom",
+  "description": "Sem accidentally washes off Saf's purple pen ink... and tries to put it back 😱 #ThePenFamily #Shorts",
+  "hashtags": ["#ThePenFamily", "#KidsCartoon", "#FamilyFun", "#Shorts", "#BabySem"],
+  "thumbnail_prompt": "Sem (green pen, tiny) holding an empty purple ink bottle looking terrified. Saf (purple pen) in background looking horrified. Bright bathroom background. No text.",
+  "lesson": "honesty",
+  "beats": [
+    { "character": "sem", "text": "Uh oh. Uh oh. UH OH!", "emotion": "surprised", "background": "bathroom" },
+    { "character": "saf", "text": "What did you DO?!", "emotion": "surprised", "background": "bathroom" },
+    { "character": "sem", "text": "I was just helping!", "emotion": "neutral", "background": "bathroom" },
+    { "character": "saf", "text": "My color is GONE! I'm invisible!", "emotion": "angry", "background": "bathroom" },
+    { "character": "bas", "text": "Wait — Saf is literally transparent?", "emotion": "surprised", "background": "bathroom" },
+    { "character": "sem", "text": "I can fix it! I got a pwan!", "emotion": "happy", "background": "bathroom" },
+    { "character": "oz", "text": "Nobody touch anything. Family meeting!", "emotion": "angry", "background": "home" },
+    { "character": "saf", "text": "Wait — where does pen color even come from?", "emotion": "neutral", "background": "home" },
+    { "character": "oz", "text": "Son... what exactly did you wash?", "emotion": "neutral", "background": "home" },
+    { "character": "sem", "text": "The purple stuff. It was dirty!", "emotion": "neutral", "background": "bathroom" },
+    { "character": "bas", "text": "That IS her. That's literally Saf's color.", "emotion": "surprised", "background": "bathroom" },
+    { "character": "sem", "text": "I thought it was paint!", "emotion": "sad", "background": "bathroom" },
+    { "character": "saf", "text": "I AM the paint! I AM THE PURPLE!", "emotion": "angry", "background": "bathroom" },
+    { "character": "mira", "text": "Puh-puh!", "emotion": "happy", "background": "bathroom" },
+    { "character": "mas", "text": "She's fine. Color comes back. Deep breaths.", "emotion": "neutral", "background": "bathroom" },
+    { "character": "saf", "text": "How do you know that?!", "emotion": "surprised", "background": "bathroom" },
+    { "character": "mas", "text": "Because Sem did this to Oz last Tuesday.", "emotion": "neutral", "background": "bathroom" },
+    { "character": "oz", "text": "We agreed we weren't talking about that.", "emotion": "sad", "background": "home" },
+    { "character": "sem", "text": "I'm sowwy Saf. I didn't know.", "emotion": "sad", "background": "bathroom" },
+    { "character": "saf", "text": "...okay. But next time ASK first. Why though?", "emotion": "happy", "background": "bathroom" }
+  ]
+}

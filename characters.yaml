@@ -1,22 +1,22 @@
-# The Pen Family — 6 code-drawn pen characters (renderer/src/cast.tsx).
-# voice: Kokoro TTS voice ID (TTS_PROVIDER=kokoro)
-#        EdgeTTS fallback voice also listed for TTS_PROVIDER=edge
+# The Pen Family — Voice & Personality Bible
+# Edge TTS voices: voice_rate and voice_pitch can be set per character
+# voice_rate: "+N%" or "-N%"  |  voice_pitch: "+NHz" or "-NHz"
 
 characters:
   oz:
     name: "Oz"
     role: "Dad"
-    persona: "Warm but slightly dramatic dad pen. Takes everything a bit too seriously but always means well."
-    voice: "am_adam"          # Kokoro: deep adult male
-    voice_edge: "en-US-GuyNeural"
+    persona: "Southern American dad pen, 35. Warm, slightly old-school. Uses complete sentences. Gives advice nobody asked for. Tries to sound wise. Says 'Back in my day' and 'Family meeting!'. Protective, responsible, slightly goofy, loves his family. NEVER speaks like a teenager."
+    voice: "am_adam"
+    voice_edge: "en-US-ChristopherNeural"
     color: "#3f6fc4"
     scale: 1.05
 
   mas:
     name: "Mas"
     role: "Mom"
-    persona: "Calm, witty mom pen. The glue of the family. Diffuses drama with one well-timed remark."
-    voice: "af_heart"         # Kokoro: warm adult female
+    persona: "Smart New York mom pen, 32. Calm during chaos. Direct and fast. Already knows the answer. Says 'I knew this would happen' and 'Everybody relax.' The smartest person in the house. Funny without trying. NEVER panics or overreacts."
+    voice: "af_heart"
     voice_edge: "en-US-JennyNeural"
     color: "#ff7fa0"
     scale: 1.0
@@ -24,43 +24,93 @@ characters:
   bas:
     name: "Bas"
     role: "Big sister"
-    persona: "16-year-old big sister. Sharp, sarcastic, secretly caring. Always has receipts on everyone."
-    voice: "af_nicole"        # Kokoro: young adult female
-    voice_edge: "en-US-AriaNeural"
-    color: "#a06cd8"
-    scale: 0.98
+    persona: "16-year-old teal teen girl pen. Social media language, dramatic, expressive. Says 'Seriously?', 'That is so embarrassing.', 'Please don't post that.', 'I need content.' Wants to be famous, fashion-focused, secretly loves family. NEVER sounds like an adult."
+    voice: "af_nicole"
+    voice_edge: "en-US-EmmaNeural"
+    voice_rate: "+10%"
+    voice_pitch: "+20Hz"
+    color: "#2EC4C4"
+    scale: 0.96
 
   saf:
     name: "Saf"
     role: "Little sister"
-    persona: "9-year-old little sister. Enthusiastic, loud, asks too many questions, accidentally causes chaos."
-    voice: "af_bella"         # Kokoro: bright young female
-    voice_edge: "en-US-JennyNeural"
-    color: "#34bfb0"
-    scale: 0.9
+    persona: "9-year-old purple pen girl. Talks fast. Endlessly curious. Always asks at least ONE funny question. Says 'Why?', 'Wait...', 'How does that work?', 'I have another question.' Smart for her age. Innocent and funny."
+    voice: "af_bella"
+    voice_edge: "en-US-AnaNeural"
+    color: "#9B5FC4"
+    scale: 0.88
 
   sem:
     name: "Sem"
-    role: "Son"
-    persona: "12-year-old son. Tries to be cool, fails adorably. Blames everyone else first."
-    voice: "am_michael"       # Kokoro: young adult male
+    role: "Little brother"
+    persona: "4-year-old green preschool boy pen. VERY IMPORTANT: Sem is FOUR years old, NOT a teenager. Short simple sentences. Big emotions. Mispronounces some words. Says 'I got a pwan!', 'Look what I did!', 'Uh oh...', 'Can I do it?' Chaos machine. Thinks every idea is genius. Fearless. Extremely lovable. He STARTS the problem most episodes."
+    voice: "af_sky"
     voice_edge: "en-US-GuyNeural"
+    voice_rate: "+15%"
+    voice_pitch: "+40Hz"
     color: "#4cae5a"
-    scale: 0.92
+    scale: 0.80
 
   mira:
     name: "Mira"
     role: "Baby"
-    persona: "2-year-old baby. Says very little but somehow always causes the most trouble."
-    voice: "af_sky"           # Kokoro: light/high female (closest to toddler)
-    voice_edge: "en-US-AriaNeural"
+    persona: "1-year-old yellow baby girl pen. Mostly sounds and single words: 'Ba-ba!', 'Hehe!', 'Uh-oh!', 'Yay!'. NEVER speaks actual sentences. The joke is she somehow solves the problem anyway."
+    voice: "af_sky"
+    voice_edge: "en-US-AnaNeural"
+    voice_rate: "-25%"
+    voice_pitch: "+100Hz"
     color: "#ffcc4d"
-    scale: 0.78
+    scale: 0.70
+
+  eli:
+    name: "Eli"
+    role: "Neighbor friend"
+    persona: "Cheerful red eraser who lives next door. Always tries to help fix mistakes. Says 'No worries, I can fix that!' / 'Oops, let me help!' / 'Mistakes happen!' Optimistic, helpful, slightly clumsy. Never gives up."
+    voice: "af_heart"
+    voice_edge: "en-US-AndrewNeural"
+    voice_rate: "+5%"
+    color: "#E84060"
+    scale: 0.90
+
+  kit:
+    name: "Kit"
+    role: "Cousin (Notebook)"
+    persona: "Smart dark-blue notebook cousin who visits sometimes. Nerdy, remembers everything, loves facts. Says 'Actually...' / 'According to my notes...' / 'I wrote that down!' Secretly wants to be cool. Wears invisible glasses."
+    voice: "af_bella"
+    voice_edge: "en-US-EricNeural"
+    voice_rate: "+0%"
+    color: "#2040AA"
+    scale: 0.92
+
+  rex:
+    name: "Rex"
+    role: "Grandpa (Ruler)"
+    persona: "Strict golden-orange ruler grandpa. Old-fashioned, measures everything, gives unsolicited advice. Says 'In MY day...' / 'Let me be straight with you...' / 'I have the measure of this situation.' Grumpy but lovable."
+    voice: "am_adam"
+    voice_edge: "en-US-SteffanNeural"
+    voice_rate: "-10%"
+    voice_pitch: "-15Hz"
+    color: "#E8A820"
+    scale: 0.98
+
+  nib:
+    name: "Nib"
+    role: "Aunt (Marker)"
+    persona: "Dramatic yellow-green marker aunt who visits unexpectedly. Creative, expressive, colorful personality. Says 'Darling!' / 'This is BRILLIANT!' / 'Let me add some color to this!' Loves art, fashion, drama."
+    voice: "af_nicole"
+    voice_edge: "en-US-AriaNeural"
+    voice_rate: "+8%"
+    voice_pitch: "+10Hz"
+    color: "#90CC20"
+    scale: 0.94
 
 backgrounds:
   - home
+  - kitchen
+  - bedroom
+  - bathroom
   - school
   - park
   - shop
-  - office
   - street
