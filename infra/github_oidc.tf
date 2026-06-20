@@ -138,10 +138,16 @@ resource "aws_iam_role_policy" "github_deploy_permissions" {
         Action   = ["iam:ListOpenIDConnectProviders"]
         Resource = "*"
       },
-      # ECR describe (for data source refresh)
+      # ECR full read (Terraform data sources + lifecycle policy refresh)
       {
         Effect   = "Allow"
-        Action   = ["ecr:DescribeRepositories", "ecr:ListTagsForResource"]
+        Action   = [
+          "ecr:DescribeRepositories",
+          "ecr:ListTagsForResource",
+          "ecr:GetLifecyclePolicy",
+          "ecr:GetRepositoryPolicy",
+          "ecr:DescribeImages",
+        ]
         Resource = "*"
       },
     ]
