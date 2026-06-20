@@ -17,6 +17,20 @@ resource "aws_iam_role_policy_attachment" "ecs_execution_managed" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
+# Execution role needs SSM access to inject secrets before container starts
+resource "aws_iam_role_policy" "ecs_execution_ssm" {
+  name = "${var.project}-execution-ssm"
+  role = aws_iam_role.ecs_execution.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect   = "Allow"
+      Action   = ["ssm:GetParameter", "ssm:GetParameters", "ssm:GetParametersByPath"]
+      Resource = "arn:aws:ssm:${local.region}:${local.account_id}:parameter${var.ssm_prefix}/*"
+    }]
+  })
+}
+
 # ── ECS Task Role ────────────────────────────────────────────────────────────
 # What the running container itself is allowed to do
 resource "aws_iam_role" "ecs_task" {
