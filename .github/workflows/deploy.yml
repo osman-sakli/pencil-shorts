@@ -122,6 +122,6 @@ jobs:
 
       - name: Terraform Apply
         working-directory: infra
-        run: terraform apply -auto-approve infra/tfplan
+        run: terraform apply -auto-approve tfplan
         env:
           TF_VAR_budget_alert_email: ${{ secrets.BUDGET_ALERT_EMAIL }}
