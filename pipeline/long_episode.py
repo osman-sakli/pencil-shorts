@@ -148,6 +148,11 @@ def render_scene(scene_topic: str, scene_dir: Path, act_name: str) -> Path:
         synthesize_voice.synthesize(script)
         lipsync.lipsync(script)
         manifest = build_manifest.build(script)
+        # Fix audio path: build_manifest hardcodes "out/audio_full.wav"
+        # but scene audio lives in scene_dir. Public-dir is repo root.
+        manifest["audio"] = str(
+            (scene_dir / "audio_full.wav").relative_to(config.ROOT)
+        )
         manifest_path = scene_dir / "manifest.json"
         manifest_path.write_text(
             json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -159,7 +164,7 @@ def render_scene(scene_topic: str, scene_dir: Path, act_name: str) -> Path:
         props_path.write_text(json.dumps(props), encoding="utf-8")
         subprocess.run(
             ["npx", "remotion", "render", "PencilShort", str(out_mp4),
-             f"--props={props_path}", "--public-dir=../"],
+             f"--props={props_path}", f"--public-dir={config.ROOT}"],
             cwd=renderer, check=True,
         )
         print(f"  [render] {out_mp4.name} ({manifest['totalDurationFrames']/config.FPS:.1f}s)")
