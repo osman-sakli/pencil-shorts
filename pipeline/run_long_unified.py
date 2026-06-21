@@ -246,7 +246,7 @@ def main() -> None:
         "hashtags": script.get("hashtags", []),
     }
     upload.publish(
-        ["tiktok", "youtube", "instagram", "facebook"],
+        ["youtube"],
         video_path=out_mp4,
         manifest_data=episode_manifest,
     )

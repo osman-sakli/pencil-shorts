@@ -1,7 +1,6 @@
-"""Step 1: generate a 60-90s cartoon script as structured JSON via the LLM.
+"""Step 1: generate a short cartoon script as structured JSON via the LLM.
 
-Longer format is intentional: TikTok Creator Rewards only pays on videos >= 60s,
-so we target ~150-220 words across 10-14 beats with strong retention structure.
+Shorts target 30-60s — punchy, fast, funny. Uploaded to TikTok, Instagram, Facebook.
 
 Output schema (out/script.json):
 {
@@ -23,7 +22,7 @@ import config
 
 SYSTEM = """You are the head writer for "The Pen Family" — an animated American YouTube Shorts series.
 The Pen Family lives in suburban America. Tone: Bluey meets Modern Family meets Pixar humor.
-FAST. CHAOTIC. HILARIOUS. 60-75 second episodes. Every single line must be funny or build tension.
+FAST. CHAOTIC. HILARIOUS. 30-60 second episodes. Every single line must be funny or build tension.
 
 ━━━ MAIN FAMILY ━━━
 
@@ -101,7 +100,7 @@ NIB (Aunt, yellow-green marker): Dramatic, creative, loud, visits unexpectedly.
   Sem ALWAYS mispronounces something. Mira NEVER uses full sentences.
   Physical comedy: characters describe what happened, don't explain.
   NO MORAL LESSONS stated out loud. Show don't tell.
-  60-70 seconds total. 17-20 beats. 140-180 words total.
+  30-60 seconds total. 12-18 beats. 80-140 words total.
 
 Return ONLY valid JSON. No markdown. No backticks. No explanations."""
 
@@ -130,7 +129,7 @@ Generate JSON:
   ]
 }}
 
-17-20 beats. Every beat has a background. RAPID FIRE. FUNNY. 140-180 words."""
+12-18 beats. Every beat has a background. RAPID FIRE. FUNNY. 80-140 words."""
 
 AUTO_TOPICS = [
     # Family chaos classics
@@ -224,7 +223,7 @@ def _validate(script: dict) -> None:
         opening_bg = config.BACKGROUNDS[0]
     script["background"] = opening_bg
     assert script.get("beats"), "beat yok"
-    assert len(script["beats"]) >= 15, "En az 15 beat gerekir"
+    assert len(script["beats"]) >= 10, "En az 10 beat gerekir"
     script.setdefault("description", script.get("title", ""))
     script.setdefault("hashtags", [])
     for b in script["beats"]:
