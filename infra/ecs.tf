@@ -82,8 +82,8 @@ resource "aws_ecs_task_definition" "long" {
     image     = "${local.ecr_url}:latest"
     essential = true
 
-    # Override: run long episode instead of short
-    entryPoint = ["python3", "pipeline/long_episode.py"]
+    # Unified long episode — single coherent story, single render
+    entryPoint = ["python3", "pipeline/run_long_unified.py"]
     command    = ["--auto"]
 
     environment = [
@@ -103,6 +103,44 @@ resource "aws_ecs_task_definition" "long" {
     }
 
     stopTimeout = 120  # Fargate max is 120s
+  }])
+}
+
+# ── Long Episode Preview Task (render only, uploads to S3 for review) ───────
+resource "aws_ecs_task_definition" "long_preview" {
+  family                   = "${var.project}-long-preview"
+  requires_compatibilities = ["FARGATE"]
+  network_mode             = "awsvpc"
+  cpu                      = var.long_task_cpu
+  memory                   = var.long_task_memory
+  execution_role_arn       = aws_iam_role.ecs_execution.arn
+  task_role_arn            = aws_iam_role.ecs_task.arn
+
+  container_definitions = jsonencode([{
+    name      = "pipeline"
+    image     = "${local.ecr_url}:latest"
+    essential = true
+
+    entryPoint = ["python3", "pipeline/run_long_unified.py"]
+    command    = ["--auto", "--no-publish"]
+
+    environment = [
+      { name = "TTS_PROVIDER", value = "edge" },
+      { name = "LLM_MODEL",    value = "claude-haiku-4-5-20251001" },
+    ]
+
+    secrets = local.secrets
+
+    logConfiguration = {
+      logDriver = "awslogs"
+      options = {
+        "awslogs-group"         = aws_cloudwatch_log_group.long.name
+        "awslogs-region"        = local.region
+        "awslogs-stream-prefix" = "preview"
+      }
+    }
+
+    stopTimeout = 120
   }])
 }
 

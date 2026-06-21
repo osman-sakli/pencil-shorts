@@ -59,6 +59,20 @@ resource "aws_iam_role_policy" "ecs_task_ssm" {
   })
 }
 
+# S3 access for preview uploads (pre-signed URLs for human review)
+resource "aws_iam_role_policy" "ecs_task_s3" {
+  name = "${var.project}-s3-preview"
+  role = aws_iam_role.ecs_task.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect   = "Allow"
+      Action   = ["s3:PutObject", "s3:GetObject"]
+      Resource = "arn:aws:s3:::pencil-shorts-tfstate-339712706640/previews/*"
+    }]
+  })
+}
+
 # ── EventBridge Scheduler Role ───────────────────────────────────────────────
 # Allows the scheduler to start ECS tasks
 resource "aws_iam_role" "scheduler" {
