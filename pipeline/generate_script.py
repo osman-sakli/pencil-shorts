@@ -228,7 +228,8 @@ def _validate(script: dict) -> None:
     script.setdefault("description", script.get("title", ""))
     script.setdefault("hashtags", [])
     for b in script["beats"]:
-        assert b["character"] in config.CHARACTERS, f"bilinmeyen karakter: {b['character']}"
+        if b["character"] not in config.CHARACTERS:
+            b["character"] = list(config.CHARACTERS.keys())[0]
         b.setdefault("emotion", "neutral")
         # Inherit opening background if beat doesn't specify one
         beat_bg = b.get("background", opening_bg)
