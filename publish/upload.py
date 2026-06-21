@@ -57,14 +57,22 @@ def _post(platforms: list[str], key: str, user: str,
     data = [("user", user), ("title", title), ("description", description)]
     for p in platforms:
         data.append(("platform[]", p))
-    with open(video, "rb") as f:
-        r = requests.post(
-            API, headers=headers, data=data,
-            files=[("video", (video.name, f, "video/mp4"))],
-            timeout=300,
-        )
-    r.raise_for_status()
-    return r.json()
+    for attempt in range(4):
+        try:
+            with open(video, "rb") as f:
+                r = requests.post(
+                    API, headers=headers, data=data,
+                    files=[("video", (video.name, f, "video/mp4"))],
+                    timeout=600,
+                )
+            r.raise_for_status()
+            return r.json()
+        except (requests.exceptions.SSLError, requests.exceptions.ConnectionError) as e:
+            if attempt == 3:
+                raise
+            wait = 30 * (attempt + 1)
+            print(f"[upload] SSL/connection error, retry {attempt+1}/3 in {wait}s: {e}")
+            time.sleep(wait)
 
 
 def _check_status(request_id: str, key: str) -> list[dict]:
