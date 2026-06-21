@@ -6,3 +6,4 @@ python-dotenv>=1.0
 httpx>=0.27
 requests>=2.31
 soundfile>=0.12
+boto3>=1.34
