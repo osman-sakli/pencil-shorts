@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Img, staticFile } from "remotion";
+import { AbsoluteFill, Img, staticFile, useCurrentFrame } from "remotion";
 
 // ─── Photo backgrounds (real photos when available) ────────────────────────
 const PHOTO_SCENES = new Set([
@@ -651,8 +651,53 @@ const CSS_SCENES: Record<string, React.FC> = {
   pencilcase: Shop,
 };
 
-export const SceneBg: React.FC<{ label: string }> = ({ label }) => {
-  if (PHOTO_SCENES.has(label)) return <PhotoBg label={label} />;
+// ─── Animated shimmer overlay for cartoon mode ──────────────────────────────
+const CartoonShimmer: React.FC = () => {
+  const frame = useCurrentFrame();
+  const glints = [
+    { x: 12, y: 18, period: 75, phase: 0  },
+    { x: 80, y: 12, period: 90, phase: 20 },
+    { x: 6,  y: 62, period: 85, phase: 40 },
+    { x: 86, y: 70, period: 70, phase: 60 },
+    { x: 45, y: 6,  period: 95, phase: 15 },
+    { x: 25, y: 88, period: 80, phase: 35 },
+    { x: 72, y: 88, period: 100,phase: 55 },
+  ];
+  return (
+    <AbsoluteFill style={{ pointerEvents: "none" }}>
+      {glints.map((g, i) => {
+        const t = (frame + g.phase) / g.period;
+        const opacity = Math.max(0, Math.sin(t * 2 * Math.PI) * 0.55);
+        const scale = 0.7 + Math.abs(Math.sin(t * Math.PI)) * 0.6;
+        const rotate = t * 360;
+        return (
+          <div key={i} style={{
+            position: "absolute",
+            left: `${g.x}%`,
+            top: `${g.y}%`,
+            fontSize: 14,
+            transform: `rotate(${rotate}deg) scale(${scale})`,
+            opacity,
+            pointerEvents: "none",
+            userSelect: "none",
+          }}>✦</div>
+        );
+      })}
+    </AbsoluteFill>
+  );
+};
+
+export const SceneBg: React.FC<{ label: string; animated?: boolean }> = ({ label, animated }) => {
+  // cartoon mode → always use CSS-drawn backgrounds (more vibrant than photos)
   const Cmp = CSS_SCENES[label] ?? Home;
+  if (animated) {
+    return (
+      <>
+        <Cmp />
+        <CartoonShimmer />
+      </>
+    );
+  }
+  if (PHOTO_SCENES.has(label)) return <PhotoBg label={label} />;
   return <Cmp />;
 };

@@ -22,6 +22,7 @@ import config
 import synthesize_voice
 import lipsync
 import build_manifest
+import notify
 
 sys.path.insert(0, str(config.ROOT / "publish"))
 import upload
@@ -234,23 +235,38 @@ def main() -> None:
             print(f"PREVIEW URL (expires 24h):")
             print(url)
             print(f"{'='*60}\n")
+            notify.send(
+                f"Uzun bölüm önizleme: {script['title']}",
+                f"Yeni bölüm render edildi — onayınızı bekliyor.\n\nBaşlık: {script['title']}\nSüre: {duration_s:.0f}s ({duration_s/60:.1f} dk)\n\nÖnizleme URL (24 saat geçerli):\n{url}",
+            )
         except Exception as e:
             print(f"[preview] S3 upload failed: {e}")
             print(f"[preview] Video is at: {out_mp4}")
         return
 
-    print("[5/5] Uploading to all platforms...")
+    print("[5/5] Uploading to YouTube...")
     episode_manifest = {
         "title": script["title"],
         "description": script.get("description", script["title"]),
         "hashtags": script.get("hashtags", []),
     }
-    upload.publish(
-        ["youtube"],
-        video_path=out_mp4,
-        manifest_data=episode_manifest,
-    )
-    print("=== Done: episode live on all platforms ===")
+    try:
+        upload.publish(
+            ["youtube"],
+            video_path=out_mp4,
+            manifest_data=episode_manifest,
+        )
+        notify.send(
+            f"Uzun bölüm yüklendi: {script['title']}",
+            f"The Pen Family uzun bölüm YouTube'a yüklendi.\n\nBaşlık: {script['title']}\nSüre: {duration_s:.0f}s ({duration_s/60:.1f} dk)\nPlatform: YouTube",
+        )
+        print("=== Done: episode live on YouTube ===")
+    except Exception as e:
+        notify.send(
+            f"Uzun bölüm HATA: {script.get('title','?')}",
+            f"YouTube yükleme hatası:\n{e}",
+        )
+        raise
 
 
 if __name__ == "__main__":

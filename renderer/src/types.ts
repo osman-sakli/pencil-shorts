@@ -40,6 +40,7 @@ export interface Manifest {
   height: number;
   audio: string;
   background: string;
+  bgStyle?: "photo" | "cartoon";
   totalDurationFrames: number;
   characters: Record<string, CharacterDef>;
   beats: Beat[];

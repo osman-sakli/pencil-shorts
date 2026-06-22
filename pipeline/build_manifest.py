@@ -12,6 +12,7 @@ from __future__ import annotations
 import json
 import subprocess
 import shutil
+import datetime
 from pathlib import Path
 from pydub import AudioSegment
 import config
@@ -117,6 +118,9 @@ def build(script: dict) -> dict:
         for cid, c in config.CHARACTERS.items() if cid in used
     }
 
+    # Alternate background style: even day = photo, odd day = cartoon
+    bg_style = "photo" if datetime.date.today().day % 2 == 0 else "cartoon"
+
     return {
         "title": script["title"],
         "fps": config.FPS,
@@ -124,6 +128,7 @@ def build(script: dict) -> dict:
         "height": config.HEIGHT,
         "audio": "out/audio_full.wav",
         "background": "",  # renderer draws a code background; label kept in script only
+        "bgStyle": bg_style,
         "totalDurationFrames": _round_f(total_s),
         "characters": chars,
         "beats": beats_out,

@@ -59,6 +59,20 @@ resource "aws_iam_role_policy" "ecs_task_ssm" {
   })
 }
 
+# SNS publish permission — pipeline sends result email after each run
+resource "aws_iam_role_policy" "ecs_task_sns" {
+  name = "${var.project}-sns-publish"
+  role = aws_iam_role.ecs_task.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect   = "Allow"
+      Action   = ["sns:Publish"]
+      Resource = aws_sns_topic.notify.arn
+    }]
+  })
+}
+
 # S3 access for preview uploads (pre-signed URLs for human review)
 resource "aws_iam_role_policy" "ecs_task_s3" {
   name = "${var.project}-s3-preview"

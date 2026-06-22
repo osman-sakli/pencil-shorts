@@ -5,6 +5,7 @@ import { CharacterSprite } from "./CharacterSprite";
 import { Subtitles } from "./Subtitles";
 import { SceneBg } from "./backgrounds";
 import { EndCard } from "./EndCard";
+import { EmotionBurst, ScreenFlash, FloatingStars, ColorOrbs } from "./effects";
 
 const END_CARD_FRAMES = 90; // 3 seconds
 
@@ -38,6 +39,7 @@ export const PencilShort: React.FC<{ manifest: Manifest }> = ({ manifest }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = frame / fps;
+  const isCartoon = manifest.bgStyle === "cartoon";
 
   const contentFrames = manifest.totalDurationFrames;
   const showEndCard = frame >= contentFrames;
@@ -67,6 +69,9 @@ export const PencilShort: React.FC<{ manifest: Manifest }> = ({ manifest }) => {
   const sceneLabel = active?.background ?? "home";
   const listenerBeat = findListener(beats, activeIdx);
 
+  const prevBeat = activeIdx > 0 ? beats[activeIdx - 1] : null;
+  const sceneChanged = prevBeat !== null && prevBeat.background !== sceneLabel;
+
   const speakerPos = active?.position ?? "left";
   const listenerPos: Position = listenerBeat
     ? listenerBeat.position === speakerPos
@@ -77,7 +82,7 @@ export const PencilShort: React.FC<{ manifest: Manifest }> = ({ manifest }) => {
   return (
     <AbsoluteFill style={{ backgroundColor: "#111" }}>
       <Audio src={staticFile(manifest.audio)} />
-      <SceneBg label={sceneLabel} />
+      <SceneBg label={sceneLabel} animated={isCartoon} />
 
       {listenerBeat && (
         <CharacterSprite
@@ -111,6 +116,14 @@ export const PencilShort: React.FC<{ manifest: Manifest }> = ({ manifest }) => {
           color={speakerDef.color}
           speakerName={speakerDef.name}
         />
+      )}
+
+      {/* Cartoon-mode effects */}
+      {isCartoon && <ColorOrbs />}
+      {isCartoon && <FloatingStars />}
+      {isCartoon && sceneChanged && active && <ScreenFlash beatStart={active.startFrame} />}
+      {isCartoon && active && speaking && (
+        <EmotionBurst emotion={(active as any).emotion ?? "neutral"} beatStart={active.startFrame} />
       )}
     </AbsoluteFill>
   );

@@ -22,18 +22,18 @@ variable "ssm_prefix" {
   default     = "/pencil-shorts"
 }
 
-# Short video schedule: daily at 14:00 UTC
+# Short video schedule: daily at 08:00 AM EDT = 12:00 UTC
 variable "short_schedule_expression" {
   description = "EventBridge schedule for daily short videos"
   type        = string
-  default     = "cron(0 14 * * ? *)"
+  default     = "cron(0 12 * * ? *)"
 }
 
-# Long episode schedule: every 3 days at 08:00 UTC
+# Long episode schedule: every 3rd day at 06:00 AM EDT = 10:00 UTC
 variable "long_schedule_expression" {
   description = "EventBridge schedule for long episodes"
   type        = string
-  default     = "rate(3 days)"
+  default     = "cron(0 10 */3 * ? *)"
 }
 
 # ECS short task resources (1 vCPU / 2GB)

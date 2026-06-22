@@ -19,6 +19,7 @@ import generate_script
 import synthesize_voice
 import lipsync
 import build_manifest
+import notify
 
 sys.path.insert(0, str(config.ROOT / "publish"))
 import upload
@@ -81,8 +82,19 @@ def main() -> None:
         return
 
     print("[5/5] uploading to all platforms...")
-    upload.publish(["tiktok", "youtube", "instagram", "facebook"])
-    print("=== Done: video live on all platforms ===")
+    try:
+        upload.publish(["tiktok", "youtube", "instagram", "facebook"])
+        notify.send(
+            f"Short yüklendi: {script['title']}",
+            f"The Pen Family kısa video yüklendi.\n\nBaşlık: {script['title']}\nSüre: {manifest['totalDurationFrames']/config.FPS:.0f}s\nPlatformlar: TikTok, YouTube, Instagram, Facebook",
+        )
+        print("=== Done: video live on all platforms ===")
+    except Exception as e:
+        notify.send(
+            f"Short HATA: {script.get('title','?')}",
+            f"Yükleme hatası:\n{e}",
+        )
+        raise
 
 
 if __name__ == "__main__":

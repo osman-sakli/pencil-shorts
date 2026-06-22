@@ -48,8 +48,9 @@ resource "aws_ecs_task_definition" "short" {
     command = ["--auto"]
 
     environment = [
-      { name = "TTS_PROVIDER", value = "edge" },
-      { name = "LLM_MODEL",    value = "claude-haiku-4-5-20251001" },
+      { name = "TTS_PROVIDER",    value = "edge" },
+      { name = "LLM_MODEL",       value = "claude-haiku-4-5-20251001" },
+      { name = "SNS_TOPIC_ARN",   value = aws_sns_topic.notify.arn },
     ]
 
     secrets = local.secrets
@@ -87,8 +88,9 @@ resource "aws_ecs_task_definition" "long" {
     command    = ["--auto"]
 
     environment = [
-      { name = "TTS_PROVIDER", value = "edge" },
-      { name = "LLM_MODEL",    value = "claude-haiku-4-5-20251001" },
+      { name = "TTS_PROVIDER",  value = "edge" },
+      { name = "LLM_MODEL",     value = "claude-haiku-4-5-20251001" },
+      { name = "SNS_TOPIC_ARN", value = aws_sns_topic.notify.arn },
     ]
 
     secrets = local.secrets
@@ -125,8 +127,9 @@ resource "aws_ecs_task_definition" "long_preview" {
     command    = ["--auto", "--no-publish"]
 
     environment = [
-      { name = "TTS_PROVIDER", value = "edge" },
-      { name = "LLM_MODEL",    value = "claude-haiku-4-5-20251001" },
+      { name = "TTS_PROVIDER",  value = "edge" },
+      { name = "LLM_MODEL",     value = "claude-haiku-4-5-20251001" },
+      { name = "SNS_TOPIC_ARN", value = aws_sns_topic.notify.arn },
     ]
 
     secrets = local.secrets
