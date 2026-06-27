@@ -37,6 +37,22 @@ def _kokoro(text: str, voice: str, wav_path: Path) -> list[dict]:
 
 # ── EdgeTTS ───────────────────────────────────────────────────────────────────
 
+def _words_from_sentence(sent_text: str, sent_start: float, sent_dur: float) -> list[dict]:
+    """Distribute word timing within a sentence proportionally by character count."""
+    raw_words = sent_text.split()
+    if not raw_words:
+        return []
+    char_counts = [max(1, len(w.strip(".,!?'\"()-"))) for w in raw_words]
+    total_chars = sum(char_counts)
+    words: list[dict] = []
+    t = sent_start
+    for w, cc in zip(raw_words, char_counts):
+        word_dur = sent_dur * cc / total_chars
+        words.append({"word": w, "start": t, "end": t + word_dur})
+        t += word_dur
+    return words
+
+
 async def _edge_tts(text: str, voice: str, mp3_path: Path,
                     rate: str = "+0%", pitch: str = "+0Hz") -> list[dict]:
     import asyncio as _aio
@@ -49,9 +65,15 @@ async def _edge_tts(text: str, voice: str, mp3_path: Path,
                     if chunk["type"] == "audio":
                         f.write(chunk["data"])
                     elif chunk["type"] == "WordBoundary":
+                        # edge-tts < 7.x: direct word boundaries
                         start = chunk["offset"] / 1e7
                         dur = chunk["duration"] / 1e7
                         words.append({"word": chunk["text"], "start": start, "end": start + dur})
+                    elif chunk["type"] == "SentenceBoundary":
+                        # edge-tts >= 7.x: sentence-level timing — distribute words proportionally
+                        sent_start = chunk["offset"] / 1e7
+                        sent_dur = chunk["duration"] / 1e7
+                        words.extend(_words_from_sentence(chunk["text"], sent_start, sent_dur))
             if mp3_path.stat().st_size > 0:
                 return words
             raise RuntimeError("empty audio file")

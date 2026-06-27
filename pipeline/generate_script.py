@@ -73,15 +73,23 @@ REX (Grandpa, golden ruler): Strict, old-fashioned, measures everything.
 NIB (Aunt, yellow-green marker): Dramatic, creative, loud, visits unexpectedly.
   Says: "Darling!" / "This is BRILLIANT!" / "Let me add some color to this!"
 
+━━━ FAMILY PETS ━━━
+BISCUIT (family dog): Golden retriever puppy. Only says "Woof!", "Arf!", "Woof woof!". Runs in and causes chaos. Mira's best friend.
+MITTENS (family cat): Orange tabby. Only says "Meow.", "Prrr...", "Hiss!". Appears in home/bedroom. Knocks things over.
+
+━━━ SCHOOL FRIENDS ━━━
+SNIP (pencil sharpener): Saf and Sem's cheerful blue school friend. Says "I can sharpen that idea!" / "Let me help!" Use in school scenes.
+
 ━━━ BACKGROUND RULES ━━━
   EACH BEAT must have a background that MATCHES where the scene is happening.
+  CHANGE BACKGROUNDS OFTEN — move characters between locations every 2-3 beats!
   Available backgrounds: {backgrounds}
   - kitchen → breakfast, eating, cooking chaos
-  - home → living room, family hanging out, TV time
-  - bedroom → Bas's room, sleeping, hiding, private moments
+  - home → living room, family hanging out, TV time, couch, Biscuit sleeping, Mittens on table
+  - bedroom → Bas's room, sleeping, hiding, private moments, Mittens napping
   - bathroom → Sem flooding, brushing teeth, bath time chaos
-  - school → classroom, hallway, show and tell, science fair
-  - park → outdoor, picnic, playing, running
+  - school → classroom, hallway, show and tell, science fair, Snip appears here
+  - park → outdoor, picnic, playing, Biscuit running, chasing sticks
   - shop → grocery store, buying things, errands
   - street → outside, walking, neighborhood, school pickup
 
@@ -90,17 +98,31 @@ NIB (Aunt, yellow-green marker): Dramatic, creative, loud, visits unexpectedly.
   2. Fast rapid-fire reactions — short lines, interruptions, pile-on
   3. Things get WORSE, not better. Every attempt fails.
   4. Saf asks one genius/dumb question that perfectly sums up the chaos
-  5. Mira does something that accidentally saves or ruins everything
+  5. Mira (or Biscuit/Mittens) does something that accidentally saves or ruins everything
   6. Mas delivers the one-liner that ends it all
 
 ━━━ WRITING RULES — CRITICAL ━━━
-  MAX 8 WORDS PER LINE. Hard limit. 5-6 words is ideal.
+  MAX 7 WORDS PER LINE. Hard limit. 5-6 words is ideal.
   RAPID FIRE — no monologues. Ping-pong between characters.
   Use REACTIONS: "What?!" / "No no no no!" / "I TOLD you!" / "Uh oh."
   Sem ALWAYS mispronounces something. Mira NEVER uses full sentences.
   Physical comedy: characters describe what happened, don't explain.
   NO MORAL LESSONS stated out loud. Show don't tell.
-  30-60 seconds total. 12-18 beats. 80-140 words total.
+  TEACH ENGLISH NATURALLY — clear vocabulary, natural expressions families use.
+  40-44 seconds total. 9-10 beats. 60-80 words total.
+  EACH LINE: 5-8 words. No line longer than 8 words.
+  SURPRISE FACTOR: Every episode needs one unexpected twist or reveal nobody saw coming.
+
+━━━ TITLE RULES — VIRAL CLICKBAIT ━━━
+  Title must INSTANTLY make someone stop scrolling.
+  ALWAYS include one of: Biscuit, Mittens, dog, cat, puppy, kitten, baby, OR a shocking verb.
+  Use ALLCAPS on the shocking word. Max 8 words.
+  PROVEN VIRAL FORMATS:
+  - "[Pet] [SHOCKING VERB] [thing]!" → "Biscuit ATE Dad's Report Card!"
+  - "[Character] CAUGHT [pet/baby] [doing thing]!" → "Mas CAUGHT Mittens Stealing Food!"
+  - "Nobody Expected [character] to [shocking action]!" → "Nobody Expected Sem to WIN!"
+  - "The [pet] KNOWS [secret/thing]!" → "The Dog KNOWS Our Secret!"
+  - "[Baby/Pet] Just [shocking thing] 😱" → "Mira Just Said Her First Word 😱"
 
 Return ONLY valid JSON. No markdown. No backticks. No explanations."""
 
@@ -113,63 +135,66 @@ Background options: {backgrounds}
 
 CRITICAL RULES:
 - OPEN MID-ACTION. Line 1 = already in chaos. Zero setup.
-- MAX 8 WORDS per line. 5-6 is better.
+- MAX 7 WORDS per line. 5-6 is ideal.
 - Every beat needs a "background" matching where scene happens.
+- CHANGE BACKGROUND every 2-3 beats — characters move around!
 - Sem is 4 years old — mispronounces words. Saf asks one funny question.
+- Optional: include biscuit (dog sounds), mittens (cat sounds), snip (school friend).
+- TEACH ENGLISH naturally — common family words, clear expressions.
 - RAPID FIRE dialogue only. No speeches.
 
 Generate JSON:
 {{
-  "title": "episode title max 7 words",
+  "title": "VIRAL TITLE — must feature a pet (Biscuit/Mittens/dog/cat) OR a shocking moment. MAX 8 words. Use ALLCAPS for one keyword. Make people NEED to click. Examples: 'Biscuit ATE Dad's Homework!', 'Mittens RUINED the Birthday Cake!', 'This DOG Knows Our Secret!', 'Sem BROKE the House Again!', 'Baby Mira SHOCKED Everyone Today!'",
   "background": "opening background label",
-  "description": "punchy 1-sentence social caption + emojis",
-  "hashtags": ["#ThePenFamily", "#KidsCartoon", "#FamilyFun", "#Shorts"],
+  "description": "2 punchy sentences social caption + emojis + call to action. Mention Biscuit or Mittens or both if they appear. Add 'Follow for more Pen Family chaos! 🖊️🐶🐱' at end.",
+  "hashtags": ["#ThePenFamily", "#BiscuitTheDog", "#MittensTheCat", "#LearnEnglish", "#KidsCartoon", "#FamilyFun", "#Shorts", "#AnimatedFamily", "#CuteDogs", "#CuteCats", "#FunnyKids"],
   "beats": [
-    {{"character": "id", "text": "MAX 8 WORDS", "emotion": "neutral|happy|angry|surprised|sad", "background": "scene_label"}}
+    {{"character": "id", "text": "MAX 7 WORDS", "emotion": "neutral|happy|angry|surprised|sad", "background": "scene_label"}}
   ]
 }}
 
-12-18 beats. Every beat has a background. RAPID FIRE. FUNNY. 80-140 words."""
+9-11 beats. Every beat has a background. RAPID FIRE. FUNNY. 40-45 SECONDS. 55-75 words."""
 
 AUTO_TOPICS = [
-    # Family chaos classics
-    "Dad discovers someone used his favorite pen and the whole family denies it",
-    "Mom tries to get everyone ready for school but nobody cooperates",
-    "Sem floods the bathroom trying to give the rubber duck a bath",
-    "The whole family argues over who gets the last snack while Mira already ate it",
-    "Dad gives terrible life advice and somehow makes things worse",
-    "Saf asks so many 'why' questions that Dad gives up and leaves the room",
-    "Bas tries to delete an embarrassing family video but it already has thousands of views",
-    "Everyone tries to make Mira say their name first but she says something completely unexpected",
-    "Sem has a 'genius plan' that destroys the kitchen in under 2 minutes",
-    "The kids hide a massive mess from Mom but she already knew about it",
-    "Dad tries to learn TikTok and accidentally starts a viral trend",
-    "The family tries a no-screen day and fails spectacularly within the first hour",
-    "Sem finds Grandpa Rex's old ruler and accidentally breaks it — then everyone lies",
-    "Bas needs 10,000 views by tomorrow or loses a bet against her friends",
-    "Mira somehow locks everyone out of the house and won't let them back in",
-    # Guest character episodes
-    "Neighbor Eli the eraser comes over and tries to 'fix' everything — and makes it worse",
-    "Cousin Kit the notebook visits and won't stop correcting everyone with 'facts'",
-    "Grandpa Rex shows up unannounced with a ruler and starts measuring everything in the house",
-    "Aunt Nib arrives with a giant art project that covers the entire living room",
-    "Eli teaches Sem a new trick that immediately causes a disaster",
-    "Kit and Saf team up to investigate a 'family mystery' and find something embarrassing",
-    "Rex tries to teach the kids old-school discipline but Mira keeps interrupting",
-    "Nib decides to redecorate Bas's room without asking and Bas completely loses it",
-    # Social / school episodes
-    "Sem's show-and-tell at school goes spectacularly wrong",
-    "Bas is embarrassed by her family at the school open house",
-    "Saf enters a science fair and drags the whole family into the project",
-    "The perfect family photo for the holiday card takes 47 attempts",
-    "Dad coaches Sem's soccer game and gives the worst pep talk in history",
-    "Bas livestreams a 'normal family dinner' and it immediately becomes chaos",
-    # Lesson-based
-    "Sem learns that lying makes everything ten times worse",
-    "Bas realizes she posted something she really shouldn't have",
-    "The whole family tries to apologize for the same mistake at the same time",
-    "Saf discovers that asking 'why' is actually the smartest thing you can do",
-    "Oz learns that sometimes kids are right and dads are wrong",
+    # 🎭 Unexpected twists
+    "Sem accidentally calls the pizza place instead of grandpa and orders 40 pizzas",
+    "Biscuit ate Oz's car keys and now has to confess — but only Mira understands him",
+    "Bas goes viral for the wrong video and it's actually Oz dancing in the kitchen",
+    "Sem swaps Oz's coffee with chocolate milk and Oz doesn't notice for the whole morning",
+    "Mittens somehow learned to open the fridge and the whole family blames each other",
+    "Saf's science experiment accidentally dyes Biscuit bright purple — the vet is shocked",
+    "Oz tries to surprise the family but walks into his own surprise party instead",
+    "Sem hides Mira's toy and Mira's first real word is 'SEM' in a very angry voice",
+    "The family gets Biscuit a GPS collar and discovers he visits the neighbors every single day",
+    "Bas posts a cooking video but Sem walks in wearing Oz's giant shoes and steals the show",
+
+    # 🌀 Chaos escalators
+    "Sem decides to give Mittens a bath — Mittens disagrees loudly",
+    "Oz tries to fix one thing in the house and breaks five more things",
+    "Mira learns to open doors and nobody is safe anymore",
+    "Saf explains gravity to Sem using Oz's coffee mug — it does not end well",
+    "Sem trades his lunch with Snip at school and gets something completely inedible",
+    "Bas tries to teach Oz one social media trend — it takes the entire morning",
+    "Mittens knocks something expensive off the shelf — everyone pretends not to notice",
+    "Sem buries something important in the backyard and forgets what it was",
+    "Biscuit chases Mittens through the house and they destroy Bas's room in 8 seconds",
+
+    # 💡 English learning built in
+    "Sem tries to use grown-up words he overheard but uses them all completely wrong",
+    "Saf teaches Sem the difference between 'borrow' and 'steal' using Oz's cookie",
+    "The family plays a word game at dinner and Sem invents words that somehow make sense",
+    "Oz teaches Sem the word 'responsible' but Sem thinks it means something incredible",
+    "Saf explains what 'patient' means to Sem — Sem immediately tries to test everyone's patience",
+    "Sem learns 'apologize' and starts apologizing for things that haven't happened yet",
+
+    # 😲 Surprise reveals
+    "Mas already knew about every secret in the house — she reveals them all at breakfast",
+    "It turns out Biscuit and Mittens have been best friends the whole time and hid it",
+    "Sem's 'bad drawing' becomes famous online because Bas accidentally posted it",
+    "Mira has been understanding everything this whole time — she finally shows it",
+    "Grandpa Rex turns out to be secretly learning TikTok dances in his room",
+    "Snip the sharpener comes to visit and has been to every country in the world",
 ]
 
 
@@ -223,13 +248,17 @@ def _validate(script: dict) -> None:
         opening_bg = config.BACKGROUNDS[0]
     script["background"] = opening_bg
     assert script.get("beats"), "beat yok"
-    assert len(script["beats"]) >= 10, "En az 10 beat gerekir"
+    assert len(script["beats"]) >= 8, "En az 8 beat gerekir"
     script.setdefault("description", script.get("title", ""))
     script.setdefault("hashtags", [])
     for b in script["beats"]:
         if b["character"] not in config.CHARACTERS:
             b["character"] = list(config.CHARACTERS.keys())[0]
-        b.setdefault("emotion", "neutral")
+        if b.get("emotion") not in {"neutral", "happy", "angry", "surprised", "sad"}:
+            b["emotion"] = "neutral"
+        # New characters included in scripts now
+        if b["character"] not in config.CHARACTERS:
+            b["character"] = list(config.CHARACTERS.keys())[0]
         # Inherit opening background if beat doesn't specify one
         beat_bg = b.get("background", opening_bg)
         b["background"] = beat_bg if beat_bg in config.BACKGROUNDS else opening_bg

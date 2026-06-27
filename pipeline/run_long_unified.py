@@ -31,29 +31,49 @@ import upload
 # ── Topic pool ──────────────────────────────────────────────────────────────
 LONG_TOPICS = [
     {
-        "title": "The Dinosaur Egg",
+        "title": "Sem Found a DINOSAUR EGG (It Was Not a Dinosaur Egg)",
         "premise": "Sem finds a tiny seed and is 100% convinced it's a dinosaur egg. He puts it in wrong places (cereal box, Oz's shoe, bathtub). Saf teaches him about soil/water/sunlight and photosynthesis ('the plant eats sunshine!'). They plant it together. Mira overwaters. Day 8 it sprouts. Sem names it Sunshine.",
         "education": "Seeds need soil, water, sunlight. Photosynthesis. Patience. Caring for living things."
     },
     {
-        "title": "The Missing Cookie",
+        "title": "Biscuit STOLE the Cookie and Nobody Could Prove It",
         "premise": "A cookie disappears from the kitchen. Everyone suspects someone else. Saf starts a full investigation with evidence. Sem confesses to eating it but claims 'the cookie jumped into my mouth.' Mas calmly reveals she hid it because Sem had already eaten four. Lesson: honesty and consequences.",
         "education": "Honesty, cause and effect, family trust."
     },
     {
-        "title": "Saf's Science Fair",
+        "title": "Saf's Science Fair EXPLODED (Mittens Helped)",
         "premise": "Saf has a science fair project about the water cycle. Sem keeps 'helping' and making it worse. Oz tries to explain with a dad analogy nobody understands. Mas quietly fixes everything. The project wins — but Saf gives Sem credit for accidentally making the rain cloud demonstration better.",
         "education": "Water cycle: evaporation, condensation, precipitation. Teamwork."
     },
     {
-        "title": "Bas's Big Audition",
+        "title": "Sem CRASHED Bas's Video and Got 1 MILLION Views",
         "premise": "Bas has a video audition for a youth talent show. Sem keeps walking into frame. The family tries to keep him out. Eventually Sem's interruption goes viral and Bas gets in because of it. She's embarrassed then secretly grateful. Lesson: unexpected help from people you love.",
         "education": "Creativity, persistence, accepting help."
     },
     {
-        "title": "The Bedtime Machine",
+        "title": "Sem Refused to Sleep and Built a MACHINE to Stop It",
         "premise": "Sem invents 'the bedtime machine' — a pillow fort with dials — to avoid going to sleep. Saf explains why sleep is important (brain growth, repair). Oz adds a dad story. Eventually Sem falls asleep inside his own machine mid-explanation.",
         "education": "Why sleep is important, brain development, health habits."
+    },
+    {
+        "title": "Sem Found a Lost PUPPY and Named Him Volcano",
+        "premise": "At the park, Sem finds a tiny shivering lost puppy and immediately declares 'dis is MY dog now.' Bas starts filming 'lost dog content' for views. Saf reads the puppy's collar tag and wants to call the owner. Oz gives a big responsible-pet-owner speech that backfires when he admits he wants to keep the puppy too. Mas has already put up flyers without telling anyone. Sem secretly names the puppy 'Volcano', hides it in his room under Mira's blanket. Mira immediately bonds with Volcano. When the owner — a crying little girl named Lily — calls, Sem must make the hardest decision of his 4-year-old life: give Volcano back to someone who needs him more.",
+        "education": "Responsibility and honesty. Empathy for animals and their families. Kindness sometimes means doing what's right even when it hurts. Pets need people who can care for them properly."
+    },
+    {
+        "title": "Sem's BIRTHDAY Wish Went COMPLETELY Wrong",
+        "premise": "It's Sem's 5th birthday. He makes a wish: 'I want EVERYTHING to be MINE.' Somehow the whole family starts acting like everything belongs to Sem — then chaos erupts when he realizes sharing is what makes things fun. Mira shares her toy first. Sem has a change of heart.",
+        "education": "Sharing, empathy, understanding that happiness comes from connection not possession."
+    },
+    {
+        "title": "Biscuit and Mittens Were SECRET Best Friends ALL ALONG",
+        "premise": "The family discovers Biscuit (the dog) and Mittens (the cat) secretly meet every night to cuddle in Sem's room. Everyone thought they hated each other. Sem filmed it because he's 4 and thought it was 'their TV show.' The video accidentally gets posted by Mira pressing buttons. Goes viral. The family learns appearances can be deceiving.",
+        "education": "Judging by appearances, friendship comes in unexpected forms, kindness, empathy."
+    },
+    {
+        "title": "Mira Said Her FIRST WORD and Nobody Expected THIS",
+        "premise": "Mira has been saying 'Ba-ba' for months. The family bets on what her first real word will be. Oz says 'Daddy.' Mas says 'Mama.' Bas says 'beautiful.' Saf says 'science.' Sem says 'Sem!' One day when nobody is paying attention — Mira clearly says a word that shocks everyone. That word reveals exactly who she loves most.",
+        "education": "Language development, family bonds, paying attention to those you love, surprises."
     },
 ]
 
@@ -94,9 +114,9 @@ DIALOGUE QUALITY: Natural English for families. Clear vocabulary — kids learni
 
 Output ONLY valid JSON:
 {{
-  "title": "...",
-  "description": "...(2-3 warm sentences for YouTube/Instagram, with emojis)",
-  "hashtags": ["ThePenFamily", "KidsCartoon", ... 8 total],
+  "title": "VIRAL TITLE — use a pet (Biscuit/Mittens/dog/cat/puppy) OR shocking hook. ALLCAPS one word. Make people NEED to watch. Examples: 'Biscuit ATE Dad's Report Card!', 'Mittens RUINED Movie Night!', 'Sem's GENIUS Plan Nearly Broke Everything!', 'The DOG Knew Our Secret ALL Along!'",
+  "description": "2-3 warm engaging sentences for YouTube + emojis. Mention Biscuit/Mittens if they appear. End with 'Subscribe for new Pen Family episodes! 🖊️❤️'",
+  "hashtags": ["ThePenFamily", "BiscuitTheDog", "MittensTheCat", "KidsCartoon", "LearnEnglish", "AnimatedFamily", "FamilyFun", "CutePets"],
   "background": "kitchen",
   "beats": [
     {{"character": "sem", "text": "...(max 18 words)", "emotion": "happy|neutral|surprised|angry|sad", "background": "kitchen|home|bedroom|bathroom|park|school|shop|street"}}
@@ -154,9 +174,14 @@ def render(manifest_path: Path, out_mp4: Path) -> Path:
     renderer = config.ROOT / "renderer"
     props_path = out_mp4.parent / "props.json"
     manifest_data = json.loads(manifest_path.read_text(encoding="utf-8"))
+    # Long episodes are landscape 1920×1080
+    manifest_data["width"] = 1920
+    manifest_data["height"] = 1080
+    # Re-save with landscape dimensions
+    manifest_path.write_text(json.dumps(manifest_data, ensure_ascii=False, indent=2), encoding="utf-8")
     props_path.write_text(json.dumps({"manifest": manifest_data}), encoding="utf-8")
     subprocess.run(
-        ["npx", "remotion", "render", "PencilShort", str(out_mp4),
+        ["npx", "remotion", "render", "PencilLong", str(out_mp4),
          f"--props={props_path}", f"--public-dir={config.ROOT}"],
         cwd=renderer, check=True,
     )

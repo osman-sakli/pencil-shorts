@@ -105,6 +105,39 @@ characters:
     color: "#90CC20"
     scale: 0.94
 
+  biscuit:
+    name: "Biscuit"
+    role: "Family dog"
+    persona: "The Pen Family's golden retriever puppy. Energetic, loyal, always excited. Simple sounds only: 'Woof!', 'Arf!', 'Woof woof!'. Runs into scenes unexpectedly. Licks everything. Chases cats. Mira's best friend."
+    voice: "af_sky"
+    voice_edge: "en-US-AnaNeural"
+    voice_rate: "+30%"
+    voice_pitch: "+60Hz"
+    color: "#E8A820"
+    scale: 0.72
+
+  mittens:
+    name: "Mittens"
+    role: "Family cat"
+    persona: "The Pen Family's orange tabby cat. Lazy, sassy, judges everyone. Single words only: 'Meow.', 'Prrr...', 'Hiss!'. Ignores everyone except Mira. Knocks things off tables. Acts like she owns the house."
+    voice: "af_nicole"
+    voice_edge: "en-US-JennyNeural"
+    voice_rate: "-15%"
+    voice_pitch: "+30Hz"
+    color: "#FF8844"
+    scale: 0.65
+
+  snip:
+    name: "Snip"
+    role: "School friend (Sharpener)"
+    persona: "A cheerful blue pencil sharpener who goes to Saf and Sem's school. Always ready with a solution. Says 'I can sharpen that idea!' / 'Let me help!' / 'That is actually brilliant!' Positive, helpful, creative thinker."
+    voice: "af_bella"
+    voice_edge: "en-US-JaneNeural"
+    voice_rate: "+5%"
+    voice_pitch: "+15Hz"
+    color: "#4488FF"
+    scale: 0.85
+
 backgrounds:
   - home
   - kitchen

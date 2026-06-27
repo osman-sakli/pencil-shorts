@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Img, staticFile, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Img, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 
 // ─── Photo backgrounds (real photos when available) ────────────────────────
 const PHOTO_SCENES = new Set([
@@ -700,4 +700,85 @@ export const SceneBg: React.FC<{ label: string; animated?: boolean }> = ({ label
   }
   if (PHOTO_SCENES.has(label)) return <PhotoBg label={label} />;
   return <Cmp />;
+};
+
+// ── Per-beat background — smooth crossfade when conversation changes scene ───
+export const SceneTransitionBg: React.FC<{
+  currentScene: string;
+  prevScene: string;
+  beatStartFrame: number;
+}> = ({ currentScene, prevScene, beatStartFrame }) => {
+  const frame = useCurrentFrame();
+  const TRANS = 18; // 0.6s transition
+  const t = Math.min(1, Math.max(0, (frame - beatStartFrame) / TRANS));
+
+  const CurrentCmp = CSS_SCENES[currentScene] ?? Home;
+  const PrevCmp    = CSS_SCENES[prevScene]    ?? Home;
+
+  return (
+    <>
+      <AbsoluteFill>
+        {currentScene === prevScene || t >= 1
+          ? <CurrentCmp />
+          : <>
+              <AbsoluteFill><PrevCmp /></AbsoluteFill>
+              <AbsoluteFill style={{ opacity: t }}><CurrentCmp /></AbsoluteFill>
+            </>
+        }
+      </AbsoluteFill>
+      <div style={{
+        position: "absolute", inset: 0, pointerEvents: "none",
+        background: "linear-gradient(180deg, rgba(0,0,0,0.14) 0%, rgba(0,0,0,0.03) 50%, rgba(0,0,0,0.30) 100%)",
+      }} />
+    </>
+  );
+};
+
+// ── Dynamic cycling background — switches scene every 5 seconds ─────────────
+const ALL_SCENE_ORDER = ["home", "kitchen", "park", "bedroom", "school", "shop", "street", "bathroom"];
+
+export const DynamicSceneBg: React.FC<{ labels: string[] }> = ({ labels }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  // Build a cycle list: use script scenes + fill up to 5 unique scenes for variety
+  const seen = new Set<string>();
+  const cycle: string[] = [];
+  for (const l of labels) {
+    if (!seen.has(l) && CSS_SCENES[l]) { seen.add(l); cycle.push(l); }
+  }
+  for (const l of ALL_SCENE_ORDER) {
+    if (cycle.length >= 5) break;
+    if (!seen.has(l)) { seen.add(l); cycle.push(l); }
+  }
+  if (cycle.length === 0) cycle.push("home");
+
+  const CYCLE = Math.round(fps * 5); // 5 seconds per scene
+  const FADE = 14; // frames of crossfade
+
+  const cyclePos = frame % CYCLE;
+  const cycleIdx = Math.floor(frame / CYCLE) % cycle.length;
+  const nextIdx = (cycleIdx + 1) % cycle.length;
+
+  const nextOpacity = cyclePos >= CYCLE - FADE ? (cyclePos - (CYCLE - FADE)) / FADE : 0;
+
+  const CurrentCmp = CSS_SCENES[cycle[cycleIdx]] ?? Home;
+  const NextCmp = CSS_SCENES[cycle[nextIdx]] ?? Home;
+
+  return (
+    <>
+      <AbsoluteFill>
+        <CurrentCmp />
+      </AbsoluteFill>
+      {nextOpacity > 0 && (
+        <AbsoluteFill style={{ opacity: nextOpacity }}>
+          <NextCmp />
+        </AbsoluteFill>
+      )}
+      <div style={{
+        position: "absolute", inset: 0, pointerEvents: "none",
+        background: "linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.04) 50%, rgba(0,0,0,0.28) 100%)",
+      }} />
+    </>
+  );
 };

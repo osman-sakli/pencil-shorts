@@ -154,3 +154,67 @@ export const ColorOrbs: React.FC = () => {
     </>
   );
 };
+
+// ── Scene-specific ambient particles ────────────────────────────────────────
+const SCENE_EMOJIS: Record<string, string[]> = {
+  kitchen:  ["🔥", "💨", "☁️", "✨"],
+  park:     ["🍃", "🌸", "🌺", "🍀"],
+  school:   ["⭐", "📚", "💡", "✏️"],
+  bedroom:  ["💫", "🌙", "⭐", "💤"],
+  bathroom: ["💧", "🫧", "💦", "✨"],
+  shop:     ["💰", "🛍️", "⭐", "✨"],
+  street:   ["🍃", "💨", "✨", "⭐"],
+  home:     ["❤️", "💫", "⭐", "✨"],
+};
+
+export const SceneParticles: React.FC<{ scene: string; beatStart: number }> = ({ scene, beatStart }) => {
+  const frame = useCurrentFrame();
+  const local = frame - beatStart;
+  if (local < 0 || local > 75) return null;
+
+  const emojis = SCENE_EMOJIS[scene] ?? SCENE_EMOJIS.home;
+  const seed = beatStart;
+
+  const items = Array.from({ length: 4 }, (_, i) => ({
+    x: 8 + ((seed * 31 + i * 23) % 84),
+    y: 12 + ((seed * 17 + i * 41) % 55),
+    delay: beatStart + i * 6,
+    emoji: emojis[(seed + i) % emojis.length],
+    size: 22 + (i % 3) * 8,
+  }));
+
+  return <>{items.map((p, i) => <Particle key={i} {...p} />)}</>;
+};
+
+// ── Big emotion burst — always fires on each speaking beat ───────────────────
+export const BigEmotionPop: React.FC<{ emotion: string; beatStart: number; side: "left" | "right" }> = ({
+  emotion, beatStart, side
+}) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const f = frame - beatStart;
+  if (f < 0 || f > 35) return null;
+
+  const emojiMap: Record<string, string> = {
+    happy: "😄", angry: "😤", surprised: "😱", sad: "😢", neutral: "💬",
+  };
+  const emoji = emojiMap[emotion] ?? "💬";
+  const sc = spring({ frame: f, fps, config: { damping: 10, stiffness: 260, mass: 0.5 } });
+  const fadeOut = interpolate(f, [18, 35], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const opacity = Math.min(sc, fadeOut);
+  const xPct = side === "left" ? 22 : 72;
+
+  return (
+    <div style={{
+      position: "absolute",
+      left: `${xPct}%`,
+      top: "28%",
+      fontSize: 56,
+      transform: `scale(${sc * 1.1})`,
+      opacity,
+      pointerEvents: "none",
+      userSelect: "none",
+      filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.4))",
+    }}>{emoji}</div>
+  );
+};
