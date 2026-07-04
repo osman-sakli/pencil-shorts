@@ -1,0 +1,284 @@
+{
+  "title": "Grandpa Pen's Secret Treasure Map! 🗺️",
+  "background": "home",
+  "music": "mystery",
+  "description": "Sem found a REAL treasure map behind the bookshelf! 🗺️✨ Where does it lead? The Pen Family follows the riddles... #kids #cartoon #treasure #mystery #pencilfamily\n\nMusic: Kevin MacLeod (incompetech.com), Licensed under CC BY 4.0",
+  "hashtags": [
+    "kids",
+    "cartoon",
+    "treasure",
+    "mystery",
+    "adventure",
+    "family"
+  ],
+  "environments": {
+    "garden": "a cozy 3D cartoon backyard garden with colorful flowers, a big rose bush, a white picket fence, fluttering butterflies and warm golden sunshine",
+    "library": "a warm 3D cartoon reading room with a tall wooden bookshelf full of colorful books, a cozy armchair and soft lamp light"
+  },
+  "beats": [
+    {
+      "character": "sem",
+      "emotion": "surprised",
+      "background": "home",
+      "music": "mystery",
+      "text": "Whoa... a secret dusty envelope!",
+      "action": "The little green toddler pen Sem is playing with blocks next to a tall bookshelf when a dusty old envelope slips out from behind it and lands in front of him. He picks it up with wide eyes."
+    },
+    {
+      "character": "sem",
+      "emotion": "happy",
+      "background": "home",
+      "music": "happy",
+      "text": "FAMILY! I found a TREASURE map!",
+      "action": "Sem runs excitedly through the living room waving the old envelope above his head, bouncing on his pencil tip with joy."
+    },
+    {
+      "character": "oz",
+      "emotion": "neutral",
+      "background": "home",
+      "music": "mystery",
+      "cast": [
+        "oz",
+        "sem",
+        "mas"
+      ],
+      "text": "This is Grandpa Pen's old handwriting...",
+      "action": "Dad pen Oz carefully opens the envelope and unfolds an old yellowed treasure map, adjusting his glasses and studying it closely while the family gathers around."
+    },
+    {
+      "character": "bas",
+      "emotion": "happy",
+      "background": "home",
+      "music": "happy",
+      "text": "A real treasure hunt? This is EPIC!",
+      "action": "Teen pen Bas holds up her pink phone filming the map, then pockets the phone, genuinely excited, eyes sparkling."
+    },
+    {
+      "character": "mas",
+      "emotion": "neutral",
+      "background": "home",
+      "music": "mystery",
+      "cast": [
+        "mas",
+        "saf"
+      ],
+      "text": "Riddle one: where breakfast smiles begin...",
+      "action": "Mom pen Mas reads the first riddle from the map aloud, tapping her chin thoughtfully while little Saf listens carefully."
+    },
+    {
+      "character": "saf",
+      "emotion": "happy",
+      "background": "home",
+      "music": "happy",
+      "text": "The kitchen! Where we make pancakes!",
+      "action": "The purple 9-year-old pen Saf jumps up with her hand raised, her bow bouncing, proud of solving the riddle."
+    },
+    {
+      "character": "oz",
+      "emotion": "happy",
+      "background": "kitchen",
+      "music": "adventure",
+      "cast": [
+        "oz",
+        "sem",
+        "saf",
+        "mira"
+      ],
+      "text": "To the kitchen, Pen Family! March!",
+      "action": "The whole pencil family marches in a determined line into the cartoon kitchen, dad Oz in front pointing forward like an explorer, everyone hopping on their pencil tips."
+    },
+    {
+      "character": "mira",
+      "emotion": "happy",
+      "background": "kitchen",
+      "music": "mystery",
+      "text": "Shiny! Behind the fridge!",
+      "action": "Baby pen Mira giggles and points her tiny arm at something glinting behind the big cartoon fridge."
+    },
+    {
+      "character": "oz",
+      "emotion": "surprised",
+      "background": "kitchen",
+      "music": "mystery",
+      "text": "Another envelope! Riddle two, everyone!",
+      "action": "Dad pen Oz reaches behind the fridge and pulls out a second envelope taped there, holding it up triumphantly, a little dust puffing off it."
+    },
+    {
+      "character": "mas",
+      "emotion": "neutral",
+      "background": "kitchen",
+      "music": "mystery",
+      "text": "Where flowers dance with busy bees...",
+      "action": "Mom pen Mas holds the second envelope and reads the riddle aloud slowly and mysteriously. Dad pen Oz strokes his chin and little green pen Sem scratches his cap, both thinking hard. ONLY these three pencil characters are in the kitchen, nobody else.",
+      "cast": [
+        "mas",
+        "oz",
+        "sem"
+      ]
+    },
+    {
+      "character": "saf",
+      "emotion": "happy",
+      "background": "garden",
+      "music": "adventure",
+      "cast": [
+        "saf",
+        "sem",
+        "biscuit"
+      ],
+      "text": "The garden! Follow me, everybody!",
+      "action": "Saf leads the charge out into the sunny cartoon backyard garden, Sem and puppy pen Biscuit bounding after her past colorful flowers and butterflies."
+    },
+    {
+      "character": "biscuit",
+      "emotion": "happy",
+      "background": "garden",
+      "music": "happy",
+      "text": "Woof! Dig dig dig! Here here!",
+      "action": "The golden puppy pen Biscuit sniffs excitedly around the big rose bush, tail wagging fast, then starts digging at the soil with his little paws, dirt flying."
+    },
+    {
+      "character": "sem",
+      "emotion": "surprised",
+      "background": "garden",
+      "music": "mystery",
+      "text": "A box! But... it's LOCKED!",
+      "action": "Sem pulls a small old tin box out of the hole, shakes it gently, and tugs at the tiny padlock that will not open, frowning dramatically."
+    },
+    {
+      "character": "bas",
+      "emotion": "neutral",
+      "background": "garden",
+      "music": "mystery",
+      "text": "Look, writing: the key sleeps where stories live.",
+      "action": "Teen pen Bas turns the small tin box over and reads the tiny engraved words on the bottom while dad pen Oz and little Saf lean closer with curious faces.",
+      "cast": [
+        "bas",
+        "oz",
+        "saf"
+      ]
+    },
+    {
+      "character": "saf",
+      "emotion": "surprised",
+      "background": "library",
+      "music": "adventure",
+      "text": "Where stories live... GRANDPA'S BOOKSHELF!",
+      "action": "Saf gasps with the big realization, pointing dramatically, then the scene shows the family hurrying into the cozy reading room with the tall bookshelf."
+    },
+    {
+      "character": "mira",
+      "emotion": "surprised",
+      "background": "library",
+      "music": "mystery",
+      "cast": [
+        "mira",
+        "oz"
+      ],
+      "text": "Dada... that book is GLOWING!",
+      "action": "Baby pen Mira points up at one old golden book on the tall shelf that glows softly among the others, everyone freezing and staring up at it in silence."
+    },
+    {
+      "character": "oz",
+      "emotion": "surprised",
+      "background": "library",
+      "music": "mystery",
+      "text": "Careful now... here goes nothing!",
+      "action": "Dad pen Oz slowly reaches up on his tiptoe pencil point and pulls the glowing golden book from the shelf; the bookshelf makes a soft magical CLICK sound and a tiny drawer pops open."
+    },
+    {
+      "character": "sem",
+      "emotion": "happy",
+      "background": "library",
+      "music": "happy",
+      "text": "A golden key! Open it open it!",
+      "action": "Inside the secret little drawer lies a tiny golden key; Sem jumps up and down chanting, barely able to contain himself."
+    },
+    {
+      "character": "mas",
+      "emotion": "neutral",
+      "background": "library",
+      "music": "mystery",
+      "cast": [
+        "mas",
+        "oz",
+        "sem",
+        "saf"
+      ],
+      "text": "Everyone ready? One... two... THREE!",
+      "action": "Mom pen Mas slowly turns the golden key in the tin box padlock while the whole family holds their breath around her, the box beginning to glow with warm golden light from inside."
+    },
+    {
+      "character": "oz",
+      "emotion": "surprised",
+      "background": "library",
+      "music": "calm",
+      "text": "Grandpa's treasure box... look at this!",
+      "action": "The box opens revealing old photographs of pencil-character ancestors, a shiny medal, and a folded letter, all bathed in soft golden light; the family gazes in wonder."
+    },
+    {
+      "character": "oz",
+      "emotion": "neutral",
+      "background": "library",
+      "music": "calm",
+      "text": "To my dear Pen Family...",
+      "action": "Dad pen Oz gently unfolds the old letter and begins reading aloud, the family sitting close together around him in the cozy lamp light."
+    },
+    {
+      "character": "oz",
+      "emotion": "happy",
+      "background": "library",
+      "music": "calm",
+      "text": "The real treasure is every day together.",
+      "action": "Oz reads the last line of Grandpa's letter with a warm smile, lowering the letter, his eyes a little misty behind his glasses."
+    },
+    {
+      "character": "mira",
+      "emotion": "happy",
+      "background": "library",
+      "music": "calm",
+      "text": "Ganpa! Ganpa pen!",
+      "action": "Baby pen Mira hugs an old paper photograph tightly against her cheek. The photograph shows Grandpa Pen: a kind elderly PENCIL character with a gray mustache, round glasses and a wooden texture. Mom pen Mas watches her with melting warm eyes. ONLY these two pencil characters are in the reading room.",
+      "cast": [
+        "mira",
+        "mas"
+      ]
+    },
+    {
+      "character": "sem",
+      "emotion": "happy",
+      "background": "library",
+      "music": "happy",
+      "cast": [
+        "sem",
+        "oz",
+        "mas",
+        "saf"
+      ],
+      "text": "Best. Treasure. EVER!",
+      "action": "The whole pencil family piles into a giant warm group hug, Sem squished happily in the middle, Biscuit jumping around them barking joyfully."
+    },
+    {
+      "character": "saf",
+      "emotion": "surprised",
+      "background": "library",
+      "music": "happy",
+      "text": "Wait... there's one more paper!",
+      "action": "Saf notices a small folded paper still tucked in the corner of the treasure box and pulls it out, unfolding it curiously."
+    },
+    {
+      "character": "mas",
+      "emotion": "happy",
+      "background": "kitchen",
+      "music": "happy",
+      "cast": [
+        "mas",
+        "sem",
+        "saf",
+        "mira"
+      ],
+      "text": "Grandpa's SECRET cookie recipe! Who wants to bake?",
+      "action": "Mom pen Mas holds up the old recipe card grinning; the scene jumps to the cartoon kitchen where the whole family cheers, flour puffing in the air, Biscuit already wearing a tiny chef hat."
+    }
+  ]
+}

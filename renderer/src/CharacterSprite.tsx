@@ -43,10 +43,11 @@ export const CharacterSprite: React.FC<{
   emotion?: string;
   entryFrame?: number;
   beatStartFrame?: number; // for per-beat zoom-in effect on speaker
-}> = ({ characterId, position, speaking, mouth = "X", scale = 1, emotion = "neutral", entryFrame = 0, beatStartFrame }) => {
+  groundBottom?: number;   // px from frame bottom where feet touch the scene's surface
+}> = ({ characterId, position, speaking, mouth = "X", scale = 1, emotion = "neutral", entryFrame = 0, beatStartFrame, groundBottom }) => {
   const frame = useCurrentFrame();
   const { fps, height } = useVideoConfig();
-  const BASE_BOTTOM = height > 1200 ? 270 : 65;
+  const BASE_BOTTOM = height > 1200 ? (groundBottom ?? 270) : 65;
 
   const sh = SPRITE_H[characterId] ?? 420;
   const sw = SPRITE_W[characterId] ?? 220;
@@ -104,29 +105,54 @@ export const CharacterSprite: React.FC<{
 
   const totalScale = scalePulse * emotionBounce * entryScale * beatZoom;
 
+  // Contact shadow on the ground: shrinks & fades as the character lifts off it
+  const lift = Math.max(0, bottomPx - BASE_BOTTOM);
+  const shadowSquash = Math.max(0.45, 1 - lift / 260);
+  const shadowW = displayW * totalScale * 0.80 * shadowSquash;
+  const shadowOpacity = (speaking ? 0.55 : 0.34) * shadowSquash;
+
   return (
-    <div style={{
-      position: "absolute",
-      bottom: bottomPx,
-      width: displayW * totalScale,
-      height: displayH * totalScale,
-      filter: speaking
-        ? "drop-shadow(0 10px 28px rgba(0,0,0,0.40))"
-        : "brightness(0.62) saturate(0.65) drop-shadow(0 2px 8px rgba(0,0,0,0.15))",
-      transform: transforms.filter(Boolean).join(" ") || undefined,
-      transformOrigin: "bottom center",
-      transition: "filter 0.12s ease",
-      zIndex: speaking ? 10 : 5,
-      ...posStyle,
-    }}>
-      <Img
-        src={staticFile(
-          AI_CHARS.has(characterId)
-            ? `characters/sprites/${characterId}_${VALID_EMOTIONS.has(emotion) ? emotion : "neutral"}.png`
-            : `characters/sprites/${characterId}.png`
-        )}
-        style={{ width: "100%", height: "100%", objectFit: "contain" }}
-      />
-    </div>
+    <>
+      <div style={{
+        position: "absolute",
+        bottom: BASE_BOTTOM - 14,
+        width: shadowW,
+        height: Math.max(14, shadowW * 0.16),
+        borderRadius: "50%",
+        background: "radial-gradient(ellipse, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 55%, rgba(0,0,0,0) 75%)",
+        opacity: shadowOpacity,
+        filter: "blur(6px)",
+        zIndex: speaking ? 9 : 4,
+        pointerEvents: "none",
+        ...posStyle,
+        // keep the shadow visually centered under the sprite despite width differences
+        ...(position === "left"   ? { left: `calc(3% + ${(displayW * totalScale - shadowW) / 2}px)` } :
+            position === "right"  ? { right: `calc(3% + ${(displayW * totalScale - shadowW) / 2}px)`, transform: undefined } :
+            {}),
+      }} />
+      <div style={{
+        position: "absolute",
+        bottom: bottomPx,
+        width: displayW * totalScale,
+        height: displayH * totalScale,
+        filter: speaking
+          ? "drop-shadow(0 14px 22px rgba(0,0,0,0.35))"
+          : "blur(1.8px) brightness(0.82) saturate(0.85) drop-shadow(0 6px 14px rgba(0,0,0,0.25))",
+        transform: transforms.filter(Boolean).join(" ") || undefined,
+        transformOrigin: "bottom center",
+        transition: "filter 0.12s ease",
+        zIndex: speaking ? 10 : 5,
+        ...posStyle,
+      }}>
+        <Img
+          src={staticFile(
+            AI_CHARS.has(characterId)
+              ? `characters/sprites/${characterId}_${VALID_EMOTIONS.has(emotion) ? emotion : "neutral"}.png`
+              : `characters/sprites/${characterId}.png`
+          )}
+          style={{ width: "100%", height: "100%", objectFit: "contain" }}
+        />
+      </div>
+    </>
   );
 };

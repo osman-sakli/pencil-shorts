@@ -1,0 +1,444 @@
+{
+  "title": "The Little Star Who Fell From the Sky! ⭐",
+  "background": "bedroom_night",
+  "music": "calm",
+  "description": "A tiny star crashed into the Pen Family's garden... and she must get home before SUNRISE! ⭐🌙 Can the family save her light? #kids #cartoon #star #adventure #bedtimestory #pencilfamily\n\nMusic: Kevin MacLeod (incompetech.com), Licensed under CC BY 4.0",
+  "hashtags": [
+    "kids",
+    "cartoon",
+    "star",
+    "adventure",
+    "bedtime",
+    "family",
+    "magic"
+  ],
+  "environments": {
+    "bedroom_night": "a cozy 3D cartoon kids' bedroom at night: bunk beds with colorful blankets, a slowly spinning star mobile, a warm orange night lamp, toys on a round rug, and a big window showing a deep blue night sky with a huge glowing full moon. Night palette: deep blues with warm golden lamp light",
+    "living_night": "the Pen Family's cozy 3D cartoon living room at night: big soft orange couch, round rug, framed drawings of pencil characters on warm yellow walls, one warm floor lamp making a golden pool of light, moonlight spilling through the window. Night palette: deep blues with warm golden lamp light",
+    "garden_night": "the Pen Family's 3D cartoon backyard garden at night: deep blue sky with a huge glowing full moon and countless stars, a big rose bush, white picket fence in silhouette, drifting glowing fireflies, dewy grass reflecting moonlight. Night palette: deep blues with warm golden glow accents",
+    "street_night": "a quiet 3D cartoon suburban street at night: warm glowing streetlamps making pools of golden light on the sidewalk, moonlit rooftops, parked toy-like cars, a soft breeze moving leaves, deep blue starry sky. Night palette: deep blues with warm golden lamp light",
+    "hill_night": "a grassy 3D cartoon hilltop under an enormous breathtaking starry night sky with the Milky Way clearly visible, a low golden moon, tiny warm town lights far below in the valley, gentle grass swaying. Night palette: deep blues and purples with warm golden glow accents"
+  },
+  "beats": [
+    {
+      "character": "mas",
+      "emotion": "neutral",
+      "background": "bedroom_night",
+      "music": "calm",
+      "text": "Sweet dreams, my little pencils. Tomorrow is pancake day!",
+      "action": "Mom pen Mas gently tucks Sem into the lower bunk and Saf into the upper bunk, pulls their blankets up to their chins, dims the warm night lamp, and kisses each on the forehead. The star mobile above turns slowly. Camera: soft slow push-in, warm and sleepy mood."
+    },
+    {
+      "character": "sem",
+      "emotion": "happy",
+      "background": "bedroom_night",
+      "music": "calm",
+      "text": "Pancakes! I will dweam about pancakes!",
+      "action": "Little green toddler pen Sem wiggles happily under his blanket until only his eyes peek out, kicks his blanket once with joy, then hugs his pillow. Cozy warm lamplight on his face. Camera: close on Sem's sleepy happy face."
+    },
+    {
+      "character": "saf",
+      "emotion": "surprised",
+      "background": "bedroom_night",
+      "music": "mystery",
+      "text": "Did you hear that? Something went WHOOSH!",
+      "action": "A streak of golden light flashes past the bedroom window, briefly filling the dark room with warm gold. Purple pen Saf sits bolt upright in the top bunk, eyes wide, gripping her blanket. The star mobile spins faster from a breeze. Camera: window in background flashes, then snap to Saf."
+    },
+    {
+      "character": "sem",
+      "emotion": "surprised",
+      "background": "bedroom_night",
+      "music": "mystery",
+      "text": "The sky is falling! ...or maybe just a little bit.",
+      "action": "Sem and Saf scramble out of their bunks and press their faces against the cold window glass, breath fogging it. Outside, a faint golden glow pulses behind the garden's rose bush. Camera: over-the-shoulder shot through the window at the mysterious glow."
+    },
+    {
+      "character": "saf",
+      "emotion": "surprised",
+      "background": "bedroom_night",
+      "music": "mystery",
+      "text": "Something glowy landed in our garden! Come on!",
+      "action": "Saf points dramatically out the window at the pulsing golden glow behind the rose bush, then grabs Sem's arm and they both hop down and run toward the bedroom door on their pencil tips. Camera: tracking shot following them to the door."
+    },
+    {
+      "character": "oz",
+      "emotion": "neutral",
+      "background": "living_night",
+      "music": "mystery",
+      "cast": [
+        "oz",
+        "mas"
+      ],
+      "text": "Stay behind me, family. Detective Dad is on the case.",
+      "action": "Dad pen Oz in the dim living room clicks on a flashlight under his chin looking dramatic, adjusts his glasses, and tiptoes toward the back door with exaggerated sneaky steps. Mom pen Mas follows holding his shoulder, half amused, half worried. Camera: low angle, flashlight beam cutting the dark."
+    },
+    {
+      "character": "oz",
+      "emotion": "surprised",
+      "background": "garden_night",
+      "music": "mystery",
+      "cast": [
+        "oz",
+        "saf",
+        "sem"
+      ],
+      "text": "The glow is coming from... behind the roses!",
+      "action": "The family creeps across the moonlit garden in a line, Oz's flashlight beam sweeping over dewy grass and scattering fireflies. The golden glow behind the big rose bush pulses like a heartbeat, brighter and dimmer. Camera: slow dolly behind the family toward the bush, tension building."
+    },
+    {
+      "character": "biscuit",
+      "emotion": "happy",
+      "background": "garden_night",
+      "music": "mystery",
+      "text": "Woof! Sniff sniff! Warm! Warm and sparkly!",
+      "action": "Golden puppy Biscuit rushes past everyone's legs, nose to the ground, tail spinning like a helicopter, following a trail of tiny glowing sparkle dust in the grass right up to the rose bush. He points at it with one paw like a hunting dog. Camera: ground-level following the sniffing puppy."
+    },
+    {
+      "character": "twinkle",
+      "emotion": "sad",
+      "background": "garden_night",
+      "music": "mystery",
+      "text": "T-twinkle...? Where am I? This is not the sky...",
+      "action": "The rose branches part to REVEAL: a tiny golden star child curled up in the grass, glowing weakly, with big teary sparkling eyes and trembling tiny arms. Sparkle dust settles around her like snow. The pencil family's faces peek around the bush in a vertical stack, all eyes huge. Camera: intimate close-up on the tiny star, the family's stacked faces soft in the background.",
+      "model": "full"
+    },
+    {
+      "character": "mira",
+      "emotion": "happy",
+      "background": "garden_night",
+      "music": "calm",
+      "text": "Ooooh! Gaga! Ista! Ista!",
+      "action": "Baby pen Mira, in Mom's arms, reaches out with both tiny arms toward the glowing star, opening and closing her little hands with pure baby wonder, pacifier almost falling out. The star's glow reflects in Mira's huge eyes. Camera: warm two-shot of baby reaching toward star."
+    },
+    {
+      "character": "twinkle",
+      "emotion": "sad",
+      "background": "garden_night",
+      "music": "calm",
+      "text": "I fell from the Star Parade... and I lost my mama.",
+      "action": "The tiny star sniffles, wipes her eye with a stubby arm, and her golden glow flickers weakly like a dying candle. The family exchanges worried glances. Biscuit gently nuzzles the star with his nose to comfort her. Camera: slow push-in as the glow dims, hearts melting."
+    },
+    {
+      "character": "oz",
+      "emotion": "neutral",
+      "background": "garden_night",
+      "music": "adventure",
+      "text": "Then the Pen Family has a new mission: get you home!",
+      "action": "Dad pen Oz plants his pencil tip firmly, points up at the vast starry sky with total determination, cape-in-the-wind hero energy even though he has no cape. Behind him the whole family nods firmly in unison. Fireflies swirl upward following his gesture. Camera: heroic low angle against the moon."
+    },
+    {
+      "character": "mas",
+      "emotion": "happy",
+      "background": "living_night",
+      "music": "calm",
+      "text": "First: a warm blanket and warm milk for our tiny guest.",
+      "action": "Inside the warm lamplit living room, Mom pen Mas wraps the tiny star in a small knitted blanket on the big orange couch and sets a thimble-sized cup of warm milk beside her. The star sighs a happy little sigh and her glow steadies slightly. Camera: cozy warm framing, gentle."
+    },
+    {
+      "character": "sem",
+      "emotion": "happy",
+      "background": "living_night",
+      "music": "happy",
+      "text": "Can we keep her? Pleeeease? I will feed her cookies!",
+      "action": "Sem bounces in circles around the couch on his pencil tip, hands clasped in begging position at every bounce, eyes enormous and pleading toward Mom. Camera: playful whip-pans following each bounce."
+    },
+    {
+      "character": "twinkle",
+      "emotion": "happy",
+      "background": "living_night",
+      "music": "happy",
+      "text": "Twinkle twinkle... twinkle-CHOO!",
+      "action": "The tiny star giggles at Sem, then scrunches her face and sneezes a fountain of golden glitter that rains sparkles over the entire family. Everyone blinks, covered in glitter, then bursts out laughing. Camera: slow-motion glitter burst, sparkles catching the lamplight.",
+      "model": "full"
+    },
+    {
+      "character": "bas",
+      "emotion": "surprised",
+      "background": "living_night",
+      "music": "happy",
+      "text": "Okay, THAT was adorable. Also my phone is full of glitter.",
+      "action": "Teen pen Bas holds up her pink phone dripping golden glitter, shakes it with fake annoyance, but cannot hide the huge smile spreading on her face. She sneakily takes one photo of the star. Camera: over-phone shot, glitter falling off it."
+    },
+    {
+      "character": "saf",
+      "emotion": "surprised",
+      "background": "living_night",
+      "music": "mystery",
+      "text": "Everyone, look! Her glow is getting dimmer every minute!",
+      "action": "Saf points urgently at the tiny star: her golden light visibly pulses weaker and weaker, the warm circle of light around her shrinking on the couch cushion. The room feels a shade darker. All smiles fade to worry. Camera: close on the shrinking glow, music turns tense."
+    },
+    {
+      "character": "twinkle",
+      "emotion": "sad",
+      "background": "living_night",
+      "music": "mystery",
+      "text": "If I miss the sunrise... my light goes out. Forever.",
+      "action": "The tiny star looks down at her own flickering hands, voice tiny and trembling. The word hangs in the silent room. The family gasps together — even Biscuit's ears drop flat. Camera: dramatic slow push-in on the star's worried face, lamp flickers once."
+    },
+    {
+      "character": "saf",
+      "emotion": "surprised",
+      "background": "living_night",
+      "music": "adventure",
+      "text": "Grandpa's star book! Fallen stars fly home from Starlight Hill!",
+      "action": "Saf sprints to the bookshelf, pulls out a big midnight-blue book with a golden star on the cover, slams it open on the rug and jabs her arm at a page showing a drawing of a hilltop with rising stars. Everyone crowds around the book. Camera: overhead shot of the open book circled by pencil faces."
+    },
+    {
+      "character": "oz",
+      "emotion": "neutral",
+      "background": "living_night",
+      "music": "adventure",
+      "text": "Starlight Hill is past the street, up the big meadow. Night mission!",
+      "action": "Dad pen Oz stands tall, taps the book page twice like a general with a battle map, then draws an invisible route in the air: window, street, hill. The family huddles in a determined circle, hands stacked in the middle, then raised with a silent cheer. Camera: rousing team-huddle shot."
+    },
+    {
+      "character": "mas",
+      "emotion": "neutral",
+      "background": "living_night",
+      "music": "calm",
+      "text": "Bundle up, little ones. Biscuit — you lead the way.",
+      "action": "Mom pen Mas hands out tiny colorful scarves to each child, wrapping Mira in a extra-fluffy one until only her eyes show. Biscuit snaps to attention and salutes with one paw like a soldier. Camera: quick cozy montage of scarves being wrapped."
+    },
+    {
+      "character": "sem",
+      "emotion": "happy",
+      "background": "living_night",
+      "music": "adventure",
+      "text": "Adventure! Adventure! I bring my wagon!",
+      "action": "Sem drags his little red toy wagon across the living room with a determined grunt, parks it beside the couch, and pats the cushion inside it like a limo driver inviting a queen. The tiny star giggles and hops in, wrapped in her blanket. Camera: low wagon-level shot."
+    },
+    {
+      "character": "bas",
+      "emotion": "happy",
+      "background": "living_night",
+      "music": "happy",
+      "text": "Fine, I'm coming too. Someone has to film the miracle.",
+      "action": "Teen pen Bas leans in the doorway with fake reluctance, then flips her phone into camera mode with a stylish spin and winks. She holds the door open for the wagon convoy. Camera: doorway framing as the family files out into the night."
+    },
+    {
+      "character": "mira",
+      "emotion": "happy",
+      "background": "living_night",
+      "music": "adventure",
+      "text": "Gogo! Ista gogo! Gaga!",
+      "action": "Baby Mira, bundled in her fluffy scarf in Mom's arms, pumps her tiny fist toward the open door where the dark night waits, cheering in baby language. The door frames the deep blue night and the glowing wagon. Camera: final doorway shot, family silhouettes stepping into the night — cliffhanger beat."
+    },
+    {
+      "character": "oz",
+      "emotion": "neutral",
+      "background": "street_night",
+      "music": "adventure",
+      "cast": [
+        "oz",
+        "sem",
+        "twinkle"
+      ],
+      "text": "Stay close, troops. Starlight Hill, here we come.",
+      "action": "The family convoy walks along the moonlit sidewalk through pools of warm streetlamp light: Oz in front like a scout, Sem proudly pulling the red wagon where the tiny star sits wrapped in her blanket, her weak glow lighting the wagon like a lantern. Camera: long side-tracking shot of the whole marching line, streetlamps passing rhythmically."
+    },
+    {
+      "character": "twinkle",
+      "emotion": "happy",
+      "background": "street_night",
+      "music": "calm",
+      "text": "The world is so big down here... and so pretty.",
+      "action": "The tiny star peeks over the edge of the wagon, her wide sparkling eyes reflecting the passing streetlamps one by one. A moth flutters around her glow and she giggles softly at it. Camera: close-up from inside the wagon looking up at the passing lights and her amazed face."
+    },
+    {
+      "character": "biscuit",
+      "emotion": "happy",
+      "background": "street_night",
+      "music": "adventure",
+      "text": "Woof! This way! Shortcut shortcut! Woof woof!",
+      "action": "Biscuit trots ahead to a gap in a hedge at the end of the street, tail wagging fast, spinning in an excited circle and pointing his nose toward the dark meadow path beyond. The family changes course to follow him. Camera: puppy-level tracking, grass blades whipping past."
+    },
+    {
+      "character": "saf",
+      "emotion": "surprised",
+      "background": "street_night",
+      "music": "mystery",
+      "text": "Hold on! The wind is picking up—!",
+      "action": "A strong gust of wind suddenly sweeps down the street: leaves spiral into the air, scarves flap sideways, everyone leans into the wind, and the little red wagon wobbles dangerously on its wheels. Camera: dutch angle, wind particles rushing through frame."
+    },
+    {
+      "character": "twinkle",
+      "emotion": "surprised",
+      "background": "street_night",
+      "music": "mystery",
+      "text": "Whooaaa! Help! I'm too light!",
+      "action": "The gust lifts the tiny star clean out of the wagon like a leaf — she tumbles through the air, blanket fluttering away, and catches on a high tree branch where she dangles, glowing faintly among dark leaves. The family runs beneath the tree, arms all raised. Camera: dramatic upward shot at the tiny glow high in the dark branches.",
+      "model": "full"
+    },
+    {
+      "character": "oz",
+      "emotion": "neutral",
+      "background": "street_night",
+      "music": "adventure",
+      "cast": [
+        "oz",
+        "bas"
+      ],
+      "text": "Pen pyramid! Bas, on my shoulders — like beach day!",
+      "action": "Dad pen Oz plants himself under the tree in a strong stance and pats his shoulders. Teen pen Bas pockets her phone, cracks her knuckles, and climbs up to balance on his shoulders, wobbling on her pencil tip, reaching high toward the branch. Camera: circling shot of the two-pencil tower forming."
+    },
+    {
+      "character": "bas",
+      "emotion": "surprised",
+      "background": "street_night",
+      "music": "adventure",
+      "text": "Almost... got you... GOTCHA! Whoa-whoa-WHOA!",
+      "action": "Bas's fingertips stretch, stretch... and grab the tiny star just as the branch springs back — the whole pencil tower teeters and topples backward in slow motion into a soft bush, star held safely high in Bas's hand. The family piles around; everyone pops out of the bush leaves laughing with relief. Camera: slow-motion topple, then joyful pile-up."
+    },
+    {
+      "character": "twinkle",
+      "emotion": "sad",
+      "background": "street_night",
+      "music": "mystery",
+      "text": "My glow... it's almost gone...",
+      "action": "In Bas's cupped hands, the tiny star's light shrinks to a faint ember, barely lighting their faces. Far on the horizon, the deep blue sky shows the first hint of lighter blue — sunrise is coming. All laughter stops. Camera: close on the dim star, then a look to the lightening horizon."
+    },
+    {
+      "character": "sem",
+      "emotion": "happy",
+      "background": "hill_night",
+      "music": "adventure",
+      "text": "The hill! I see the hill! Wace you all!",
+      "action": "Sem points ahead and sprints up the grassy hillside on his pencil tip, tiny silhouette against the enormous starry sky and the Milky Way. The family charges up after him, wagon bouncing, Biscuit zigzagging with joy. Camera: epic wide shot of little silhouettes climbing under a giant sky."
+    },
+    {
+      "character": "oz",
+      "emotion": "neutral",
+      "background": "hill_night",
+      "music": "mystery",
+      "cast": [
+        "oz",
+        "mas",
+        "twinkle"
+      ],
+      "text": "Okay, little one. We're here... now what?",
+      "action": "The family reaches the hilltop, breathing hard. Oz gently sets the dim tiny star on the highest tuft of grass. The wind goes completely still. The gigantic starry sky stretches above; the town glitters tiny and far below. Nothing happens. Camera: slow 360 around the silent hilltop circle."
+    },
+    {
+      "character": "twinkle",
+      "emotion": "sad",
+      "background": "hill_night",
+      "music": "mystery",
+      "text": "I don't know... mama always sang to find me...",
+      "action": "The tiny star looks up at the vast silent sky, her voice tiny and trembling, glow down to a candle flicker. She hugs her own points. The family stands in a helpless half-circle around her. A long quiet beat. Camera: intimate close-up, giant indifferent sky above."
+    },
+    {
+      "character": "saf",
+      "emotion": "surprised",
+      "background": "hill_night",
+      "music": "adventure",
+      "text": "Sang? THAT'S IT! Stars come when you SING!",
+      "action": "Saf's eyes fly open wide with the realization, she spins to face the family, arms spread, bow bouncing. Everyone's faces light up one by one as the idea lands. Camera: rapid push-in on Saf, then quick cuts to each family member's dawning smile — cliffhanger energy."
+    },
+    {
+      "character": "mas",
+      "emotion": "neutral",
+      "background": "hill_night",
+      "music": "calm",
+      "text": "Then we sing. All together — the bedtime lullaby.",
+      "action": "Mom pen Mas kneels in the grass, gathers the whole family into a close circle around the faint tiny star, takes a deep calm breath, and nods the count-in like a choir director. The stars above seem to lean in. Camera: overhead shot of the family circle with the ember of the star at its center."
+    },
+    {
+      "character": "oz",
+      "emotion": "happy",
+      "background": "hill_night",
+      "music": "calm",
+      "text": "Twinkle twinkle, little star... how we wonder where you are...",
+      "action": "Dad pen Oz begins the lullaby in his deep warm voice, one hand on his heart, eyes closing. The tiny star's ember pulses once — slightly brighter — with each sung line. Camera: slow rise from the circle up toward the sky as the song starts."
+    },
+    {
+      "character": "sem",
+      "emotion": "happy",
+      "background": "hill_night",
+      "music": "calm",
+      "text": "Up above the world so high!",
+      "action": "Sem sings at the top of his little lungs, wildly off-key but with his whole heart, eyes squeezed shut, fists clenched with effort. Saf giggles mid-song beside him. The star's glow strengthens noticeably, casting warm light on their faces now. Camera: close on Sem's passionate singing face, warm glow rising."
+    },
+    {
+      "character": "mira",
+      "emotion": "happy",
+      "background": "hill_night",
+      "music": "calm",
+      "text": "Aaaah... aaah... gaga... aaah...",
+      "action": "Baby Mira coos the melody in perfect adorable baby-tune from Mom's arms, conducting with one tiny hand. With her voice the star's glow doubles — golden light now bathes the whole hilltop circle like a campfire. Camera: the family circle now lit in warm gold, night pushed back."
+    },
+    {
+      "character": "twinkle",
+      "emotion": "happy",
+      "background": "hill_night",
+      "music": "happy",
+      "text": "It's working! I feel warm! Keep singing!",
+      "action": "The tiny star rises slowly off the grass, spinning gently, glowing brighter and brighter, streams of golden sparkles spiraling up from her points into the night sky like reverse snowfall. The family sings on, faces lifted, hair and scarves stirring in a warm magical updraft. Camera: rising with the sparkles, family below in a ring of light."
+    },
+    {
+      "character": "saf",
+      "emotion": "surprised",
+      "background": "hill_night",
+      "music": "mystery",
+      "text": "Look up! The stars... they're DANCING!",
+      "action": "Above them the constellations begin to swirl and rearrange like golden fireflies — the entire sky comes alive. One large warm golden star detaches and descends slowly toward the hilltop like a gentle comet with a glittering tail. Camera: massive sky-wide shot, the descending mother star growing.",
+      "model": "full"
+    },
+    {
+      "character": "twinkle",
+      "emotion": "happy",
+      "background": "hill_night",
+      "music": "happy",
+      "text": "MAMA! Mama, I'm here! I'm HERE!",
+      "action": "The tiny star ROCKETS up from the grass and loops a joyful spiral around the whole family before zooming toward the descending mother star, leaving a golden ribbon of light behind her. Biscuit chases the light ribbon in circles, barking happily. Camera: whip-following the joyful flight.",
+      "model": "full"
+    },
+    {
+      "character": "twinkle",
+      "emotion": "happy",
+      "background": "hill_night",
+      "music": "calm",
+      "text": "Thank you, Pen Family. You are my heroes forever.",
+      "action": "The great warm mother star hovers above the hilltop, gently pulsing, as tiny Twinkle nestles against her side, both glowing together. Twinkle turns back to the family below and presses both stubby arms to her heart. The family waves, Mas dabbing her eye with her scarf. Camera: reverent low angle, two stars above the small waving family.",
+      "model": "full"
+    },
+    {
+      "character": "twinkle",
+      "emotion": "happy",
+      "background": "hill_night",
+      "music": "happy",
+      "text": "This is for you — so you never sleep in the dark!",
+      "action": "Twinkle blows a kiss that becomes a stream of glowing stardust; it swirls down and settles into Sem's red wagon, forming a tiny glowing star-shaped lantern that pulses softly like a heartbeat. Sem gasps and cradles it like the greatest treasure in the universe. Camera: the gift forming in golden light, Sem's awed face lit from below.",
+      "model": "full"
+    },
+    {
+      "character": "oz",
+      "emotion": "happy",
+      "background": "hill_night",
+      "music": "calm",
+      "cast": [
+        "oz",
+        "mas",
+        "mira"
+      ],
+      "text": "Goodbye, little Twinkle. Shine bright up there!",
+      "action": "The two stars rise together into the vast sky, shrinking to two bright points that settle into a constellation shaped faintly like a heart. Then the whole sky twinkles TWICE, like a wink. The family waves from the hilltop until their arms are tired. Camera: epic farewell wide shot, the winking sky.",
+      "model": "full"
+    },
+    {
+      "character": "mas",
+      "emotion": "happy",
+      "background": "garden_night",
+      "music": "calm",
+      "text": "Look — sunrise. Time for sleepy pencils and... pancakes.",
+      "action": "The first orange light of dawn creeps over the garden fence as the tired, happy family walks back through the garden gate. Sem is fast asleep in the red wagon, hugging the glowing star lantern, Biscuit curled beside him. Mom carries sleeping Mira. Camera: golden-hour backlit walk home, long soft shadows, peaceful."
+    },
+    {
+      "character": "sem",
+      "emotion": "happy",
+      "background": "garden_night",
+      "music": "calm",
+      "text": "Best... night... ever... twinkle twinkle...",
+      "action": "Half-asleep in the wagon, Sem murmurs with a tiny smile, hugging the softly pulsing star lantern to his cheek. Camera slowly tilts up from his sleeping face to the dawn sky, where one single little star still shines — and it twinkles back, twice. Fade out. THE END."
+    }
+  ]
+}

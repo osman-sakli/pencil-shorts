@@ -1,5 +1,6 @@
 # ── EventBridge Scheduler: Short Video (daily 14:00 UTC) ────────────────────
 resource "aws_scheduler_schedule" "short_daily" {
+  state = "DISABLED"  # yerine parts_daily kuyruğu geçti (2026-07-04)
   name       = "${var.project}-short-daily"
   group_name = "default"
 
@@ -41,6 +42,7 @@ resource "aws_scheduler_schedule" "short_daily" {
 
 # ── EventBridge Scheduler: Long Episode (every 3 days 08:00 UTC) ────────────
 resource "aws_scheduler_schedule" "long_episode" {
+  state = "DISABLED"  # yerine parts_daily kuyruğu geçti (2026-07-04)
   name       = "${var.project}-long-episode"
   group_name = "default"
 

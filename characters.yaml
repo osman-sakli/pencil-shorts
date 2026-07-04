@@ -8,6 +8,8 @@ characters:
     role: "Dad"
     persona: "Southern American dad pen, 35. Warm, slightly old-school. Uses complete sentences. Gives advice nobody asked for. Tries to sound wise. Says 'Back in my day' and 'Family meeting!'. Protective, responsible, slightly goofy, loves his family. NEVER speaks like a teenager."
     voice: "am_adam"
+    voice_openai: "onyx"
+    voice_instructions: "45-year-old American dad: settled, dignified and calm, but cheerful and warm. Deep steady voice with a smile in it. Fatherly, reassuring, occasionally chuckles."
     voice_edge: "en-US-ChristopherNeural"
     color: "#3f6fc4"
     scale: 1.05
@@ -17,6 +19,8 @@ characters:
     role: "Mom"
     persona: "Smart New York mom pen, 32. Calm during chaos. Direct and fast. Already knows the answer. Says 'I knew this would happen' and 'Everybody relax.' The smartest person in the house. Funny without trying. NEVER panics or overreacts."
     voice: "af_heart"
+    voice_openai: "sage"
+    voice_instructions: "40-year-old American mom: mature and composed but lively and energetic. Warm, clear, confident motherly voice."
     voice_edge: "en-US-JennyNeural"
     color: "#ff7fa0"
     scale: 1.0
@@ -26,6 +30,8 @@ characters:
     role: "Big sister"
     persona: "16-year-old teal teen girl pen. Social media language, dramatic, expressive. Says 'Seriously?', 'That is so embarrassing.', 'Please don't post that.', 'I need content.' Wants to be famous, fashion-focused, secretly loves family. NEVER sounds like an adult."
     voice: "af_nicole"
+    voice_openai: "shimmer"
+    voice_instructions: "15-year-old American teenage girl: delicate, soft-spoken and gentle, sweet light young voice. Never sounds like an adult woman."
     voice_edge: "en-US-EmmaNeural"
     voice_rate: "+10%"
     voice_pitch: "+20Hz"
@@ -37,6 +43,9 @@ characters:
     role: "Little sister"
     persona: "9-year-old purple pen girl. Talks fast. Endlessly curious. Always asks at least ONE funny question. Says 'Why?', 'Wait...', 'How does that work?', 'I have another question.' Smart for her age. Innocent and funny."
     voice: "af_bella"
+    voice_openai: "nova"
+    voice_instructions: "9-year-old American girl: smart, quick and bright. Clear articulate school-kid voice, proud and clever. Never sounds like an adult."
+    voice_provider: "edge"
     voice_edge: "en-US-AnaNeural"
     color: "#9B5FC4"
     scale: 0.88
@@ -46,6 +55,9 @@ characters:
     role: "Little brother"
     persona: "4-year-old green preschool boy pen. VERY IMPORTANT: Sem is FOUR years old, NOT a teenager. Short simple sentences. Big emotions. Mispronounces some words. Says 'I got a pwan!', 'Look what I did!', 'Uh oh...', 'Can I do it?' Chaos machine. Thinks every idea is genius. Fearless. Extremely lovable. He STARTS the problem most episodes."
     voice: "af_sky"
+    voice_openai: "coral"
+    voice_instructions: "4-year-old American toddler BOY: tiny, high-pitched, bouncy little-kid voice with huge emotions, sometimes mispronounces words. Absolutely never sounds like an adult."
+    voice_provider: "edge"
     voice_edge: "en-US-GuyNeural"
     voice_rate: "+15%"
     voice_pitch: "+40Hz"
@@ -57,9 +69,12 @@ characters:
     role: "Baby"
     persona: "1-year-old yellow baby girl pen. Mostly sounds and single words: 'Ba-ba!', 'Hehe!', 'Uh-oh!', 'Yay!'. NEVER speaks actual sentences. The joke is she somehow solves the problem anyway."
     voice: "af_sky"
+    voice_openai: "shimmer"
+    voice_instructions: "1.5-year-old baby girl: babbly, cooing, giggly, adorable tiny baby cadence. Mostly baby sounds like 'gaga', 'ooooh', giggles, plus a few very simple tiny words like 'dada', 'mama'. Sweet and cute, never sounds grown."
+    voice_provider: "edge"
     voice_edge: "en-US-AnaNeural"
-    voice_rate: "-25%"
-    voice_pitch: "+100Hz"
+    voice_rate: "+30%"
+    voice_pitch: "+60Hz"
     color: "#ffcc4d"
     scale: 0.70
 
@@ -110,6 +125,8 @@ characters:
     role: "Family dog"
     persona: "The Pen Family's golden retriever puppy. Energetic, loyal, always excited. Simple sounds only: 'Woof!', 'Arf!', 'Woof woof!'. Runs into scenes unexpectedly. Licks everything. Chases cats. Mira's best friend."
     voice: "af_sky"
+    voice_openai: "verse"
+    voice_instructions: "Playful puppy character: quick happy yips, short excited phrases, boundless doggy energy."
     voice_edge: "en-US-AnaNeural"
     voice_rate: "+30%"
     voice_pitch: "+60Hz"
@@ -137,6 +154,19 @@ characters:
     voice_pitch: "+15Hz"
     color: "#4488FF"
     scale: 0.85
+
+  twinkle:
+    name: "Twinkle"
+    role: "Guest star"
+    persona: "A tiny magical star child who fell from the sky. Speaks in short chime-like sentences. Sweet, shy at first, giggly when happy. Says 'twinkle twinkle' when excited."
+    voice: "af_sky"
+    voice_openai: "coral"
+    voice_instructions: "A tiny magical star creature child: chime-like, giggly, high sweet little voice, slightly echoey and sparkly feel, shy and adorable. Sounds like a magical 5-year-old."
+    voice_edge: "en-US-AnaNeural"
+    voice_rate: "+12%"
+    voice_pitch: "+45Hz"
+    color: "#FFD75E"
+    scale: 0.6
 
 backgrounds:
   - home

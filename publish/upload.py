@@ -28,9 +28,10 @@ HEADERS = {
     "X-Upload-Post-Source": "pip",
 }
 
-# TikTok retry config
-TIKTOK_RETRIES = 4           # max retry attempts
-TIKTOK_RETRY_WAIT = 90 * 60  # 90 minutes between retries
+# TikTok retry config (overridable via .env)
+TIKTOK_RETRIES = int(os.getenv("TIKTOK_RETRIES", "4"))
+TIKTOK_RETRY_WAIT = int(os.getenv("TIKTOK_RETRY_WAIT", str(5 * 60)))   # 5 min default
+TIKTOK_CAP_WAIT   = int(os.getenv("TIKTOK_CAP_WAIT",   str(90 * 60))) # 90 min for quota
 
 
 def build_texts(manifest: dict) -> tuple[str, str]:
@@ -92,6 +93,14 @@ def _is_tiktok_cap_error(result: dict) -> bool:
     return "temporary restriction" in err.lower() or "active user cap" in err.lower()
 
 
+def _tiktok_is_inbox(result: dict) -> bool:
+    """True when TikTok accepted the video but put it in Inbox (no public URL yet)."""
+    if not result or not result.get("success"):
+        return False
+    url = result.get("post_url") or ""
+    return not url.startswith("http") or "inbox" in url.lower()
+
+
 def publish(platforms: list[str], *,
             video_path: Path | None = None,
             manifest_data: dict | None = None) -> dict:
@@ -127,46 +136,57 @@ def publish(platforms: list[str], *,
         else:
             print(f"[publish] ❌ {platform}: {res.get('error_message','')[:80]}")
 
-    # Retry TikTok separately if it hit the cap error
+    # TikTok retry: triggers for (1) failure, (2) inbox (no public URL)
     tiktok_result = next((r for r in results if r["platform"] == "tiktok"), None)
-    if "tiktok" in platforms and (not tiktok_result or not tiktok_result["success"]):
-        _retry_tiktok(key, user, manifest, video, tiktok_result)
+    if "tiktok" in platforms:
+        if not tiktok_result or not tiktok_result.get("success"):
+            print("[tiktok] Yükleme başarısız — retry başlıyor...")
+            _retry_tiktok(key, user, manifest, video, tiktok_result)
+        elif _tiktok_is_inbox(tiktok_result):
+            print("[tiktok] Video Inbox'a düştü (önceden direkt URL geliyordu). Retry...")
+            _retry_tiktok(key, user, manifest, video, tiktok_result)
 
     return body
 
 
 def _retry_tiktok(key: str, user: str, manifest: dict,
                   video: Path, last_result: dict | None) -> None:
-    if last_result and not _is_tiktok_cap_error(last_result):
-        print("[tiktok] Kalıcı hata — retry yapılmıyor.")
-        return
-
+    """Retry TikTok upload for: quota cap, inbox, or general failure."""
     for attempt in range(1, TIKTOK_RETRIES + 1):
-        wait_min = TIKTOK_RETRY_WAIT // 60
-        print(f"[tiktok] Geçici kota hatası. {wait_min} dakika sonra tekrar denenecek "
+        is_cap = _is_tiktok_cap_error(last_result or {})
+        wait = TIKTOK_CAP_WAIT if is_cap else TIKTOK_RETRY_WAIT
+        reason = "kota hatası" if is_cap else ("Inbox" if _tiktok_is_inbox(last_result or {}) else "hata")
+        print(f"[tiktok] {reason} — {wait // 60}dk sonra tekrar denenecek "
               f"(deneme {attempt}/{TIKTOK_RETRIES})...")
-        time.sleep(TIKTOK_RETRY_WAIT)
+        time.sleep(wait)
 
         try:
             body = _post(["tiktok"], key, user, manifest, video)
             request_id = body.get("request_id", "")
-            time.sleep(20)
+            time.sleep(30)
             results = _check_status(request_id, key)
             tiktok = next((r for r in results if r["platform"] == "tiktok"), None)
 
-            if tiktok and tiktok["success"]:
+            if tiktok and tiktok.get("success") and not _tiktok_is_inbox(tiktok):
                 print(f"[tiktok] ✅ Yüklendi: {tiktok.get('post_url')}")
                 return
-            elif tiktok and _is_tiktok_cap_error(tiktok):
-                continue  # kota hâlâ aktif, tekrar bekle
+            elif _tiktok_is_inbox(tiktok or {}):
+                print(f"[tiktok] ⏳ Yine Inbox'a düştü (deneme {attempt}) — devam...")
+                last_result = tiktok
+                continue
+            elif _is_tiktok_cap_error(tiktok or {}):
+                print(f"[tiktok] ⏳ Kota hâlâ aktif (deneme {attempt}) — devam...")
+                last_result = tiktok
+                continue
             else:
                 err = (tiktok or {}).get("error_message", "bilinmiyor")
-                print(f"[tiktok] ❌ Farklı hata, durduruluyor: {err[:100]}")
+                print(f"[tiktok] ❌ Kalıcı hata, durduruluyor: {err[:120]}")
                 return
         except Exception as exc:
-            print(f"[tiktok] ⚠️ Bağlantı hatası: {exc}")
+            print(f"[tiktok] ⚠️ Bağlantı hatası (deneme {attempt}): {exc}")
+            last_result = None
 
-    print("[tiktok] ❌ Tüm retry'lar tükendi. Elle yükleme gerekiyor.")
+    print("[tiktok] ❌ Tüm retry'lar tükendi. upload-post.com panelinden TikTok bağlantısını yenile.")
 
 
 def main() -> None:

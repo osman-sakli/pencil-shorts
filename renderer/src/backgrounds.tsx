@@ -7,17 +7,73 @@ const PHOTO_SCENES = new Set([
   "office", "library",
 ]);
 
-const PhotoBg: React.FC<{ label: string }> = ({ label }) => (
-  <AbsoluteFill>
-    <Img
-      src={staticFile(`backgrounds/photos/${label}.jpg`)}
-      style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%" }}
-    />
-    {/* darken so characters & text stay readable */}
-    <div style={{ position: "absolute", inset: 0,
-      background: "linear-gradient(180deg, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0.10) 50%, rgba(0,0,0,0.35) 100%)" }} />
-  </AbsoluteFill>
-);
+// Scenes without their own photo borrow the closest real location
+const PHOTO_ALIAS: Record<string, string> = {
+  bathroom: "bedroom",
+  notebook: "office",
+  desk: "office",
+  pencilcase: "shop",
+  living_room: "home",
+};
+
+export const photoForScene = (label: string): string | null => {
+  if (PHOTO_SCENES.has(label)) return label;
+  return PHOTO_ALIAS[label] ?? null;
+};
+
+// Hand-tuned ground line per photo (portrait 1080x1920): px from frame bottom
+// where characters' feet touch a believable surface in that image.
+const PHOTO_GROUND: Record<string, number> = {
+  kitchen: 470,  // countertop surface
+  home:    200,  // wood floor
+  park:    160,  // gravel path
+  school:  260,  // classroom floor
+  office:  220,  // corridor floor
+  street:  200,  // asphalt
+  bedroom: 180,  // carpet
+  library: 200,  // in front of bottom shelves
+  shop:    240,  // cafe floor
+};
+
+export const photoGroundBottom = (label: string): number | null => {
+  const photo = photoForScene(label);
+  return photo ? (PHOTO_GROUND[photo] ?? 270) : null;
+};
+
+// Deterministic per-scene pan direction so cuts back to a scene look consistent
+const sceneHash = (label: string) => {
+  let h = 0;
+  for (let i = 0; i < label.length; i++) h = (h * 31 + label.charCodeAt(i)) & 0xffff;
+  return h;
+};
+
+const PhotoBg: React.FC<{ label: string }> = ({ label }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const h = sceneHash(label);
+
+  // Ken Burns: slow continuous push-in + drift, direction fixed per scene
+  const t = frame / fps;
+  const zoom = 1.10 + Math.sin(t * 0.045 + h) * 0.025;
+  const panX = Math.sin(t * 0.060 + h * 0.7) * 18 * ((h % 2) ? 1 : -1);
+  const panY = Math.cos(t * 0.050 + h * 1.3) * 12;
+
+  return (
+    <AbsoluteFill style={{ overflow: "hidden" }}>
+      <Img
+        src={staticFile(`backgrounds/photos/${label}.jpg`)}
+        style={{
+          width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%",
+          transform: `scale(${zoom}) translate(${panX}px, ${panY}px)`,
+          filter: "saturate(1.06) contrast(1.03)",
+        }}
+      />
+      {/* darken so characters & text stay readable */}
+      <div style={{ position: "absolute", inset: 0,
+        background: "linear-gradient(180deg, rgba(0,0,0,0.16) 0%, rgba(0,0,0,0.06) 50%, rgba(0,0,0,0.30) 100%)" }} />
+    </AbsoluteFill>
+  );
+};
 
 // ─── Home / Living Room ────────────────────────────────────────────────────
 const Home: React.FC = () => (
@@ -703,6 +759,16 @@ export const SceneBg: React.FC<{ label: string; animated?: boolean }> = ({ label
 };
 
 // ── Per-beat background — smooth crossfade when conversation changes scene ───
+// Prefers real photos (with Ken Burns) for realism; CSS scenes are the fallback.
+// Photos are portrait (1080x1920), so landscape renders keep the CSS scenes.
+const SceneLayer: React.FC<{ label: string }> = ({ label }) => {
+  const { width, height } = useVideoConfig();
+  const photo = height > width ? photoForScene(label) : null;
+  if (photo) return <PhotoBg label={photo} />;
+  const Cmp = CSS_SCENES[label] ?? Home;
+  return <Cmp />;
+};
+
 export const SceneTransitionBg: React.FC<{
   currentScene: string;
   prevScene: string;
@@ -712,23 +778,20 @@ export const SceneTransitionBg: React.FC<{
   const TRANS = 18; // 0.6s transition
   const t = Math.min(1, Math.max(0, (frame - beatStartFrame) / TRANS));
 
-  const CurrentCmp = CSS_SCENES[currentScene] ?? Home;
-  const PrevCmp    = CSS_SCENES[prevScene]    ?? Home;
-
   return (
     <>
       <AbsoluteFill>
         {currentScene === prevScene || t >= 1
-          ? <CurrentCmp />
+          ? <SceneLayer label={currentScene} />
           : <>
-              <AbsoluteFill><PrevCmp /></AbsoluteFill>
-              <AbsoluteFill style={{ opacity: t }}><CurrentCmp /></AbsoluteFill>
+              <AbsoluteFill><SceneLayer label={prevScene} /></AbsoluteFill>
+              <AbsoluteFill style={{ opacity: t }}><SceneLayer label={currentScene} /></AbsoluteFill>
             </>
         }
       </AbsoluteFill>
       <div style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        background: "linear-gradient(180deg, rgba(0,0,0,0.14) 0%, rgba(0,0,0,0.03) 50%, rgba(0,0,0,0.30) 100%)",
+        background: "linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.02) 50%, rgba(0,0,0,0.26) 100%)",
       }} />
     </>
   );

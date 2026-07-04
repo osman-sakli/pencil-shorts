@@ -1,3 +1,4 @@
 # Local development only — includes Kokoro TTS (requires PyTorch ~2GB)
 -r requirements.txt
 kokoro>=0.9.4
+fal-client

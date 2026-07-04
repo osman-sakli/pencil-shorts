@@ -155,6 +155,68 @@ export const ColorOrbs: React.FC = () => {
   );
 };
 
+// ── Cinematic camera rig — subtle handheld drift + per-beat push-in ─────────
+export const CameraRig: React.FC<{ beatStart: number; children: React.ReactNode }> = ({ beatStart, children }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  // Layered sines ≈ smooth handheld drift (never repeats visibly)
+  const driftX = Math.sin(frame * 0.013) * 7 + Math.sin(frame * 0.007 + 2.1) * 5;
+  const driftY = Math.sin(frame * 0.011 + 1.0) * 5 + Math.sin(frame * 0.005) * 4;
+  const rot = Math.sin(frame * 0.006 + 0.5) * 0.35;
+
+  // Slow push-in over each beat (documentary zoom feel)
+  const beatT = Math.max(0, frame - beatStart) / fps;
+  const pushIn = Math.min(0.035, beatT * 0.006);
+
+  // Base overscan hides the edges revealed by drift/rotation
+  const scale = 1.07 + pushIn;
+
+  return (
+    <AbsoluteFill style={{
+      transform: `scale(${scale}) translate(${driftX}px, ${driftY}px) rotate(${rot}deg)`,
+      transformOrigin: "center 60%",
+    }}>
+      {children}
+    </AbsoluteFill>
+  );
+};
+
+// ── Cinematic grade — vignette + animated film grain ────────────────────────
+const GRAIN_SVG = encodeURIComponent(
+  `<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(#n)'/></svg>`
+);
+
+export const CinematicGrade: React.FC = () => {
+  const frame = useCurrentFrame();
+  // Jitter the grain tile each frame so it reads as live film grain
+  const gx = ((frame * 97) % 240);
+  const gy = ((frame * 61) % 240);
+  return (
+    <AbsoluteFill style={{ pointerEvents: "none" }}>
+      {/* film grain */}
+      <div style={{
+        position: "absolute", inset: 0,
+        backgroundImage: `url("data:image/svg+xml,${GRAIN_SVG}")`,
+        backgroundPosition: `${gx}px ${gy}px`,
+        opacity: 0.055,
+        mixBlendMode: "overlay",
+      }} />
+      {/* vignette */}
+      <div style={{
+        position: "absolute", inset: 0,
+        background: "radial-gradient(ellipse 90% 75% at 50% 45%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.30) 100%)",
+      }} />
+      {/* gentle warm grade */}
+      <div style={{
+        position: "absolute", inset: 0,
+        background: "linear-gradient(180deg, rgba(255,180,90,0.05) 0%, rgba(20,30,60,0.06) 100%)",
+        mixBlendMode: "soft-light",
+      }} />
+    </AbsoluteFill>
+  );
+};
+
 // ── Scene-specific ambient particles ────────────────────────────────────────
 const SCENE_EMOJIS: Record<string, string[]> = {
   kitchen:  ["🔥", "💨", "☁️", "✨"],
@@ -202,13 +264,13 @@ export const BigEmotionPop: React.FC<{ emotion: string; beatStart: number; side:
   const sc = spring({ frame: f, fps, config: { damping: 10, stiffness: 260, mass: 0.5 } });
   const fadeOut = interpolate(f, [18, 35], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const opacity = Math.min(sc, fadeOut);
-  const xPct = side === "left" ? 22 : 72;
+  const xPct = side === "left" ? 30 : 62;
 
   return (
     <div style={{
       position: "absolute",
       left: `${xPct}%`,
-      top: "28%",
+      top: "42%",
       fontSize: 56,
       transform: `scale(${sc * 1.1})`,
       opacity,

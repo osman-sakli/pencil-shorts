@@ -31,6 +31,11 @@ import upload
 # ── Topic pool ──────────────────────────────────────────────────────────────
 LONG_TOPICS = [
     {
+        "title": "The Pen Family's WORLD CUP Night Goes COMPLETELY Wrong",
+        "premise": "It's World Cup 2026 knockout stage. Oz has been planning 'perfect World Cup night' for weeks: big snacks, no interruptions, game starts in 10 minutes. Sem doesn't understand soccer but insists he's an expert. Bas wants to film reaction content for TikTok. Saf keeps asking why players fall down dramatically. Mira has the remote. Biscuit is excited by the crowd noise on TV and starts howling. Mittens sits on the remote and changes channels. At halftime, the whole family is more bonded than ever — even if nobody agrees on who's winning or why.",
+        "education": "Teamwork and sportsmanship. Geography — World Cup has 48 countries. Rules of soccer. How to win and lose gracefully. Family time matters more than screens."
+    },
+    {
         "title": "Sem Found a DINOSAUR EGG (It Was Not a Dinosaur Egg)",
         "premise": "Sem finds a tiny seed and is 100% convinced it's a dinosaur egg. He puts it in wrong places (cereal box, Oz's shoe, bathtub). Saf teaches him about soil/water/sunlight and photosynthesis ('the plant eats sunshine!'). They plant it together. Mira overwaters. Day 8 it sprouts. Sem names it Sunshine.",
         "education": "Seeds need soil, water, sunlight. Photosynthesis. Patience. Caring for living things."
@@ -116,7 +121,7 @@ Output ONLY valid JSON:
 {{
   "title": "VIRAL TITLE — use a pet (Biscuit/Mittens/dog/cat/puppy) OR shocking hook. ALLCAPS one word. Make people NEED to watch. Examples: 'Biscuit ATE Dad's Report Card!', 'Mittens RUINED Movie Night!', 'Sem's GENIUS Plan Nearly Broke Everything!', 'The DOG Knew Our Secret ALL Along!'",
   "description": "2-3 warm engaging sentences for YouTube + emojis. Mention Biscuit/Mittens if they appear. End with 'Subscribe for new Pen Family episodes! 🖊️❤️'",
-  "hashtags": ["ThePenFamily", "BiscuitTheDog", "MittensTheCat", "KidsCartoon", "LearnEnglish", "AnimatedFamily", "FamilyFun", "CutePets"],
+  "hashtags": ["ThePenFamily", "FIFAWorldCup2026", "WorldCup2026", "WorldCup", "FIFA", "Soccer", "Football", "KidsCartoon", "LearnEnglish", "AnimatedFamily", "FamilyFun", "Trending", "Viral", "WorldCupReaction", "FIFA2026"],
   "background": "kitchen",
   "beats": [
     {{"character": "sem", "text": "...(max 18 words)", "emotion": "happy|neutral|surprised|angry|sad", "background": "kitchen|home|bedroom|bathroom|park|school|shop|street"}}

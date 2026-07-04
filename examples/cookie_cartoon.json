@@ -1,0 +1,96 @@
+{
+  "title": "The Great Cookie Mystery! 🍪",
+  "background": "kitchen",
+  "description": "Someone ate the LAST cookie! The pencil family turns detective 🕵️🍪 #kids #cartoon #pencilfamily",
+  "hashtags": ["kids", "cartoon", "family", "cookies", "mystery"],
+  "beats": [
+    {
+      "character": "mas",
+      "emotion": "surprised",
+      "background": "kitchen",
+      "text": "My cookies! The last cookie is GONE!",
+      "action": "The pink mom pencil walks up to the kitchen counter, lifts the lid of a big cookie jar, peeks inside, and gasps dramatically - the jar is completely empty. She holds the jar upside down and one tiny crumb falls out."
+    },
+    {
+      "character": "oz",
+      "emotion": "neutral",
+      "background": "kitchen",
+      "text": "Nobody move! This is a cookie mystery.",
+      "action": "The blue dad pencil with glasses marches into the kitchen, takes the empty cookie jar, and inspects it closely like a detective examining evidence, adjusting his glasses and stroking his chin."
+    },
+    {
+      "character": "bas",
+      "emotion": "neutral",
+      "background": "kitchen",
+      "text": "Wasn't me. I only eat likes.",
+      "action": "The teal teenager pencil with purple glasses slides into the kitchen staring at her pink phone, shrugs without looking up from the screen, and leans against the counter."
+    },
+    {
+      "character": "sem",
+      "emotion": "surprised",
+      "background": "kitchen",
+      "text": "I didn't eat the cookie! Promise promise PROMISE!",
+      "action": "A small energetic kid pencil bounces into the kitchen jumping up and down, waving both arms wildly in denial, shaking his head very fast."
+    },
+    {
+      "character": "mira",
+      "emotion": "happy",
+      "background": "kitchen",
+      "text": "Look look! Crumbs go that way!",
+      "action": "The tiny baby pencil toddles into the kitchen giggling, then excitedly points down at a trail of cookie crumbs on the kitchen floor leading out of the room."
+    },
+    {
+      "character": "oz",
+      "emotion": "surprised",
+      "background": "kitchen",
+      "text": "Crumbs! Follow that trail, family!",
+      "action": "The blue dad pencil kneels down on the kitchen floor, discovers the trail of cookie crumbs, points forward heroically, and starts tiptoeing along the trail."
+    },
+    {
+      "character": "oz",
+      "emotion": "happy",
+      "background": "home",
+      "cast": ["oz", "mas", "sem", "mira"],
+      "text": "Shhh... the trail ends right here!",
+      "action": "The whole pencil family tiptoes in a sneaky line across a cozy living room, following cookie crumbs on the floor that lead behind a big comfy couch. The dad pencil in front holds a finger to his lips."
+    },
+    {
+      "character": "biscuit",
+      "emotion": "surprised",
+      "background": "home",
+      "text": "Uh oh... hi everybody!",
+      "action": "A cute orange puppy pencil slowly peeks out from behind the couch with cookie crumbs all over his face, ears drooping, caught red-handed, waving one paw shyly."
+    },
+    {
+      "character": "mas",
+      "emotion": "surprised",
+      "background": "home",
+      "cast": ["mas", "biscuit"],
+      "text": "Biscuit! Crumbs are ALL over your face!",
+      "action": "The pink mom pencil puts her hands on her hips looking at the guilty puppy pencil, tries to look stern, but slowly starts to smile."
+    },
+    {
+      "character": "biscuit",
+      "emotion": "sad",
+      "background": "home",
+      "text": "The cookie was lonely... so I helped it!",
+      "action": "The orange puppy pencil looks down at the floor with big sad puppy eyes, tail drooping, drawing a little circle on the floor with his paw, then looks up hopefully."
+    },
+    {
+      "character": "oz",
+      "emotion": "happy",
+      "background": "home",
+      "cast": ["oz", "mas", "biscuit", "mira"],
+      "text": "Come here, you silly cookie monster!",
+      "action": "The whole pencil family bursts out laughing and rushes in for a big warm group hug around the little puppy pencil, lifting him up in the air."
+    },
+    {
+      "character": "mas",
+      "emotion": "happy",
+      "background": "home",
+      "cast": ["mas", "oz", "sem", "mira", "biscuit"],
+      "text": "Fresh cookies for EVERYONE! Even you, Biscuit!",
+      "action": "The pink mom pencil walks in carrying a tray of fresh warm cookies, the whole pencil family jumps and cheers with joy, and the puppy pencil catches a cookie happily. Confetti-like sparkles in the air."
+    }
+  ]
+}

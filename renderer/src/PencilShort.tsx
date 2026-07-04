@@ -3,11 +3,11 @@ import { AbsoluteFill, Audio, Img, staticFile, useCurrentFrame, useVideoConfig }
 import { Manifest, MouthShape, Beat, Position } from "./types";
 import { CharacterSprite } from "./CharacterSprite";
 import { Subtitles } from "./Subtitles";
-import { SceneTransitionBg } from "./backgrounds";
+import { SceneTransitionBg, photoForScene, photoGroundBottom } from "./backgrounds";
 import { EndCard } from "./EndCard";
 import {
   EmotionBurst, ScreenFlash, FloatingStars, ColorOrbs,
-  SceneParticles, BigEmotionPop,
+  SceneParticles, BigEmotionPop, CameraRig, CinematicGrade,
 } from "./effects";
 
 const END_CARD_FRAMES = 90;
@@ -35,7 +35,8 @@ const WalkingBgChars: React.FC = () => {
         return (
           <div key={i} style={{
             position: "absolute", left: x, top: `${w.yPct}%`, width: cw,
-            opacity: 0.20, transform: `translateY(${bob}px)${w.flip ? " scaleX(-1)" : ""}`,
+            opacity: 0.16, filter: "blur(3px) brightness(0.9)",
+            transform: `translateY(${bob}px)${w.flip ? " scaleX(-1)" : ""}`,
             pointerEvents: "none",
           }}>
             <Img src={staticFile(`characters/sprites/${w.char}_neutral.png`)}
@@ -116,51 +117,60 @@ export const PencilShort: React.FC<{ manifest: Manifest }> = ({ manifest }) => {
   const listenerEmotion = (listenerBeat as any)?.emotion ?? "neutral";
   const listenerDef = listenerBeat ? manifest.characters[listenerBeat.character] : undefined;
 
+  const isPhotoScene = photoForScene(currentScene) !== null;
+  const groundBottom = photoGroundBottom(currentScene) ?? undefined;
+
   return (
     <AbsoluteFill style={{ backgroundColor: "#111" }}>
       <Audio src={staticFile(manifest.audio)} />
 
-      {/* Beat-synced background — transitions smoothly per dialogue scene change */}
-      <SceneTransitionBg
-        currentScene={currentScene}
-        prevScene={prevScene}
-        beatStartFrame={active?.startFrame ?? 0}
-      />
-
-      {/* Ambient glow */}
-      <ColorOrbs />
-
-      {/* Walking background characters */}
-      <WalkingBgChars />
-
-      {/* Listener — static, dimmed, 65% scale (feels further away) */}
-      {listenerBeat && (
-        <CharacterSprite
-          characterId={listenerBeat.character}
-          position={listenerPos}
-          speaking={false}
-          mouth="X"
-          scale={(listenerDef?.scale ?? 1) * 0.55}
-          emotion={listenerEmotion}
-          entryFrame={entryFrames[listenerBeat.character] ?? 0}
+      {/* Camera rig: whole scene gets handheld drift + per-beat push-in */}
+      <CameraRig beatStart={active?.startFrame ?? 0}>
+        {/* Beat-synced background — transitions smoothly per dialogue scene change */}
+        <SceneTransitionBg
+          currentScene={currentScene}
+          prevScene={prevScene}
+          beatStartFrame={active?.startFrame ?? 0}
         />
-      )}
 
-      {/* Speaker — full size, animated, zooms in at each beat start */}
-      {active && (
-        <CharacterSprite
-          characterId={active.character}
-          position={speakerPos}
-          speaking={speaking}
-          mouth={mouth}
-          scale={speakerDef?.scale ?? 1}
-          emotion={speakerEmotion}
-          entryFrame={entryFrames[active.character] ?? 0}
-          beatStartFrame={active.startFrame}
-        />
-      )}
+        {/* Cartoon-only ambient glow (fights realism on photo scenes) */}
+        {!isPhotoScene && <ColorOrbs />}
 
-      {/* Subtitles */}
+        {/* Walking background characters — cartoon mode only (read as lens
+            smudges when ghosted over a real photo) */}
+        {!isPhotoScene && <WalkingBgChars />}
+
+        {/* Listener — static, softly blurred (depth of field), 55% scale */}
+        {listenerBeat && (
+          <CharacterSprite
+            characterId={listenerBeat.character}
+            position={listenerPos}
+            speaking={false}
+            mouth="X"
+            scale={(listenerDef?.scale ?? 1) * 0.55}
+            emotion={listenerEmotion}
+            entryFrame={entryFrames[listenerBeat.character] ?? 0}
+            groundBottom={groundBottom}
+          />
+        )}
+
+        {/* Speaker — full size, animated, zooms in at each beat start */}
+        {active && (
+          <CharacterSprite
+            characterId={active.character}
+            position={speakerPos}
+            speaking={speaking}
+            mouth={mouth}
+            scale={speakerDef?.scale ?? 1}
+            emotion={speakerEmotion}
+            entryFrame={entryFrames[active.character] ?? 0}
+            beatStartFrame={active.startFrame}
+            groundBottom={groundBottom}
+          />
+        )}
+      </CameraRig>
+
+      {/* Subtitles — outside the camera so text stays rock-steady */}
       {speaking && active && speakerDef && (
         <Subtitles
           text={active.text}
@@ -171,10 +181,11 @@ export const PencilShort: React.FC<{ manifest: Manifest }> = ({ manifest }) => {
         />
       )}
 
-      {/* Effects */}
-      <FloatingStars />
+      {/* Effects — emoji clutter only in cartoon mode; photo mode keeps the
+          single reaction emoji (reads as an intentional AR sticker) */}
+      {!isPhotoScene && <FloatingStars />}
 
-      {active && speaking && (
+      {!isPhotoScene && active && speaking && (
         <SceneParticles scene={currentScene} beatStart={active.startFrame} />
       )}
 
@@ -182,11 +193,14 @@ export const PencilShort: React.FC<{ manifest: Manifest }> = ({ manifest }) => {
         <BigEmotionPop emotion={speakerEmotion} beatStart={active.startFrame} side={speakerPos === "left" ? "left" : "right"} />
       )}
 
-      {active && speaking && (
+      {!isPhotoScene && active && speaking && (
         <EmotionBurst emotion={speakerEmotion} beatStart={active.startFrame} />
       )}
 
       {sceneChanged && active && <ScreenFlash beatStart={active.startFrame} />}
+
+      {/* Final cinematic pass: film grain + vignette + warm grade */}
+      <CinematicGrade />
     </AbsoluteFill>
   );
 };

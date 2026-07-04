@@ -148,7 +148,7 @@ Generate JSON:
   "title": "VIRAL TITLE — must feature a pet (Biscuit/Mittens/dog/cat) OR a shocking moment. MAX 8 words. Use ALLCAPS for one keyword. Make people NEED to click. Examples: 'Biscuit ATE Dad's Homework!', 'Mittens RUINED the Birthday Cake!', 'This DOG Knows Our Secret!', 'Sem BROKE the House Again!', 'Baby Mira SHOCKED Everyone Today!'",
   "background": "opening background label",
   "description": "2 punchy sentences social caption + emojis + call to action. Mention Biscuit or Mittens or both if they appear. Add 'Follow for more Pen Family chaos! 🖊️🐶🐱' at end.",
-  "hashtags": ["#ThePenFamily", "#BiscuitTheDog", "#MittensTheCat", "#LearnEnglish", "#KidsCartoon", "#FamilyFun", "#Shorts", "#AnimatedFamily", "#CuteDogs", "#CuteCats", "#FunnyKids"],
+  "hashtags": ["#ThePenFamily", "#FIFAWorldCup2026", "#WorldCup2026", "#WorldCup", "#FIFA", "#Soccer", "#Football", "#BiscuitTheDog", "#LearnEnglish", "#KidsCartoon", "#FamilyFun", "#Shorts", "#AnimatedFamily", "#FunnyKids", "#Trending", "#Viral"],
   "beats": [
     {{"character": "id", "text": "MAX 7 WORDS", "emotion": "neutral|happy|angry|surprised|sad", "background": "scene_label"}}
   ]
@@ -157,44 +157,35 @@ Generate JSON:
 9-11 beats. Every beat has a background. RAPID FIRE. FUNNY. 40-45 SECONDS. 55-75 words."""
 
 AUTO_TOPICS = [
-    # 🎭 Unexpected twists
-    "Sem accidentally calls the pizza place instead of grandpa and orders 40 pizzas",
-    "Biscuit ate Oz's car keys and now has to confess — but only Mira understands him",
-    "Bas goes viral for the wrong video and it's actually Oz dancing in the kitchen",
-    "Sem swaps Oz's coffee with chocolate milk and Oz doesn't notice for the whole morning",
+    # ⚽ FIFA World Cup 2026 (happening NOW — USA/Canada/Mexico hosts)
+    "The family watches the World Cup and Sem thinks the referee is the villain",
+    "Oz cries at the World Cup — says there's something in his eye the whole match",
+    "Sem picks his World Cup team based on which jersey color is prettiest",
+    "Bas tries to film World Cup reaction content but Sem ruins every take",
+    "The family can't agree on a team — Mira accidentally picks the winner",
+    "Oz explains the offside rule to Sem — Sem thinks it means eating on only one side",
+    "Saf asks why World Cup players fall down so much — Oz has no good answer",
+    "Sem tries to teach Biscuit soccer in the living room — total chaos",
+    "The whole neighborhood gathers at the Pen house to watch the World Cup final",
+    "Bas goes viral for accidentally filming the wrong team celebrating",
+
+    # 🌍 Other current events (Summer 2026)
+    "The family debates which summer blockbuster movie to see — nobody agrees",
+    "Sem hears about AI robots and decides to build one using kitchen utensils",
+    "Saf explains climate change to Sem using ice cream — it melts during the lesson",
+    "The family tries to go viral on every social media platform in one day",
+    "Bas discovers her video got stolen and reposts by a robot account",
+    "Sem thinks streaming services are a type of water park",
+    "Oz tries to understand TikTok For You Page algorithm — fails completely",
+    "The family does a summer reading challenge — Sem reads zero books confidently",
+
+    # 🎭 Classic chaos (evergreen)
+    "Biscuit ate Oz's car keys and only Mira understands what he's saying",
     "Mittens somehow learned to open the fridge and the whole family blames each other",
-    "Saf's science experiment accidentally dyes Biscuit bright purple — the vet is shocked",
-    "Oz tries to surprise the family but walks into his own surprise party instead",
-    "Sem hides Mira's toy and Mira's first real word is 'SEM' in a very angry voice",
-    "The family gets Biscuit a GPS collar and discovers he visits the neighbors every single day",
-    "Bas posts a cooking video but Sem walks in wearing Oz's giant shoes and steals the show",
-
-    # 🌀 Chaos escalators
-    "Sem decides to give Mittens a bath — Mittens disagrees loudly",
-    "Oz tries to fix one thing in the house and breaks five more things",
-    "Mira learns to open doors and nobody is safe anymore",
-    "Saf explains gravity to Sem using Oz's coffee mug — it does not end well",
-    "Sem trades his lunch with Snip at school and gets something completely inedible",
-    "Bas tries to teach Oz one social media trend — it takes the entire morning",
-    "Mittens knocks something expensive off the shelf — everyone pretends not to notice",
-    "Sem buries something important in the backyard and forgets what it was",
-    "Biscuit chases Mittens through the house and they destroy Bas's room in 8 seconds",
-
-    # 💡 English learning built in
-    "Sem tries to use grown-up words he overheard but uses them all completely wrong",
-    "Saf teaches Sem the difference between 'borrow' and 'steal' using Oz's cookie",
-    "The family plays a word game at dinner and Sem invents words that somehow make sense",
-    "Oz teaches Sem the word 'responsible' but Sem thinks it means something incredible",
-    "Saf explains what 'patient' means to Sem — Sem immediately tries to test everyone's patience",
-    "Sem learns 'apologize' and starts apologizing for things that haven't happened yet",
-
-    # 😲 Surprise reveals
-    "Mas already knew about every secret in the house — she reveals them all at breakfast",
-    "It turns out Biscuit and Mittens have been best friends the whole time and hid it",
+    "Sem swaps Oz's coffee with chocolate milk — Oz doesn't notice all morning",
+    "Mas already knew every secret in the house — reveals them all at breakfast",
+    "Biscuit chases Mittens through the house and destroys Bas's room in 8 seconds",
     "Sem's 'bad drawing' becomes famous online because Bas accidentally posted it",
-    "Mira has been understanding everything this whole time — she finally shows it",
-    "Grandpa Rex turns out to be secretly learning TikTok dances in his room",
-    "Snip the sharpener comes to visit and has been to every country in the world",
 ]
 
 
