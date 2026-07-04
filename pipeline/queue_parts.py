@@ -46,12 +46,40 @@ def main() -> None:
         s3.upload_file(str(video), BUCKET, key)
         day = (start + dt.timedelta(days=i - 1)).isoformat()
         extra = (f"Part {i} of {args.parts}! The adventure continues! 🎬\n\n"
-                 if i > 1 else f"Part 1 of {args.parts}! New part every morning! ⏰\n\n")
+                 if i > 1 else f"Part 1 of {args.parts}! New part every morning 6 AM! ⏰\n\n")
+        title_clean = script["title"].rstrip("! ").split("!")[0]
+        base_tags = script.get("hashtags", [])
+
+        # Platforma özel paketleme — her algoritmanın sevdiği format farklı
+        platform_meta = {
+            "tiktok": {
+                "title": f"{title_clean} — Part {i} 🍿 wait for it...",
+                "description": (f"Part {i}/{args.parts} ⏰ New part every morning at 6! "
+                                f"Follow so you don't miss the ending! 🎬\n"
+                                + " ".join(f"#{t}" for t in
+                                           ["kidsoftiktok", "cartoonsforkids", "kidsvideos",
+                                            "bedtimestories", "penfamily", f"part{i}"])),
+            },
+            "instagram": {
+                "title": f"{script['title']} — Part {i}/{args.parts}",
+                "description": (extra + script.get("description", "") + "\n"
+                                + " ".join(f"#{t}" for t in base_tags +
+                                           ["kidsreels", "toddleractivities", "animation",
+                                            "kidscartoon", "familyfun", "penfamily"])),
+            },
+            "facebook": {
+                "title": f"{script['title']} — Part {i}/{args.parts}",
+                "description": (f"Which Pen Family member is your favorite? Tell us below! 👇\n\n"
+                                + extra + script.get("description", "")),
+            },
+        }
+
         queue.append({
             "key": key,
             "title": f"{script['title']} — Part {i}/{args.parts}",
             "description": extra + script.get("description", ""),
-            "hashtags": script.get("hashtags", []) + [f"part{i}"],
+            "hashtags": base_tags + [f"part{i}"],
+            "platform_meta": platform_meta,
             "platforms": args.platforms.split(","),
             "not_before": day,
             "published_at": None,

@@ -85,7 +85,7 @@ export const EndCard: React.FC = () => {
         textAlign: "center", padding: "0 60px",
         letterSpacing: 1,
       }}>
-        New episode tomorrow! 🎬
+        New part every morning — 6 AM! ⏰
       </div>
 
       {/* Character silhouettes */}

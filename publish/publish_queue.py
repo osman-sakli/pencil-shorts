@@ -48,14 +48,22 @@ def main() -> None:
         s3.download_fileobj(BUCKET, item["key"], f)
         video = Path(f.name)
 
-    meta = {"title": item["title"],
-            "description": item.get("description", ""),
-            "hashtags": item.get("hashtags", [])}
-    results = upload.publish(item.get("platforms", ["tiktok", "instagram", "facebook"]),
-                             video_path=video, manifest_data=meta)
+    default_meta = {"title": item["title"],
+                    "description": item.get("description", ""),
+                    "hashtags": item.get("hashtags", [])}
+    platform_meta = item.get("platform_meta", {})
+
+    all_results = {}
+    for p in item.get("platforms", ["tiktok", "instagram", "facebook"]):
+        meta = {**default_meta, **platform_meta.get(p, {})}
+        try:
+            all_results[p] = upload.publish([p], video_path=video, manifest_data=meta)
+        except Exception as e:  # bir platform patlasa diğerleri devam etsin
+            all_results[p] = f"HATA: {e}"
+            print(f"  {p}: HATA {e}")
 
     item["published_at"] = dt.datetime.utcnow().isoformat() + "Z"
-    item["results"] = str(results)
+    item["results"] = str(all_results)
     s3.put_object(Bucket=BUCKET, Key=QUEUE_KEY,
                   Body=json.dumps(queue, ensure_ascii=False, indent=2).encode())
     print("Tamam — kuyruk güncellendi.")
