@@ -20,7 +20,7 @@ def main() -> None:
     ap.add_argument("--script", required=True)
     ap.add_argument("--part", type=int, required=True)
     ap.add_argument("--of", type=int, required=True)
-    ap.add_argument("--platforms", default="tiktok,instagram,facebook")
+    ap.add_argument("--platforms", default="tiktok,instagram,facebook,youtube")
     args = ap.parse_args()
 
     script = json.loads((config.ROOT / args.script).read_text(encoding="utf-8"))

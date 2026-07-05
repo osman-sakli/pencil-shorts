@@ -263,6 +263,15 @@ def main() -> None:
     done: list[tuple[int, Path]] = []
     prev_url: str | None = None
     prev_bg: str | None = None
+    # Devam modu: önceki klip diskte varsa ve aynı mekândansa sürekliliği koru
+    if args.start > 0:
+        prev_clip = CARTOON_OUT / f"beat_{args.start - 1}.mp4"
+        prev_beat_bg = beats[args.start - 1].get("background")
+        if prev_clip.exists() and prev_beat_bg == beats[args.start].get("background"):
+            import fal_client
+            prev_url = fal_client.upload_file(str(prev_clip))
+            prev_bg = prev_beat_bg
+            print(f"  süreklilik: beat_{args.start - 1} referans alındı")
     for i, beat in enumerate(beats):
         if i < args.start or (args.beats and i >= args.start + args.beats):
             continue

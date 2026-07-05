@@ -24,7 +24,7 @@ def main() -> None:
     ap.add_argument("--script", required=True)
     ap.add_argument("--parts", type=int, required=True)
     ap.add_argument("--start-date", default=(dt.date.today() + dt.timedelta(days=1)).isoformat())
-    ap.add_argument("--platforms", default="tiktok,instagram,facebook")
+    ap.add_argument("--platforms", default="tiktok,instagram,facebook,youtube")
     args = ap.parse_args()
 
     script = json.loads((config.ROOT / args.script).read_text(encoding="utf-8"))
@@ -71,6 +71,13 @@ def main() -> None:
                 "title": f"{script['title']} — Part {i}/{args.parts}",
                 "description": (f"Which Pen Family member is your favorite? Tell us below! 👇\n\n"
                                 + extra + script.get("description", "")),
+            },
+            "youtube": {
+                "title": f"{title_clean} — Part {i}/{args.parts} ⭐",
+                "description": (extra + script.get("description", "")
+                                + "\n\nSubscribe for the full episode and daily parts! 🔔"
+                                + "\n#shorts #kidscartoon #penfamily"),
+                "hashtags": base_tags + ["shorts", f"part{i}"],
             },
         }
 
