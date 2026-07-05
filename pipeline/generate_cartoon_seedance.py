@@ -150,7 +150,17 @@ def render_beat(beat_idx: int, beat: dict, resolution: str,
 
     out_path = CARTOON_OUT / f"beat_{beat_idx}.mp4"
     import urllib.request
-    urllib.request.urlretrieve(video_url, out_path)
+    for attempt in (1, 2, 3):
+        urllib.request.urlretrieve(video_url, out_path)
+        # Bütünlük: dosya süresi istenen sürenin en az %80'i olmalı (kopuk indirme koruması)
+        probe = subprocess.run(
+            [config.FFMPEG.replace("ffmpeg", "ffprobe"), "-v", "error",
+             "-show_entries", "format=duration", "-of", "csv=p=0", str(out_path)],
+            capture_output=True, text=True)
+        got = float(probe.stdout.strip() or 0)
+        if got >= float(duration) * 0.8 and out_path.stat().st_size > 400_000:
+            break
+        print(f"  beat {beat_idx}: indirme kopuk ({got:.1f}s/{duration}s), deneme {attempt}/3")
     print(f"  beat {beat_idx} indirildi → {out_path.name}")
     return out_path, video_url
 
@@ -195,6 +205,8 @@ def main() -> None:
     ap.add_argument("--no-tts", action="store_true", help="sesler zaten üretildiyse atla")
     ap.add_argument("--dry-run", action="store_true",
                     help="Seedance'i ÇAĞIRMADAN tüm promptları + maliyeti dök (bedava ön kontrol)")
+    ap.add_argument("--no-continuity", action="store_true",
+                    help="devam modunda önceki klibi referans ALMA")
     ap.add_argument("--model", default="mini", choices=["mini", "full"],
                     help="varsayılan model; beat'te \"model\" alanı varsa o kazanır")
     args = ap.parse_args()
@@ -264,7 +276,7 @@ def main() -> None:
     prev_url: str | None = None
     prev_bg: str | None = None
     # Devam modu: önceki klip diskte varsa ve aynı mekândansa sürekliliği koru
-    if args.start > 0:
+    if args.start > 0 and not args.no_continuity:
         prev_clip = CARTOON_OUT / f"beat_{args.start - 1}.mp4"
         prev_beat_bg = beats[args.start - 1].get("background")
         if prev_clip.exists() and prev_beat_bg == beats[args.start].get("background"):
