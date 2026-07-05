@@ -36,17 +36,28 @@ def main() -> None:
         return
 
     today = dt.date.today().isoformat()
+    slot = os.getenv("PUBLISH_SLOT", "am")  # am=sabah Part, pm=akşam highlight
     item = next((q for q in queue
-                 if not q.get("published_at") and q.get("not_before", "") <= today),
+                 if not q.get("published_at")
+                 and q.get("slot", "am") == slot
+                 and q.get("not_before", "") <= today),
                 None)
     if item is None:
-        print("Yayınlanacak parça yok (hepsi yayınlandı ya da tarihi gelmedi).")
+        print(f"Yayınlanacak parça yok (slot={slot}).")
         return
 
     print(f"Yayınlanıyor: {item['key']} → {item.get('platforms')}")
-    with tempfile.NamedTemporaryFile(suffix=".mp4", delete=False) as f:
-        s3.download_fileobj(BUCKET, item["key"], f)
-        video = Path(f.name)
+    # Platform-başına farklı video desteği: {"tiktok": key, "default": key}
+    videos = item.get("videos", {})
+    cache: dict[str, Path] = {}
+
+    def fetch(key: str) -> Path:
+        if key not in cache:
+            f = tempfile.NamedTemporaryFile(suffix=".mp4", delete=False)
+            s3.download_fileobj(BUCKET, key, f)
+            f.close()
+            cache[key] = Path(f.name)
+        return cache[key]
 
     default_meta = {"title": item["title"],
                     "description": item.get("description", ""),
@@ -55,9 +66,10 @@ def main() -> None:
 
     all_results = {}
     for p in item.get("platforms", ["tiktok", "instagram", "facebook"]):
+        key = videos.get(p, videos.get("default", item["key"]))
         meta = {**default_meta, **platform_meta.get(p, {})}
         try:
-            all_results[p] = upload.publish([p], video_path=video, manifest_data=meta)
+            all_results[p] = upload.publish([p], video_path=fetch(key), manifest_data=meta)
         except Exception as e:  # bir platform patlasa diğerleri devam etsin
             all_results[p] = f"HATA: {e}"
             print(f"  {p}: HATA {e}")

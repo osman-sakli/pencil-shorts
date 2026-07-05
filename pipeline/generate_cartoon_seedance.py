@@ -93,12 +93,16 @@ def build_prompt(beat: dict, cast: list[str], aspect: str,
             else "Cinematic horizontal 16:9 composition.")
     return (
         f"{STYLE} {SIZE_RULE} Setting: {env}. "
-        f"Characters: {who}. "
+        f"The cast consists EXCLUSIVELY of these pencil characters: {who}. "
         f"They act out this scene: {beat['action']} "
         f"The speaking character speaks the dialogue in @Audio1 with accurate "
-        f"lip sync while performing the action. Characters keep the same "
-        f"design, colors and proportions as the reference images. "
-        f"{comp}"
+        f"lip sync while performing the action. "
+        f"{comp} "
+        # Kapanış vurgusu: modeller prompt sonuna en çok uyar
+        f"IMPORTANT: The characters must look EXACTLY like the reference "
+        f"images — identical colors, accessories, faces and proportions in "
+        f"every shot, no redesign, no variation. Absolutely NO humans and no "
+        f"generic wooden pencils anywhere in the frame."
     )
 
 
@@ -207,6 +211,9 @@ def main() -> None:
                     help="Seedance'i ÇAĞIRMADAN tüm promptları + maliyeti dök (bedava ön kontrol)")
     ap.add_argument("--no-continuity", action="store_true",
                     help="devam modunda önceki klibi referans ALMA")
+    ap.add_argument("--redo", default="",
+                    help="sadece bu beat'leri yeniden üret (virgüllü liste); "
+                         "full model + video referanssız (kirlilik zinciri kırılır)")
     ap.add_argument("--model", default="mini", choices=["mini", "full"],
                     help="varsayılan model; beat'te \"model\" alanı varsa o kazanır")
     args = ap.parse_args()
@@ -284,9 +291,17 @@ def main() -> None:
             prev_url = fal_client.upload_file(str(prev_clip))
             prev_bg = prev_beat_bg
             print(f"  süreklilik: beat_{args.start - 1} referans alındı")
+    redo_set = {int(x) for x in args.redo.split(",") if x.strip()} if args.redo else None
     for i, beat in enumerate(beats):
-        if i < args.start or (args.beats and i >= args.start + args.beats):
+        if redo_set is not None:
+            if i not in redo_set:
+                continue
+        elif i < args.start or (args.beats and i >= args.start + args.beats):
             continue
+        if redo_set is not None:
+            # Onarım modu: full model, video referansı yok (kirlilik yayılmasın)
+            beat = {**beat, "model": "full"}
+            prev_url, prev_bg = None, None
         same_scene_url = prev_url if beat.get("background") == prev_bg else None
         env_overrides = {**ENVIRONMENTS, **script.get("environments", {})}
         try:
@@ -304,6 +319,17 @@ def main() -> None:
 
     if not done:
         sys.exit("Hiç sahne üretilemedi.")
+
+    if redo_set is not None:
+        # Onarım modu: tüm bölümü (0..N) yeniden mux'la — sadece onarılanları değil
+        print("[3/3] Onarılan sahneler dahil TÜM bölüm birleştiriliyor…")
+        all_items = [(i, CARTOON_OUT / f"beat_{i}.mp4") for i in range(len(beats))]
+        missing = [i for i, p in all_items if not p.exists()]
+        if missing:
+            sys.exit(f"Eksik klipler var, birleştirme yapılmadı: {missing}")
+        mux_and_concat(all_items, config.OUT / "cartoon.mp4", aspect=args.aspect)
+        print(f"\nOnarım tamam ({len(done)} sahne yenilendi) → {config.OUT / 'cartoon.mp4'}")
+        return
 
     print("[3/3] Sesler bindirilip birleştiriliyor…")
     out_file = config.OUT / "cartoon.mp4"

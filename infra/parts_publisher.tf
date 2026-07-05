@@ -115,3 +115,50 @@ resource "aws_scheduler_schedule" "parts_daily" {
     }
   }
 }
+
+# Akşam slotu: 19:00 ET'de highlight yayını (PUBLISH_SLOT=pm override)
+resource "aws_scheduler_schedule" "highlights_evening" {
+  name       = "${var.project}-highlights-evening"
+  group_name = "default"
+
+  schedule_expression          = "cron(0 19 * * ? *)"
+  schedule_expression_timezone = "America/New_York"
+
+  flexible_time_window {
+    mode = "OFF"
+  }
+
+  target {
+    arn      = "arn:aws:ecs:${local.region}:${local.account_id}:cluster/${aws_ecs_cluster.main.name}"
+    role_arn = aws_iam_role.scheduler.arn
+
+    input = jsonencode({
+      containerOverrides = [{
+        name = "publisher"
+        environment = [{ name = "PUBLISH_SLOT", value = "pm" }]
+      }]
+    })
+
+    ecs_parameters {
+      task_definition_arn = aws_ecs_task_definition.publisher.arn
+      launch_type         = "FARGATE"
+      task_count          = 1
+
+      capacity_provider_strategy {
+        capacity_provider = "FARGATE_SPOT"
+        weight            = 1
+      }
+
+      network_configuration {
+        assign_public_ip = true
+        subnets          = data.aws_subnets.default.ids
+        security_groups  = [aws_security_group.ecs_task.id]
+      }
+    }
+
+    retry_policy {
+      maximum_retry_attempts       = 2
+      maximum_event_age_in_seconds = 3600
+    }
+  }
+}
