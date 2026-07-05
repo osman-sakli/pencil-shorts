@@ -85,14 +85,20 @@ def sprite_path(char: str, emotion: str = "neutral") -> Path:
 
 
 def build_prompt(beat: dict, cast: list[str], aspect: str,
-                 environments: dict[str, str]) -> str:
+                 environments: dict[str, str], img_offset: int = 0) -> str:
     env = environments.get(beat.get("background", "home"), DEFAULT_ENV)
     who = "; ".join(
-        f"@Image{i+1} is {CHAR_DESC.get(c, c)}" for i, c in enumerate(cast))
+        f"@Image{i+1+img_offset} is {CHAR_DESC.get(c, c)}"
+        for i, c in enumerate(cast[:4 - img_offset]))
+    opening = ""
+    if img_offset:
+        opening = ("@Image1 is the EXACT opening frame of this shot — the video "
+                   "must begin from precisely this composition, these characters, "
+                   "this environment and lighting, then animate forward. ")
     comp = ("Vertical 9:16 composition." if aspect == "9:16"
             else "Cinematic horizontal 16:9 composition.")
     return (
-        f"{STYLE} {SIZE_RULE} Setting: {env}. "
+        f"{opening}{STYLE} {SIZE_RULE} Setting: {env}. "
         f"The cast consists EXCLUSIVELY of these pencil characters: {who}. "
         f"They act out this scene: {beat['action']} "
         f"The speaking character speaks the dialogue in @Audio1 with accurate "
@@ -118,11 +124,18 @@ def render_beat(beat_idx: int, beat: dict, resolution: str,
         return None
 
     cast = beat.get("cast", [beat["character"]])
-    # Konuşan karakter her zaman @Image1
+    # Konuşan karakter her zaman ilk sprite referansı
     cast = [beat["character"]] + [c for c in cast if c != beat["character"]]
     cast = cast[:4]
     image_urls = [fal_client.upload_file(str(sprite_path(c, beat.get("emotion", "neutral") if c == beat["character"] else "neutral")))
                   for c in cast]
+    # Kompozit başlangıç karesi varsa @Image1 olur (kimlik + kompozisyon garantisi)
+    start_frame = beat.get("start_frame")
+    img_offset = 0
+    if start_frame:
+        sf_path = config.ROOT / start_frame
+        image_urls = [fal_client.upload_file(str(sf_path))] + image_urls[:3]
+        img_offset = 1
     audio_url = fal_client.upload_file(str(audio))
 
     # Süreyi sese bağla: ses + 1.5 sn oyunculuk payı, 4-8 sn arası (tempo + maliyet)
@@ -134,7 +147,7 @@ def render_beat(beat_idx: int, beat: dict, resolution: str,
     duration = str(min(8, max(4, round(audio_s + 1.5))))
 
     args = {
-        "prompt": build_prompt(beat, cast, aspect, environments or ENVIRONMENTS),
+        "prompt": build_prompt(beat, cast, aspect, environments or ENVIRONMENTS, img_offset),
         "image_urls": image_urls,
         "audio_urls": [audio_url],
         "resolution": resolution,
@@ -149,7 +162,17 @@ def render_beat(beat_idx: int, beat: dict, resolution: str,
                            "style and character designs as @Video1.")
 
     print(f"  beat {beat_idx} [{beat['character']}] üretiliyor ({model})…")
-    result = fal_client.subscribe(ENDPOINTS[model], arguments=args, with_logs=False)
+    try:
+        result = fal_client.subscribe(ENDPOINTS[model], arguments=args, with_logs=False)
+    except Exception as e:
+        if "content_policy" not in str(e):
+            raise
+        # Şarkı/ninni sahnelerinde Seedance'in ÜRETTİĞİ ses filtreye takılabiliyor.
+        # Bizim mux zaten kendi TTS sesimizi bindiriyor — modelin sesini kapat, tekrar dene.
+        print(f"  beat {beat_idx}: ses filtresi — generate_audio=False ile yeniden…")
+        result = fal_client.subscribe(ENDPOINTS[model],
+                                      arguments={**args, "generate_audio": False},
+                                      with_logs=False)
     video_url = result["video"]["url"]
 
     out_path = CARTOON_OUT / f"beat_{beat_idx}.mp4"

@@ -64,15 +64,23 @@ def _post(platforms: list[str], key: str, user: str,
                 r = requests.post(
                     API, headers=headers, data=data,
                     files=[("video", (video.name, f, "video/mp4"))],
-                    timeout=600,
+                    timeout=900,
                 )
+            # Transient gateway errors (499 client-closed, 502/503/504) → retry
+            if r.status_code in (499, 502, 503, 504):
+                raise requests.exceptions.HTTPError(f"{r.status_code} gateway", response=r)
             r.raise_for_status()
             return r.json()
-        except (requests.exceptions.SSLError, requests.exceptions.ConnectionError) as e:
+        except (requests.exceptions.SSLError, requests.exceptions.ConnectionError,
+                requests.exceptions.Timeout, requests.exceptions.HTTPError) as e:
+            status = getattr(getattr(e, "response", None), "status_code", None)
+            # Kalıcı istemci hataları (4xx, gateway hariç) tekrar denenmez
+            if status and status not in (499, 502, 503, 504):
+                raise
             if attempt == 3:
                 raise
             wait = 30 * (attempt + 1)
-            print(f"[upload] SSL/connection error, retry {attempt+1}/3 in {wait}s: {e}")
+            print(f"[upload] geçici hata ({e}), {wait}s sonra tekrar {attempt+1}/3…")
             time.sleep(wait)
 
 
