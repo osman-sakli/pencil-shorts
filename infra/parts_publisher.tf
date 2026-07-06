@@ -94,9 +94,11 @@ resource "aws_scheduler_schedule" "parts_daily" {
 
     ecs_parameters {
       task_definition_arn = aws_ecs_task_definition.publisher.arn
-      launch_type         = "FARGATE"
       task_count          = 1
 
+      # NOT: launch_type ile capacity_provider_strategy AYNI ANDA olamaz —
+      # ikisi birlikteyken RunTask sessizce başarısız olur. Sadece capacity
+      # provider (FARGATE_SPOT) bırakıldı.
       capacity_provider_strategy {
         capacity_provider = "FARGATE_SPOT"
         weight            = 1
@@ -141,9 +143,11 @@ resource "aws_scheduler_schedule" "highlights_evening" {
 
     ecs_parameters {
       task_definition_arn = aws_ecs_task_definition.publisher.arn
-      launch_type         = "FARGATE"
       task_count          = 1
 
+      # NOT: launch_type ile capacity_provider_strategy AYNI ANDA olamaz —
+      # ikisi birlikteyken RunTask sessizce başarısız olur. Sadece capacity
+      # provider (FARGATE_SPOT) bırakıldı.
       capacity_provider_strategy {
         capacity_provider = "FARGATE_SPOT"
         weight            = 1
