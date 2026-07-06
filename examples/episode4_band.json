@@ -1,0 +1,193 @@
+{
+  "title": "The Pencil Family Band! 🎵🥁",
+  "background": "living_day",
+  "music": "happy",
+  "description": "It's a rainy day... so the Pen Family starts a BAND! 🎵 Can they make music together before the big backyard concert? 🥁🎸⭐ #kids #cartoon #song #music #penfamily #kidssongs #nurseryrhymes\n\nMusic: Kevin MacLeod (incompetech.com), Licensed under CC BY 4.0",
+  "hashtags": ["kids", "cartoon", "song", "music", "band", "family", "kidssongs"],
+  "environments": {
+    "living_day": "a cozy bright 3D cartoon living room on a rainy day: big soft orange couch, round rug, framed drawings of pencil characters on warm yellow walls, rain gently streaking the window, warm indoor lamp glow. Cheerful cozy palette",
+    "kitchen_day": "a cheerful 3D cartoon kitchen: warm wooden cabinets, colorful tiles, pots and pans hanging, a big window with soft rainy daylight. Bright and homey",
+    "bedroom_day": "a colorful 3D cartoon kids' bedroom in daytime: bunk beds with rainbow blankets, toy shelves, a big rug, soft cloudy daylight through the window. Playful and bright",
+    "garden_day": "the Pen Family's 3D cartoon backyard garden after the rain: green grass with sparkling dewdrops, a big rose bush, white picket fence, a rainbow arcing across a clearing sky, puddles reflecting light. Fresh and joyful",
+    "stage_day": "a colorful little 3D cartoon backyard stage: a wooden platform with string lights and bunting flags, cardboard music-note decorations, a big rainbow banner reading music notes, garden and rainbow behind. Festive concert mood"
+  },
+  "beats": [
+    {
+      "character": "sem",
+      "emotion": "sad",
+      "background": "living_day",
+      "music": "calm",
+      "text": "It's raining. I'm boooored. No fun today.",
+      "action": "Close-up: the small green toddler pen Sem stands on his pencil-tip feet by the rainy window, cheek squished against the glass, sighing as raindrops trickle down. His shoulders droop. Camera: slow push-in on his bored little face, cozy rainy light."
+    },
+    {
+      "character": "oz",
+      "emotion": "happy",
+      "background": "living_day",
+      "music": "happy",
+      "text": "Rainy day? Then let's start a FAMILY BAND!",
+      "action": "The blue dad pen Oz with glasses strides in on his pencil-tip feet, throws both arms up with a big grin, and a shiny toy drum bounces into his hands. A little burst of colorful music notes pops around his head. Camera: energetic push-in as he raises the drum triumphantly."
+    },
+    {
+      "character": "sem",
+      "emotion": "surprised",
+      "background": "living_day",
+      "music": "happy",
+      "text": "A BAND?! Yes yes YES! Boom boom boom!",
+      "action": "Sem gasps, eyes sparkling, and starts bouncing up and down on his pencil-tip feet, drumming the air wildly with both little arms. Music notes bounce around him. Camera: quick zoom on his ecstatic bouncing."
+    },
+    {
+      "character": "oz",
+      "emotion": "happy",
+      "background": "living_day",
+      "music": "happy",
+      "text": "La la la, the Pencil Family Band!",
+      "action": "Oz taps a cheerful rhythm on his toy drum with both hands, bobbing side to side and singing the chorus line joyfully. Colorful music notes float up in time with each drum tap. Camera: playful bob matching the beat."
+    },
+    {
+      "character": "mas",
+      "emotion": "happy",
+      "background": "kitchen_day",
+      "music": "happy",
+      "text": "I'll bring the rhythm! Pots and pans, clang clang!",
+      "action": "The pink mom pen Mas in the kitchen grabs a shiny pot and a wooden spoon in her arms and taps out a bouncy beat, swaying happily on her pencil-tip feet. Hanging pans jingle along. Music notes swirl. Camera: fun two-beat sway with the clanging rhythm."
+    },
+    {
+      "character": "bas",
+      "emotion": "neutral",
+      "background": "bedroom_day",
+      "music": "happy",
+      "text": "Okay okay... I'll be on guitar. This might be cool.",
+      "action": "The teal teenage pen Bas with purple glasses, in her room, slings a small colorful toy guitar over her shoulder, tries to look unimpressed, then cracks a small smile and strums a bright chord. Music notes puff from the guitar. Camera: slow reveal of her cool-kid smirk turning into a real smile."
+    },
+    {
+      "character": "saf",
+      "emotion": "happy",
+      "background": "bedroom_day",
+      "music": "happy",
+      "text": "I'll play the keyboard! I practiced ALL week!",
+      "action": "The purple girl pen Saf proudly sets a little rainbow toy keyboard on the rug, wiggles her arms, and taps a cheerful melody, beaming with pride on her pencil-tip feet. Colorful notes rise from each key. Camera: bright close-up on her proud playing.",
+      "model": "full"
+    },
+    {
+      "character": "mira",
+      "emotion": "happy",
+      "background": "living_day",
+      "music": "happy",
+      "text": "Gaga! Baba! Booo-booo! Hehehe!",
+      "action": "The tiny baby pen Mira, sitting on the rug, happily shakes a colorful rattle in each little hand, giggling and bouncing. The rattles sparkle and jingle. Music notes pop around her. Camera: adorable close-up of the giggling baby shaking rattles."
+    },
+    {
+      "character": "biscuit",
+      "emotion": "happy",
+      "background": "living_day",
+      "music": "happy",
+      "text": "Woof woof! Howoooo! Woof!",
+      "action": "The golden puppy pen Biscuit throws his head back and howls a happy tune, tail spinning like a helicopter, then bounces in a circle. A little burst of music notes follows his wagging tail. Camera: playful follow of the howling spinning puppy."
+    },
+    {
+      "character": "oz",
+      "emotion": "surprised",
+      "background": "living_day",
+      "music": "adventure",
+      "text": "Uh oh... everyone's playing something DIFFERENT!",
+      "action": "Wide shot: Oz stands in the middle, arms out, looking overwhelmed as clashing music notes of every color crash together chaotically around him. He winces one eye shut. Camera: shake slightly, notes colliding comically.",
+      "model": "full",
+      "cast": ["oz", "sem", "mas"]
+    },
+    {
+      "character": "saf",
+      "emotion": "surprised",
+      "background": "living_day",
+      "music": "adventure",
+      "text": "We need to play TOGETHER! One, two, three!",
+      "action": "Saf hops up on her pencil-tip feet, waves both arms like a little conductor, and counts them in. The clashing notes freeze mid-air, then swirl into a neat spiral. Camera: dramatic freeze then smooth swirl as order returns.",
+      "model": "full"
+    },
+    {
+      "character": "sem",
+      "emotion": "happy",
+      "background": "living_day",
+      "music": "happy",
+      "text": "Boom boom! Now it sounds YUMMY!",
+      "action": "Sem drums the air in perfect rhythm now, giggling, as harmonious rainbow music notes flow smoothly around the room in a happy stream. He does a little spin on his pencil-tip feet. Camera: joyful orbit as the harmony clicks.",
+      "model": "full"
+    },
+    {
+      "character": "mas",
+      "emotion": "happy",
+      "background": "garden_day",
+      "music": "happy",
+      "text": "The rain stopped! Let's play in the garden!",
+      "action": "Mas throws open a door to the sunny post-rain garden, gesturing outside with a big smile. A rainbow arcs over the dewy grass and puddles sparkle. She hops out on her pencil-tip feet. Camera: bright reveal of the rainbow garden."
+    },
+    {
+      "character": "twinkle",
+      "emotion": "happy",
+      "background": "garden_day",
+      "music": "happy",
+      "text": "Twinkle twinkle! Can I sing with you?",
+      "action": "The tiny golden star Twinkle floats down from the fading rain clouds, glowing warmly, and does a happy little sparkle-spin above the garden. Glitter dust trails behind her. Camera: gentle float-down, glitter sparkling.",
+      "model": "full"
+    },
+    {
+      "character": "oz",
+      "emotion": "happy",
+      "background": "garden_day",
+      "music": "happy",
+      "text": "Of course, Twinkle! Everyone can join the band!",
+      "action": "Oz beams and waves Twinkle over with his drum, then points to a little backyard stage with string lights. The family gathers toward it on their pencil-tip feet. Camera: warm wide welcome, stage in the background.",
+      "model": "full",
+      "cast": ["oz", "twinkle", "sem"]
+    },
+    {
+      "character": "bas",
+      "emotion": "happy",
+      "background": "stage_day",
+      "music": "happy",
+      "text": "Ready everyone? Let's ROCK the backyard!",
+      "action": "Bas steps up on the festive little stage under the string lights, strikes a fun rockstar pose with her toy guitar, and strums a big shiny chord. Bunting flags flutter and music notes shower down. Camera: hero low angle, confetti of notes.",
+      "model": "full"
+    },
+    {
+      "character": "oz",
+      "emotion": "happy",
+      "background": "stage_day",
+      "music": "happy",
+      "text": "La la la, we're the Pencil Family Band!",
+      "action": "On stage, Oz drums and sings the chorus with a huge grin, bobbing to the beat. Behind him the rainbow banner glows. Colorful notes burst on each beat. Camera: joyful bounce with the rhythm.",
+      "model": "full",
+      "cast": ["oz", "mas", "bas"]
+    },
+    {
+      "character": "saf",
+      "emotion": "happy",
+      "background": "stage_day",
+      "music": "happy",
+      "text": "Clap your hands and join the band!",
+      "action": "Saf plays her rainbow keyboard and sings the next chorus line, encouraging with a big smile, while Sem drums and Mira shakes her rattles beside her. A wave of music notes ripples out toward the camera. Camera: bright band-wide shot, everyone playing together.",
+      "model": "full",
+      "cast": ["saf", "sem", "mira"]
+    },
+    {
+      "character": "twinkle",
+      "emotion": "happy",
+      "background": "stage_day",
+      "music": "happy",
+      "text": "La la la! Big and small, we play for all!",
+      "action": "Twinkle floats above the stage glowing bright, spinning and singing the chorus, showering the whole band in warm golden glitter that turns into floating music notes. The family plays joyfully below her. Camera: sweeping rise from the band up to the glowing star.",
+      "model": "full",
+      "cast": ["twinkle", "oz", "saf"]
+    },
+    {
+      "character": "mas",
+      "emotion": "happy",
+      "background": "stage_day",
+      "music": "happy",
+      "text": "La la la, the Pencil Family Band! Hooray!",
+      "action": "The whole band strikes a final triumphant pose together on stage, arms up, as a huge burst of rainbow music notes, glitter and confetti explodes into the sky. Biscuit leaps with joy. The rainbow shines behind them. Camera: epic pull-back revealing the whole joyful band under the fireworks of notes.",
+      "model": "full",
+      "cast": ["mas", "oz", "saf"]
+    }
+  ]
+}

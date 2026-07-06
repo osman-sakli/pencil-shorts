@@ -57,15 +57,39 @@ STYLE = ("High-quality 3D animated children's cartoon, preschool TV series "
 
 # Kanonik karakter tarifleri — her prompt'a giren kimlik + boy + kalem ucu ayak
 CHAR_DESC = {
-    "oz":      "Oz the dad pen (tallest, dark blue, black glasses, striped tie)",
-    "mas":     "Mas the mom pen (slightly shorter than dad, pink, pearl necklace, heart charm)",
-    "bas":     "Bas the teenage big sister pen (teal, purple sunglasses/glasses, pink phone, purse)",
-    "saf":     "Saf the 9-year-old little sister pen (purple, big purple bow on cap, yellow star on chest, much shorter than the teens)",
-    "sem":     "Sem the 4-year-old little brother pen (green, green hoodie, small and chubby)",
-    "mira":    "Mira the 1-year-old baby girl pen (yellow, tiny, pink pacifier, small pearl necklace, little bow)",
-    "biscuit": "Biscuit the puppy pen (golden-orange, red collar with bone tag, floppy ears)",
-    "twinkle": "Twinkle the tiny magical star child (small glowing golden five-pointed star, big sparkly eyes, rosy cheeks, tiny stubby arms, soft warm golden glow with gentle sparkles, smaller than baby Mira)",
+    "oz":      "Oz the dad pen (TALLEST of all, dark blue body, black glasses, blue striped tie, pointed silver pencil-tip feet)",
+    "mas":     "Mas the mom pen (second tallest, slightly shorter than Oz, pink body, white pearl necklace, pink heart charm, pointed silver pencil-tip feet)",
+    "bas":     "Bas the teenage big sister pen (medium height, teal body, purple sunglasses, pink phone, small purse, pointed silver pencil-tip feet)",
+    "saf":     "Saf the 9-year-old little sister pen (short, purple body, big purple bow on her cap, yellow star on chest, pointed silver pencil-tip feet)",
+    "sem":     "Sem the 4-year-old little brother pen (very short and chubby, green body, green hoodie, pointed silver pencil-tip feet)",
+    "mira":    "Mira the 1-year-old baby girl pen (TINIEST pen, yellow body, pink pacifier, tiny pearl necklace, little bow, pointed silver pencil-tip feet)",
+    "biscuit": "Biscuit the puppy pen (golden-orange body, red collar with a bone tag, floppy ears, pointed silver pencil-tip feet)",
+    "twinkle": "Twinkle the magical star child (small glowing golden five-pointed star, big sparkly eyes, rosy cheeks, tiny stubby arms, soft golden glow with sparkles, smaller than baby Mira, floats — no feet)",
 }
+
+# Her karaktere sabit seed → aynı karakter aynı çekirdekten üretilir (kayma azalır)
+CHAR_SEED = {c: 1000 + i * 111 for i, c in enumerate(sorted(CHAR_DESC))}
+
+# Her sahnede tekrarlanan sert NEGATİF kısıtlar (kayma/insan/fazlalık engeli)
+HARD_CONSTRAINTS = (
+    "STRICT RULES — follow every one exactly:\n"
+    "1) The ONLY characters allowed in the frame are the specific pencil "
+    "characters listed above, matching their reference images pixel-for-pixel: "
+    "same body color, same accessories, same face, same proportions, same "
+    "pencil-tip feet. No redesign, no restyle, no color shift between shots.\n"
+    "2) Do NOT add any extra characters, extra pencils, background pencils, "
+    "duplicates, crowds, or generic plain wooden pencils.\n"
+    "3) Absolutely NO humans, no human people, no children, no human hands, "
+    "faces, arms or bodies — not even in photos, posters, framed pictures, "
+    "TV screens, reflections or the background. Framed pictures show pencil "
+    "characters only.\n"
+    "4) Keep each character's size correct relative to the others: Oz tallest, "
+    "then Mas, then Bas, then Saf, then Sem, then baby Mira the smallest.\n"
+    "5) Every pencil character stands and walks on pointed silver pencil-tip "
+    "feet — never flat feet, never shoes, never human legs.\n"
+    "6) Consistent preschool 3D cartoon style, bright and clean, no scary or "
+    "realistic elements."
+)
 SIZE_RULE = ("Character heights follow the family order: dad Oz is the "
              "tallest, mom Mas slightly shorter, teen Bas shorter than mom, "
              "Saf child-sized, Sem toddler-sized, baby Mira the tiniest. "
@@ -97,18 +121,19 @@ def build_prompt(beat: dict, cast: list[str], aspect: str,
                    "this environment and lighting, then animate forward. ")
     comp = ("Vertical 9:16 composition." if aspect == "9:16"
             else "Cinematic horizontal 16:9 composition.")
+    n = len(cast[:4 - img_offset])
+    count_lock = (f"There must be EXACTLY {n} pencil character"
+                  f"{'s' if n != 1 else ''} in this scene — no more, no fewer.")
     return (
         f"{opening}{STYLE} {SIZE_RULE} Setting: {env}. "
         f"The cast consists EXCLUSIVELY of these pencil characters: {who}. "
+        f"{count_lock} "
         f"They act out this scene: {beat['action']} "
         f"The speaking character speaks the dialogue in @Audio1 with accurate "
         f"lip sync while performing the action. "
-        f"{comp} "
+        f"{comp}\n\n"
         # Kapanış vurgusu: modeller prompt sonuna en çok uyar
-        f"IMPORTANT: The characters must look EXACTLY like the reference "
-        f"images — identical colors, accessories, faces and proportions in "
-        f"every shot, no redesign, no variation. Absolutely NO humans and no "
-        f"generic wooden pencils anywhere in the frame."
+        f"{HARD_CONSTRAINTS}"
     )
 
 
@@ -154,6 +179,8 @@ def render_beat(beat_idx: int, beat: dict, resolution: str,
         "duration": duration,
         "aspect_ratio": aspect,
         "generate_audio": True,
+        # Konuşan karaktere sabit seed → aynı karakter tutarlı üretilir
+        "seed": CHAR_SEED.get(beat["character"], 1234),
     }
     # Sahne/stil sürekliliği: önceki klip aynı ortamdaysa referans ver
     if prev_clip_url:
