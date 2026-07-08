@@ -155,6 +155,19 @@ videosu. Evergreen, sonsuz tekrar izlenir, algoritma sever (Cocomelon modeli).
   ekranda zıplayan karaoke şarkı sözleri.
 - ⚠️ Osman'dan gereken: Suno hesabı/anahtarı (ya da onaylı vokal kaynağı).
 
+### Nursery görseli — YALNIZ yıldız değil, AİLE olsun
+- Sadece Twinkle sprite'ı = cansız, Osman beğenmedi (2026-07-07).
+- **Doğru yol:** mevcut Seedance kliplerinden (özellikle Yıldız bölümü ham
+  klipleri out/cartoon/beat_17-47, altyazısız) şarkıya UYUMLU sahneleri
+  (aile+yıldız+şarkı+gece) 9:16 blurred-fill montaj yap → NurseryMusic'in
+  `videoSrc`'ine ver → üstüne karaoke sözler. Sıfır yeni maliyet.
+- NurseryMusic.tsx artık videoSrc destekliyor (montaj arka plan modu).
+
+### ⚠️ ONAY KURALI (2026-07-07): nursery/short OTOMATİK yayınlanmaz
+Yeni bir nursery ya da özel short ÖNCE Osman'a gösterilir, onayıyla yayınlanır.
+Sadece zaten onaylı bölümlerin kuyruğa dizili chapter/highlight'ları otomatik
+gider. (star-only nursery onay alınmadan gidip beğenilmedi — bir daha olmasın.)
+
 ### Nursery yapısı
 - 1.5–3 dk şarkı. Dikey (9:16) doğrudan üretilir (kırpma yok).
 - Nakarat tekrarlı, sözler ekranda (öğretici + tekrar izleme).
