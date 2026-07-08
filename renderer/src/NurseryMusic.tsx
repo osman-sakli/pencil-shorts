@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import {
-  AbsoluteFill, Audio, Img, staticFile, useCurrentFrame, useVideoConfig,
-  interpolate,
+  AbsoluteFill, Audio, Img, OffthreadVideo, staticFile, useCurrentFrame,
+  useVideoConfig, interpolate,
 } from "remotion";
 
 export interface NurseryWord { word: string; start: number; end: number; }
@@ -10,6 +10,7 @@ export interface NurseryData {
   title: string;
   words: NurseryWord[];
   characterSprite: string;   // e.g. "characters/sprites/twinkle.png"
+  videoSrc?: string;         // opsiyonel: aile montajı arka plan (varsa yıldız sahnesi yerine)
   totalDurationFrames: number;
   fps: number;
   width: number;
@@ -86,53 +87,55 @@ export const NurseryMusic: React.FC<{ data: NurseryData }> = ({ data }) => {
   const titleOpacity = interpolate(t, [0, 1, 5, 6.5], [0, 1, 1, 0.25],
     { extrapolateRight: "clamp" });
 
+  const hasVideo = !!data.videoSrc;
+
   return (
     <AbsoluteFill style={{
       background: "linear-gradient(180deg,#0A0E2A 0%,#1A1550 45%,#2A1E6A 100%)",
     }}>
       {data.audio ? <Audio src={staticFile(data.audio)} /> : null}
-      <StarField />
 
-      {/* Ay */}
-      <div style={{
-        position: "absolute", top: "7%", right: "12%", width: 150, height: 150,
-        borderRadius: "50%", background: "radial-gradient(circle at 40% 40%,#FFF8E0,#FFE9A8)",
-        boxShadow: "0 0 60px #FFE9A8, 0 0 120px rgba(255,233,168,0.4)",
-      }} />
+      {hasVideo ? (
+        <>
+          {/* Aile montajı arka plan (Seedance klipleri, sessiz) */}
+          <AbsoluteFill>
+            <OffthreadVideo src={staticFile(data.videoSrc!)} muted
+              style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          </AbsoluteFill>
+          {/* Sözlerin okunması için altta koyulaştırma */}
+          <AbsoluteFill style={{
+            background: "linear-gradient(180deg,rgba(0,0,0,0.28) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 60%,rgba(0,0,0,0.62) 100%)",
+          }} />
+        </>
+      ) : (
+        <>
+          <StarField />
+          <div style={{
+            position: "absolute", top: "7%", right: "12%", width: 150, height: 150,
+            borderRadius: "50%", background: "radial-gradient(circle at 40% 40%,#FFF8E0,#FFE9A8)",
+            boxShadow: "0 0 60px #FFE9A8, 0 0 120px rgba(255,233,168,0.4)",
+          }} />
+          <div style={{
+            position: "absolute", left: "50%", top: "34%",
+            transform: `translate(-50%,-50%) translate(${sway}px,${bob}px) scale(${scalePulse})`,
+            width: 460, height: 460,
+            filter: `drop-shadow(0 0 ${40 * glowPulse}px rgba(255,220,90,${glowPulse}))`,
+          }}>
+            <Img src={staticFile(data.characterSprite)}
+                 style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+          </div>
+        </>
+      )}
 
       {/* Başlık */}
       <div style={{
         position: "absolute", top: "6%", left: 0, right: 0, textAlign: "center",
-        fontFamily: "Arial Black, Impact, sans-serif", fontWeight: 900, fontSize: 64,
+        fontFamily: "Arial Black, Impact, sans-serif", fontWeight: 900, fontSize: 60,
         color: "#FFE88A", opacity: titleOpacity,
-        textShadow: "0 0 24px #FFC94A, 3px 3px 0 rgba(0,0,0,0.4)", padding: "0 40px",
+        textShadow: "0 0 24px #FFC94A, 3px 3px 0 rgba(0,0,0,0.6)", padding: "0 40px",
       }}>
         {data.title}
       </div>
-
-      {/* Twinkle — merkezde süzülüyor, parlıyor */}
-      <div style={{
-        position: "absolute", left: "50%", top: "34%",
-        transform: `translate(-50%,-50%) translate(${sway}px,${bob}px) scale(${scalePulse})`,
-        width: 460, height: 460,
-        filter: `drop-shadow(0 0 ${40 * glowPulse}px rgba(255,220,90,${glowPulse}))`,
-      }}>
-        <Img src={staticFile(data.characterSprite)}
-             style={{ width: "100%", height: "100%", objectFit: "contain" }} />
-      </div>
-
-      {/* Yükselen ışık parçacıkları */}
-      {Array.from({ length: 10 }).map((_, i) => {
-        const p = ((frame * 0.6 + i * 40) % 260) / 260;
-        const x = 30 + ((i * 61) % 40);
-        return (
-          <div key={i} style={{
-            position: "absolute", left: `${x}%`, top: `${60 - p * 40}%`,
-            width: 10, height: 10, borderRadius: "50%", background: "#FFE88A",
-            opacity: (1 - p) * 0.7, boxShadow: "0 0 12px #FFE88A",
-          }} />
-        );
-      })}
 
       {/* Karaoke sözleri */}
       <div style={{
