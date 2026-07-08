@@ -136,6 +136,39 @@ senaryolaştırılır. Banka tükendikçe yenileri eklenir.
 
 ---
 
+## 4b. NURSERY MÜZİK HATTI (3 günde bir — Osman direktifi 2026-07-07)
+
+Sinematik filmlerin ARASINA, **her 3 günde bir** nursery rhyme / çocuk şarkısı
+videosu. Evergreen, sonsuz tekrar izlenir, algoritma sever (Cocomelon modeli).
+
+### Yöntem bölüşümü (maliyet sürdürülebilirliği için)
+- **Sinematik film → Seedance** (~$28, yürüme/aksiyon/sinematik gerek).
+- **Nursery → KOD-KUKLA (Remotion), BEDAVA.** Şarkı+dans tek ortamda geçer,
+  karakter yürümesine gerek yok → kod-kuklanın zaafı burada önemsiz, üstelik
+  %100 tutarlı + sıfır maliyet. 3 günde bir sıklık ancak böyle sürdürülür.
+
+### Şarkı sesi (KRİTİK — TTS şarkı söyleyemez)
+- **Suno / Udio** gibi AI müzik aracıyla söylenmiş vokal üretilir:
+  ya klasik (Twinkle Twinkle, Wheels on the Bus, Old MacDonald, ABC, Baby
+  Shark tarzı) ya da "Pen Family" özgün şarkıları.
+- Vokal + enstrüman track → Remotion'da karakterler ağız/dans senkronu +
+  ekranda zıplayan karaoke şarkı sözleri.
+- ⚠️ Osman'dan gereken: Suno hesabı/anahtarı (ya da onaylı vokal kaynağı).
+
+### Nursery yapısı
+- 1.5–3 dk şarkı. Dikey (9:16) doğrudan üretilir (kırpma yok).
+- Nakarat tekrarlı, sözler ekranda (öğretici + tekrar izleme).
+- Kısa 20-30s "en cıvıl" bölümü short olarak da kesilir (FB/YT/IG).
+- İmza karakterler şarkı söyler → tanınırlık artar.
+
+### Nursery şarkı bankası (başlangıç)
+Twinkle Twinkle (Twinkle karakteriyle birebir!), Wheels on the Bus (aile
+gezisi), Old MacDonald (Biscuit + hayvanlar), ABC Song (Saf okulda), Rain
+Rain Go Away (yağmurlu gün), Clean Up Song, Bath Song, Colors Song, Numbers
+Song, If You're Happy (aile).
+
+---
+
 ## 5. ÖZET — DEĞİŞMEZ KURALLAR
 1. 5 günde bir 4:30-5 dk sinematik film (4-5 × 65s chapter).
 2. TikTok: günde 1, sabah 06:00, 65s chapter (konu bütünlüğü).
