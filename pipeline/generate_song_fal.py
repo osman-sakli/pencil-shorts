@@ -44,6 +44,11 @@ def main() -> None:
     ap.add_argument("--plain", help="düz sözler (otomatik LRC'ye çevrilir)")
     ap.add_argument("--seconds", type=float, default=80, help="--plain için hedef süre")
     ap.add_argument("--ref", default="", help="opsiyonel stil referans ses URL'si")
+    ap.add_argument("--style", default=(
+        "energetic live kids band with REAL instruments, real acoustic and electric "
+        "guitar, real drums going boom boom, keyboard and tambourine, full lively band "
+        "instrumentation, upbeat and cheerful, fun sing-along, natural organic sound"),
+        help="müzik stili (DiffRhythm için zorunlu) — gerçek enstrüman vurgusu")
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
 
@@ -58,7 +63,7 @@ def main() -> None:
         sys.exit("--lyrics ya da --plain ver.")
 
     import fal_client
-    arguments = {"lyrics": lrc}
+    arguments = {"lyrics": lrc, "style_prompt": args.style}
     if args.ref:
         arguments["reference_audio_url"] = args.ref
 

@@ -174,6 +174,16 @@ gider. (star-only nursery onay alınmadan gidip beğenilmedi — bir daha olmas�
 - Kısa 20-30s "en cıvıl" bölümü short olarak da kesilir (FB/YT/IG).
 - İmza karakterler şarkı söyler → tanınırlık artar.
 
+### MÜZİK KURALI (Osman 2026-07-09): GERÇEK müzik, cılız AI vokal değil
+- Osman: "müzikler söylenmesin, doğal müzik olsun — gitar, dum dum davul, band
+  gibi. Gerçek sesler/müzikler." AI'nın ağızdan söylediği vokal İSTENMİYOR.
+- fal DiffRhythm vokali bozuk çıkıyor (ör. "Oz is"→"Houses"). Bu yüzden:
+  - Şarkı stili = ZENGİN GERÇEK ENSTRÜMANTASYON (gerçek gitar, gerçek davul,
+    canlı band). style_prompt bunu vurgular (generate_song_fal.py varsayılanı).
+  - Vokal kalitesi kritikse SUNO tercih (daha temiz söyleyiş) ya da ağırlıklı
+    enstrümantal + basit "la la" / enstrüman sesleri.
+  - Karaoke sözleri her zaman DOĞRU yazılı sözlerden (transkript değil, bozuk olur).
+
 ### Nursery şarkı bankası (başlangıç)
 Twinkle Twinkle (Twinkle karakteriyle birebir!), Wheels on the Bus (aile
 gezisi), Old MacDonald (Biscuit + hayvanlar), ABC Song (Saf okulda), Rain
