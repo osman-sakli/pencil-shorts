@@ -42,7 +42,7 @@ export const RemotionRoot: React.FC = () => {
         component={CartoonOverlay}
         defaultProps={{ data: EMPTY_OVERLAY }}
         calculateMetadata={({ props }: { props: { data: OverlayData } }) => ({
-          durationInFrames: Math.max(1, props.data.totalDurationFrames) + 150,
+          durationInFrames: Math.max(1, props.data.totalDurationFrames),  // end card yok
           fps: props.data.fps,
           width: props.data.width,
           height: props.data.height,

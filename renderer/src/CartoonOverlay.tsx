@@ -74,7 +74,7 @@ export const CartoonOverlay: React.FC<{ data: OverlayData }> = ({ data }) => {
   const { fps } = useVideoConfig();
   const t = frame / fps;
 
-  if (frame >= data.totalDurationFrames) return <EndCard />;
+  if (frame >= data.totalDurationFrames) return null;  // end card kaldırıldı (Osman)
 
   const active = data.beats.find((b) => frame >= b.startFrame && frame < b.endFrame);
 
