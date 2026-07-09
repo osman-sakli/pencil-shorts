@@ -182,6 +182,23 @@ Song, If You're Happy (aile).
 
 ---
 
+## 4c. INTRO / KAPANIŞ JINGLE (Osman direktifi 2026-07-09)
+
+Gerçek çizgi filmlerdeki (Bluey gibi) gibi **sabit, şarkılı, eğlenceli,
+sinematik** açılış ve kapanış jingle'ı.
+
+- **Açılış jingle**: HER uzun videonun başında. Pen Family'yi kısaca tanıtır.
+  - Uzun video: **15 saniye**. Short: **5 saniyelik** kısa versiyon.
+  - Dikkat çekici, eğlenceli, sinematik. Bluey intro havası.
+- **Kapanış jingle**: SABİT (her videoda aynı). Short'larda çok kısa (5sn),
+  uzunlarda 15sn olabilir.
+- **Sabitlik**: bir kez üretilir, HER bölümde AYNI kullanılır (marka tanınırlığı).
+- **Üretim**: şarkı = fal DiffRhythm (pipeline/generate_song_fal.py); görsel =
+  aile montajı / logo animasyonu (Remotion, bedava). Karakterler karakter
+  İncil'ine birebir uyar (kalem-ucu ayak dahil).
+- Dosyalar: out/jingle_intro_15s.mp4, out/jingle_intro_5s.mp4,
+  out/jingle_outro_15s.mp4, out/jingle_outro_5s.mp4 (üretilince).
+
 ## 5. ÖZET — DEĞİŞMEZ KURALLAR
 1. 5 günde bir 4:30-5 dk sinematik film (4-5 × 65s chapter).
 2. TikTok: günde 1, sabah 06:00, 65s chapter (konu bütünlüğü).
