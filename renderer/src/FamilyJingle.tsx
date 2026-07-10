@@ -46,7 +46,7 @@ export const FamilyJingle: React.FC<{ data: FamilyJingleData }> = ({ data }) => 
   const frame = useCurrentFrame();
   const { fps, height: vh } = useVideoConfig();
   const t = frame / fps;
-  const MAX_H_PX = vh * 0.46; // en uzun karakter ekran yüksekliğinin %46'sı
+  const MAX_H_PX = vh * 0.50; // kırpılmış sprite → önceki padding'liye göre ~1.6x
 
   // Karakterler sırayla "pop" ederek girer (0.25sn arayla), sonra zıplar
   const popStart = 0.3;
@@ -92,7 +92,7 @@ export const FamilyJingle: React.FC<{ data: FamilyJingleData }> = ({ data }) => 
       {/* AİLE — 6 karakter boy sırasıyla, zıplayarak */}
       <div style={{
         position: "absolute", bottom: "6%", left: 0, right: 0,
-        display: "flex", alignItems: "flex-end", justifyContent: "center", gap: 0,
+        display: "flex", alignItems: "flex-end", justifyContent: "center", gap: "2.2%",
       }}>
         {FAMILY.map((c, i) => {
           const appear = interpolate(t, [popStart + i * 0.22, popStart + i * 0.22 + 0.4],
@@ -103,10 +103,9 @@ export const FamilyJingle: React.FC<{ data: FamilyJingleData }> = ({ data }) => 
             <div key={c.id} style={{
               height: `${hpx}px`, transform: `translateY(${-bounce}px) scale(${appear})`,
               transformOrigin: "bottom center", position: "relative",
-              marginLeft: i === 0 ? 0 : "-4.5%",  // yakın dursunlar (aile gibi)
               filter: "drop-shadow(0 12px 18px rgba(0,0,0,0.28))",
             }}>
-              <Img src={staticFile(`characters/sprites/${c.id}_${c.emo}.png`)}
+              <Img src={staticFile(`characters/sprites/_lineup/${c.id}.png`)}
                    style={{ height: "100%", width: "auto", objectFit: "contain" }} />
             </div>
           );
