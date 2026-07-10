@@ -88,6 +88,7 @@ def main() -> None:
             "hashtags": base_tags + [f"part{i}"],
             "platform_meta": platform_meta,
             "platforms": args.platforms.split(","),
+            "slot": "am",  # sabah scheduler'ı slot=="am" filtreler — ZORUNLU
             "not_before": day,
             "published_at": None,
         })
