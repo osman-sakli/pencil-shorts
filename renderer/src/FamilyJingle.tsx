@@ -103,7 +103,7 @@ export const FamilyJingle: React.FC<{ data: FamilyJingleData }> = ({ data }) => 
             <div key={c.id} style={{
               height: `${hpx}px`, transform: `translateY(${-bounce}px) scale(${appear})`,
               transformOrigin: "bottom center", position: "relative",
-              marginLeft: i === 0 ? 0 : "-2.2%",  // kare padding'ini kapat
+              marginLeft: i === 0 ? 0 : "-4.5%",  // yakın dursunlar (aile gibi)
               filter: "drop-shadow(0 12px 18px rgba(0,0,0,0.28))",
             }}>
               <Img src={staticFile(`characters/sprites/${c.id}_${c.emo}.png`)}
