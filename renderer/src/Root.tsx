@@ -4,6 +4,7 @@ import { PencilShort } from "./PencilShort";
 import { PencilLong } from "./PencilLong";
 import { CartoonOverlay, EMPTY_OVERLAY, OverlayData } from "./CartoonOverlay";
 import { NurseryMusic, EMPTY_NURSERY, NurseryData } from "./NurseryMusic";
+import { FamilyJingle, EMPTY_FAMILY_JINGLE, FamilyJingleData } from "./FamilyJingle";
 import { Manifest, EMPTY_MANIFEST } from "./types";
 
 const metaFromManifest = ({ props }: { props: { manifest: Manifest } }) => {
@@ -43,6 +44,17 @@ export const RemotionRoot: React.FC = () => {
         defaultProps={{ data: EMPTY_OVERLAY }}
         calculateMetadata={({ props }: { props: { data: OverlayData } }) => ({
           durationInFrames: Math.max(1, props.data.totalDurationFrames),  // end card yok
+          fps: props.data.fps,
+          width: props.data.width,
+          height: props.data.height,
+        })}
+      />
+      <Composition
+        id="FamilyJingle"
+        component={FamilyJingle}
+        defaultProps={{ data: EMPTY_FAMILY_JINGLE }}
+        calculateMetadata={({ props }: { props: { data: FamilyJingleData } }) => ({
+          durationInFrames: Math.max(1, props.data.totalDurationFrames),
           fps: props.data.fps,
           width: props.data.width,
           height: props.data.height,
