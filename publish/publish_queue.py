@@ -35,16 +35,45 @@ def main() -> None:
         print("Kuyruk yok (queue.json bulunamadı) — yapılacak iş yok.")
         return
 
+    now = dt.datetime.utcnow()
     today = dt.date.today().isoformat()
     slot = os.getenv("PUBLISH_SLOT", "am")  # am=sabah Part, pm=akşam highlight
+
+    def claimed_recently(q: dict) -> bool:
+        ca = q.get("claimed_at")
+        if not ca:
+            return False
+        try:
+            age = (now - dt.datetime.fromisoformat(ca.rstrip("Z"))).total_seconds()
+        except ValueError:
+            return False
+        return age < 3 * 3600  # 3 saat içinde claim'lenmişse dokunma
+
+    # SİGORTA 1: bu slotta BUGÜN zaten yayın/claim varsa çık (ECS + yerel
+    # yedek cron yarışı aynı sabah iki parça basmasın — 2026-07-12 vakası)
+    for q in queue:
+        if q.get("slot", "am") != slot:
+            continue
+        stamp = (q.get("published_at") or q.get("claimed_at") or "")[:10]
+        if stamp == today:
+            print(f"Bu slot bugün zaten yayınlandı/claim'li ({q['key']}) — çıkılıyor.")
+            return
+
     item = next((q for q in queue
                  if not q.get("published_at")
+                 and not claimed_recently(q)
                  and q.get("slot", "am") == slot
                  and q.get("not_before", "") <= today),
                 None)
     if item is None:
         print(f"Yayınlanacak parça yok (slot={slot}).")
         return
+
+    # SİGORTA 2: yayına BAŞLAMADAN claim'i S3'e yaz — süreç yarıda ölse bile
+    # sonraki çalıştırma bunu tekrar basmaz (2026-07-10/11 duplikası vakası)
+    item["claimed_at"] = now.isoformat() + "Z"
+    s3.put_object(Bucket=BUCKET, Key=QUEUE_KEY,
+                  Body=json.dumps(queue, ensure_ascii=False, indent=2).encode())
 
     print(f"Yayınlanıyor: {item['key']} → {item.get('platforms')}")
     # Platform-başına farklı video desteği: {"tiktok": key, "default": key}
