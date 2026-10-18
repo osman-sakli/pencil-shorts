@@ -32,5 +32,3 @@ renderer/out/*
 !.env.example
 *.pem
 
-# Music is fetched at runtime (Pixabay), do not commit
-assets/music/*.mp3

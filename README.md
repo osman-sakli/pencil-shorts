@@ -73,7 +73,7 @@ No keys in the repo. Use `.env` locally (git-ignored, template in `.env.example`
 
 ## Assets
 
-Background music is fetched at runtime from Pixabay (`pipeline/fetch_music.py`), not stored in the repo.
+Background music: tracks in `assets/music/` (from Pixabay) are used by the cartoon overlay step; shorts can also fetch music at runtime via `pipeline/fetch_music.py`.
 
 ## Roadmap
 
