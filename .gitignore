@@ -22,3 +22,15 @@ outputs/long_episodes/*/
 !outputs/long_episodes/.gitkeep
 
 .DS_Store
+
+# Renderer output
+renderer/out/*
+!renderer/out/.gitkeep
+
+# Secrets
+.env.*
+!.env.example
+*.pem
+
+# Music is fetched at runtime (Pixabay), do not commit
+assets/music/*.mp3
